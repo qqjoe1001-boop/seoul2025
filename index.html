@@ -55,23 +55,69 @@
       Snowflake, Clock, Edit3, Globe, ChevronRight, Navigation, Footprints, 
       Utensils, ShoppingBag, BedDouble, Ticket, Home, Ship, Car, Sparkles, 
       MessageCircle, X, Send, Loader2, Languages, Bot, AlertTriangle, Volume2,
-      ClipboardCheck, FileText, AlertCircle, Briefcase, Scan, CloudRain, Mic, Wand2, Plus, Save, Check, Trash2, Banknote, Settings
+      ClipboardCheck, FileText, AlertCircle, Briefcase, Scan, CloudRain, Mic, Wand2, Plus, Save, Check, Trash2, Banknote, Settings, Search, XCircle
     } from 'https://esm.sh/lucide-react@0.263.1';
 
     // --- 設定 ---
     const LANGUAGES = { ZH: 'ZH', KR: 'KR', EN: 'EN', JP: 'JP' };
     const UI_LABELS = {
-      ZH: { title: '2025 首爾之旅', subtitle: '圭賢演唱會・冬日首爾', editTip: '點擊文字即可編輯', days: ['準備', 'Day 1', 'Day 2', 'Day 3', 'Day 4', 'Day 5', 'Day 6', 'Day 7'], transport: '交通', estTime: '時間', location: '地點', aiChat: 'AI 隨身導遊', genPhrases: '韓語幫手', phrasesTitle: '✨ 情境韓語小幫手', chatPlaceholder: '問問 AI...', close: '關閉', fallbackMsg: 'AI 連線異常', addEvent: '新增行程', addModalTitle: '新增行程', addModalTime: '時間 (24小時制)', addModalContent: '地點 / 活動內容', addModalSubmit: '儲存並排序', addModalCancel: '取消', addItem: '新增項目', splitBill: '分帳', settings: '設定', apiKeyPlaceholder: '輸入 Gemini API Key', total: '總支出', perPerson: '每人應付', rate: '匯率' },
-      KR: { title: '2025 서울 여행', subtitle: '규현 콘서트 • 겨울 서울', editTip: '클릭하여 편집', days: ['준비', '1일차', '2일차', '3일차', '4일차', '5일차', '6일차', '7일차'], transport: '교통', estTime: '시간', location: '장소', aiChat: 'AI 가이드', genPhrases: '한국어 도우미', phrasesTitle: '✨ 한국어', chatPlaceholder: '질문...', close: '닫기', fallbackMsg: 'AI 오류', addEvent: '일정 추가', addModalTitle: '추가', addModalTime: '시간', addModalContent: '내용', addModalSubmit: '저장', addModalCancel: '취소', addItem: '항목 추가', splitBill: '정산', settings: '설정', apiKeyPlaceholder: 'API Key 입력', total: '총 지출', perPerson: '1인당', rate: '환율' },
-      EN: { title: 'Seoul Trip 2025', subtitle: 'Kyuhyun Concert • Winter Seoul', editTip: 'Click to edit', days: ['Prep', 'Day 1', 'Day 2', 'Day 3', 'Day 4', 'Day 5', 'Day 6', 'Day 7'], transport: 'Transport', estTime: 'Time', location: 'Loc', aiChat: 'AI Guide', genPhrases: 'Helper', phrasesTitle: '✨ Phrases', chatPlaceholder: 'Ask AI...', close: 'Close', fallbackMsg: 'AI Offline', addEvent: 'Add', addModalTitle: 'Add Event', addModalTime: 'Time', addModalContent: 'Content', addModalSubmit: 'Save', addModalCancel: 'Cancel', addItem: 'Add Item', splitBill: 'Split Bill', settings: 'Settings', apiKeyPlaceholder: 'Enter API Key', total: 'Total', perPerson: 'Per Person', rate: 'Rate' },
-      JP: { title: '2025 ソウル旅行', subtitle: 'キュヒョンコンサート・冬のソウル', editTip: 'クリックして編集', days: ['準備', '1日目', '2日目', '3日目', '4日目', '5日目', '6日目', '7日目'], transport: '交通', estTime: '時間', location: '場所', aiChat: 'AI ガイド', genPhrases: '韓国語ヘルプ', phrasesTitle: '✨ 韓国語', chatPlaceholder: '質問...', close: '閉じる', fallbackMsg: 'AIエラー', addEvent: '追加', addModalTitle: '追加', addModalTime: '時間', addModalContent: '内容', addModalSubmit: '保存', addModalCancel: 'キャンセル', addItem: '追加', splitBill: '割り勘', settings: '設定', apiKeyPlaceholder: 'APIキーを入力', total: '合計', perPerson: '一人当たり', rate: 'レート' }
+      ZH: { title: '2025 首爾之旅', subtitle: '圭賢演唱會・冬日首爾', editTip: '點擊文字即可編輯', days: ['準備', 'Day 1', 'Day 2', 'Day 3', 'Day 4', 'Day 5', 'Day 6', 'Day 7'], transport: '交通', estTime: '時間', location: '地點', aiChat: 'AI 隨身導遊', genPhrases: '韓語幫手', phrasesTitle: '✨ 情境韓語小幫手', chatPlaceholder: '問問 AI...', close: '關閉', fallbackMsg: 'AI 連線異常', addEvent: '新增行程', addModalTitle: '新增行程', addModalTime: '時間 (24小時制)', addModalContent: '地點 / 活動內容', addModalSubmit: '儲存並排序', addModalCancel: '取消', addItem: '新增項目', splitBill: '分帳', total: '總支出', perPerson: '每人應付', rate: '匯率', addPhrase: '新增自訂短句', phraseMeaningPlaceholder: '中文意思' },
+      KR: { title: '2025 서울 여행', subtitle: '규현 콘서트 • 겨울 서울', editTip: '클릭하여 편집', days: ['준비', '1일차', '2일차', '3일차', '4일차', '5일차', '6일차', '7일차'], transport: '교통', estTime: '시간', location: '장소', aiChat: 'AI 가이드', genPhrases: '한국어 도우미', phrasesTitle: '✨ 한국어', chatPlaceholder: '질문...', close: '닫기', fallbackMsg: 'AI 오류', addEvent: '일정 추가', addModalTitle: '추가', addModalTime: '시간', addModalContent: '내용', addModalSubmit: '저장', addModalCancel: '취소', addItem: '항목 추가', splitBill: '정산', total: '총 지출', perPerson: '1인당', rate: '환율', addPhrase: '문구 추가', phraseMeaningPlaceholder: '의미' },
+      EN: { title: 'Seoul Trip 2025', subtitle: 'Kyuhyun Concert • Winter Seoul', editTip: 'Click to edit', days: ['Prep', 'Day 1', 'Day 2', 'Day 3', 'Day 4', 'Day 5', 'Day 6', 'Day 7'], transport: 'Transport', estTime: 'Time', location: 'Loc', aiChat: 'AI Guide', genPhrases: 'Helper', phrasesTitle: '✨ Phrases', chatPlaceholder: 'Ask AI...', close: 'Close', fallbackMsg: 'AI Offline', addEvent: 'Add', addModalTitle: 'Add Event', addModalTime: 'Time', addModalContent: 'Content', addModalSubmit: 'Save', addModalCancel: 'Cancel', addItem: 'Add Item', splitBill: 'Split Bill', total: 'Total', perPerson: 'Per Person', rate: 'Rate', addPhrase: 'Add Phrase', phraseMeaningPlaceholder: 'Meaning' },
+      JP: { title: '2025 ソウル旅行', subtitle: 'キュヒョンコンサート・冬のソウル', editTip: 'クリックして編集', days: ['準備', '1日目', '2日目', '3日目', '4日目', '5日目', '6日目', '7日目'], transport: '交通', estTime: '時間', location: '場所', aiChat: 'AI ガイド', genPhrases: '韓国語ヘルプ', phrasesTitle: '✨ 韓国語', chatPlaceholder: '質問...', close: '閉じる', fallbackMsg: 'AIエラー', addEvent: '追加', addModalTitle: '追加', addModalTime: '時間', addModalContent: '内容', addModalSubmit: '保存', addModalCancel: 'キャンセル', addItem: '追加', splitBill: '割り勘', total: '合計', perPerson: '一人当たり', rate: 'レート', addPhrase: 'フレーズ追加', phraseMeaningPlaceholder: '意味' }
     };
 
     const FALLBACK_PHRASES_BY_TYPE = {
-      food: [{ korean: '메뉴판 좀 주세요', pronunciation: 'Menyupan jom juseyo', meaning: '請給我菜單' }, { korean: '이거 주세요', pronunciation: 'Ige juseyo', meaning: '請給我這個' }, { korean: '계산해 주세요', pronunciation: 'Gyesanhae juseyo', meaning: '請結帳' }],
-      shopping: [{ korean: '이거 얼마예요?', pronunciation: 'Ige eolmayeyo?', meaning: '這個多少錢?' }, { korean: '깎아주세요', pronunciation: 'Kkakkajuseyo', meaning: '請算便宜一點' }, { korean: '입어봐도 돼요?', pronunciation: 'Ibeobwado dwaeyo?', meaning: '可以試穿嗎?' }],
-      transport: [{ korean: '이 버스 명동 가나요?', pronunciation: 'I beoseu Myeongdong ganayo?', meaning: '這班公車去明洞嗎?' }, { korean: '여기서 내려주세요', pronunciation: 'Yeogiseo naeryeojuseyo', meaning: '請在這裡讓我下車' }],
-      default: [{ korean: '안녕하세요', pronunciation: 'Annyeonghaseyo', meaning: '你好' }, { korean: '감사합니다', pronunciation: 'Gamsahamnida', meaning: '謝謝' }, { korean: '화장실 어디예요?', pronunciation: 'Hwajangsil eodiyeyo?', meaning: '洗手間在哪裡?' }]
+      food: [
+        { k: '메뉴판 좀 주세요', p: 'Menyupan jom juseyo', m: { ZH: '請給我菜單', EN: 'Menu please', JP: 'メニューをください', KR: '메뉴판 좀 주세요' } },
+        { k: '이거 주세요', p: 'Ige juseyo', m: { ZH: '請給我這個', EN: 'This one please', JP: 'これをください', KR: '이거 주세요' } },
+        { k: '계산해 주세요', p: 'Gyesanhae juseyo', m: { ZH: '請結帳', EN: 'Check please', JP: 'お会計お願いします', KR: '계산해 주세요' } },
+        { k: '물 좀 주세요', p: 'Mul jom juseyo', m: { ZH: '請給我水', EN: 'Water please', JP: 'お水をください', KR: '물 좀 주세요' } },
+        { k: '덜 맵게 해주세요', p: 'Deol maepge haejuseyo', m: { ZH: '請做不辣一點', EN: 'Less spicy please', JP: '辛くしないでください', KR: '덜 맵게 해주세요' } },
+        { k: '화장실 어디예요?', p: 'Hwajangsil eodiyeyo?', m: { ZH: '洗手間在哪裡?', EN: 'Where is the toilet?', JP: 'トイレはどこですか？', KR: '화장실 어디예요?' } }
+      ],
+      shopping: [
+        { k: '이거 얼마예요?', p: 'Ige eolmayeyo?', m: { ZH: '這個多少錢?', EN: 'How much is this?', JP: 'これはいくらですか？', KR: '이거 얼마예요?' } },
+        { k: '입어봐도 돼요?', p: 'Ibeobwado dwaeyo?', m: { ZH: '可以試穿嗎?', EN: 'Can I try this on?', JP: '試着してもいいですか？', KR: '입어봐도 돼요?' } },
+        { k: '새것 있어요?', p: 'Saegeot isseoyo?', m: { ZH: '有新的嗎?', EN: 'Do you have a new one?', JP: '新しいのはありますか？', KR: '새것 있어요?' } },
+        { k: '깎아주세요', p: 'Kkakkajuseyo', m: { ZH: '請算便宜一點', EN: 'Can you give a discount?', JP: '安くしてくれませんか？', KR: '깎아주세요' } },
+        { k: '텍스 리펀 되나요?', p: 'Tekseu ripeon doenayo?', m: { ZH: '可以退稅嗎?', EN: 'Is tax refund available?', JP: '免税できますか？', KR: '텍스 리펀 되나요?' } },
+        { k: '봉투 주세요', p: 'Bongtu juseyo', m: { ZH: '請給我袋子', EN: 'Bag please', JP: '袋をください', KR: '봉투 주세요' } }
+      ],
+      transport: [
+        { k: '이 버스 명동 가나요?', p: 'I beoseu Myeongdong ganayo?', m: { ZH: '這班公車去明洞嗎?', EN: 'Does this bus go to Myeongdong?', JP: 'このバスは明洞に行きますか？', KR: '이 버스 명동 가나요?' } },
+        { k: '여기서 내려주세요', p: 'Yeogiseo naeryeojuseyo', m: { ZH: '請在這裡讓我下車', EN: 'Please drop me off here', JP: 'ここで降ろしてください', KR: '여기서 내려주세요' } },
+        { k: '얼마나 걸려요?', p: 'Eolmana geollyeoyo?', m: { ZH: '請問要多久?', EN: 'How long does it take?', JP: 'どのくらいかかりますか？', KR: '얼마나 걸려요?' } },
+        { k: '티머니 충전해 주세요', p: 'T-money chungjeonhae juseyo', m: { ZH: '請幫我充值 T-Money', EN: 'Please recharge T-money', JP: 'T-moneyをチャージしてください', KR: '티머니 충전해 주세요' } },
+        { k: '지하철역이 어디예요?', p: 'Jihacheolyeogi eodiyeyo?', m: { ZH: '地鐵站在哪裡?', EN: 'Where is the subway station?', JP: '地下鉄の駅はどこですか？', KR: '지하철역이 어디예요?' } },
+        { k: '택시 좀 불러주세요', p: 'Taeksi jom bulleojuseyo', m: { ZH: '請幫我叫計程車', EN: 'Please call a taxi for me', JP: 'タクシーを呼んでください', KR: '택시 좀 불러주세요' } }
+      ],
+      coffee: [
+        { k: '아이스 아메리카노 한 잔 주세요', p: 'Aiceu Americano hanjan juseyo', m: { ZH: '請給我一杯冰美式', EN: 'One Iced Americano please', JP: 'アイスアメリカーノをください', KR: '아이스 아메리카노 한 잔 주세요' } },
+        { k: '따뜻한 라떼 주세요', p: 'Ttatteutan latte juseyo', m: { ZH: '請給我一杯熱拿鐵', EN: 'One Hot Latte please', JP: 'ホットラテをください', KR: '따뜻한 라떼 주세요' } },
+        { k: '와이파이 비밀번호가 뭐예요?', p: 'WiFi bimilbeonhoga mwoyeyo?', m: { ZH: '請問 WiFi 密碼是什麼?', EN: 'What is the WiFi password?', JP: 'WiFiのパスワードは何ですか？', KR: '와이파이 비밀번호가 뭐예요?' } },
+        { k: '진동벨 주세요', p: 'Jindongbel juseyo', m: { ZH: '請給我震動鈴', EN: 'Give me a buzzer please', JP: '呼び出しベルをください', KR: '진동벨 주세요' } },
+        { k: '테이크아웃 할게요', p: 'Teikeuaut halgeyo', m: { ZH: '我要外帶', EN: 'To go please', JP: '持ち帰ります', KR: '테이크아웃 할게요' } },
+        { k: '화장실 비밀번호 알려주세요', p: 'Hwajangsil bimilbeonho allyeojuseyo', m: { ZH: '請告訴我廁所密碼', EN: 'What is the toilet password?', JP: 'トイレのパスワードを教えてください', KR: '화장실 비밀번호 알려주세요' } }
+      ],
+      default: [
+        { k: '안녕하세요', p: 'Annyeonghaseyo', m: { ZH: '你好', EN: 'Hello', JP: 'こんにちは', KR: '안녕하세요' } },
+        { k: '감사합니다', p: 'Gamsahamnida', m: { ZH: '謝謝', EN: 'Thank you', JP: 'ありがとうございます', KR: '감사합니다' } },
+        { k: '죄송합니다', p: 'Joesonghamnida', m: { ZH: '對不起', EN: 'I am sorry', JP: 'ごめんなさい', KR: '죄송합니다' } },
+        { k: '잠시만요', p: 'Jamsimanyo', m: { ZH: '借過 / 等一下', EN: 'Excuse me / Just a moment', JP: 'すみません / 少々お待ちください', KR: '잠시만요' } },
+        { k: '도와주세요', p: 'Dowajuseyo', m: { ZH: '請幫幫我', EN: 'Please help me', JP: '助けてください', KR: '도와주세요' } },
+        { k: '영어 할 수 있어요?', p: 'Yeong-eo hal su isseoyo?', m: { ZH: '你會說英文嗎?', EN: 'Do you speak English?', JP: '英語を話せますか？', KR: '영어 할 수 있어요?' } }
+      ]
+    };
+
+    // Helper to get phrases with correct language
+    const getFallbackPhrases = (type, lang) => {
+        const list = PHRASE_DB[type] || PHRASE_DB.default;
+        return list.map(item => ({
+            korean: item.k,
+            pronunciation: item.p,
+            meaning: item.m[lang] || item.m.EN || item.m.ZH // Fallback order
+        }));
     };
 
     // --- 地鐵顏色 ---
@@ -81,42 +127,9 @@
       'AREX': '#0090D2', 'A': '#0090D2', 'K': '#77C4A3', 'B': '#E7E727', 'S': '#A71E31'
     };
 
-    // --- API ---
-    const getApiKeyFromStorage = () => localStorage.getItem('gemini_api_key') || "";
-
-    const callGeminiAPI = async (prompt, systemInstruction = "") => {
-      const apiKey = getApiKeyFromStorage();
-      if (!apiKey) return { success: false, error: "Please set API Key in Settings" };
-      
-      const models = [
-          'gemini-1.5-flash',
-          'gemini-2.0-flash-exp',
-          'gemini-1.5-pro'
-      ];
-
-      const payload = {
-         contents: [{ parts: [{ text: systemInstruction ? `${systemInstruction}\n\n${prompt}` : prompt }] }]
-      };
-
-      for (const model of models) {
-        const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
-        try {
-          const response = await fetch(url, { 
-              method: 'POST', 
-              headers: { 'Content-Type': 'application/json' }, 
-              body: JSON.stringify(payload) 
-          });
-          
-          if (response.ok) {
-             const data = await response.json();
-             return { success: true, data: data.candidates?.[0]?.content?.parts?.[0]?.text };
-          }
-        } catch (e) { 
-           console.warn(`Model ${model} failed`, e);
-        }
-      }
-      return { success: false, error: "All models failed. Check API Key." };
-    };
+    // --- API (Placeholder) ---
+    const getApiKeyFromStorage = () => ""; 
+    const callGeminiAPI = async () => ({ success: false, error: "API Disabled" });
 
     // --- Data Helper ---
     const toObj = (item) => (typeof item === 'string' ? { text: item, checked: false } : item);
@@ -141,7 +154,7 @@
       const day0_JP = { day: 0, date: '出発前', theme: '準備 & SeS', activities: [{ title: '必需品', type: 'checklist', desc: '確認:', items: ['パスポート/Esim', '財布', '充電器', 'バッテリー', '洗面用具', '着替え', '薬'].map(toObj) }, { title: 'SeS 登録', type: 'ses', desc: '仁川 T1 Fエリア', items: ['場所: Fエリア', '時間: 07:00-18:00'].map(toObj) }, { title: '預け入れ', type: 'warning', desc: '液体100ml超', items: ['化粧水', '刃物'].map(toObj) }, { title: '機内持込', type: 'warning_red', desc: '電池類', items: ['バッテリー', 'PC'].map(toObj) }, { title: '書類', type: 'doc', desc: '書類:', items: ['Q-CODE', '予約確認書'].map(toObj) }] };
 
       const days_ZH = [
-          { day: 1, date: '12/18 (四)', theme: '抵達首爾 & 飯店入住', activities: [{ time: '12:00', title: '從溫暖的家出發', type: 'car', desc: '預約肯驛機場接送至桃園機場。', location: 'Home', transport: '專車' }, { time: '15:15', title: '長榮 BR160 起飛', type: 'flight', desc: '桃園機場 (TPE) 第二航廈 -> 仁川機場 (ICN)', location: 'TPE Airport' }, { time: '18:45', title: '抵達仁川機場 & 入境', type: 'arrival', desc: '辦理入境手續、領取行李、購買 T-Money 卡', location: 'ICN Airport' }, { time: '20:00', title: '前往 Wecostay Namsan', type: 'bus', desc: '搭乘 6015 巴士至忠武路站。', info: '費用: 17,000 KRW / 約 70-80 分鐘', customPhrases: [{ korean: 'G3 호텔에서 내려주세요', pronunciation: 'G3 Hotel-eseo naeryeojuseyo', meaning: '我們到 G3 Hotel 下車，謝謝' }], transport: '仁川機場 5B/11B 站牌搭乘【6015 機場巴士】(往明洞方向)，經過 3 站(約70分鐘)，於「忠武路站」下車，下車後往回走約 2 分鐘即達。' }, { time: '21:30', title: '飯店 Check-in & 晚餐', type: 'food', desc: '辦理入住後，於忠武路附近享用韓式炸雞或部隊鍋。', location: 'Chungmuro' }] },
+          { day: 1, date: '12/18 (四)', theme: '抵達首爾 & 飯店入住', activities: [{ time: '12:00', title: '從溫暖的家出發', type: 'car', desc: '預約肯驛機場接送至桃園機場。', location: 'Home', transport: '專車' }, { time: '15:15', title: '長榮 BR160 起飛', type: 'flight', desc: '桃園機場 (TPE) 第二航廈 -> 仁川機場 (ICN)', location: 'TPE Airport' }, { time: '18:45', title: '抵達仁川機場 & 入境', type: 'arrival', desc: '入境、領行李、買 T-Money。', location: 'ICN Airport' }, { time: '20:00', title: '前往 Wecostay Namsan', type: 'bus', desc: '仁川機場 5B 或 11B 站牌搭乘【6015 機場巴士】往明洞方向。於「忠武路站 (Chungmuro Station)」下車，步行約 5 分鐘抵達。', info: '費用: 17,000 KRW / 約 70-80 分鐘', customPhrases: [{ korean: 'G3 호텔에서 내려주세요', pronunciation: 'G3 Hotel-eseo naeryeojuseyo', meaning: '我們到 G3 Hotel 下車，謝謝' }], transport: '仁川機場 5B/11B 站牌搭乘【6015 機場巴士】(往明洞方向)，經過 3 站(約70分鐘)，於「忠武路站」下車，下車後往回走約 2 分鐘即達。' }, { time: '21:30', title: '飯店 Check-in & 晚餐', type: 'food', desc: '入住後吃炸雞或部隊鍋。', location: 'Chungmuro' }] },
           { day: 2, date: '12/19 (五)', theme: '歷史漫步 & 傳統韻味', activities: [{ time: '10:00', title: '景福宮', type: 'sight', desc: '參觀光化門與景福宮守門將換崗儀式 (10:00)。', location: 'Gyeongbokgung', transport: '3號線 忠武路站 -> (往大化方向，3站) -> 景福宮站 (5號出口)，出站後直走即達光化門廣場。' }, { time: '12:30', title: '土俗村蔘雞湯', type: 'food', desc: '享用著名的蔘雞湯暖身。', location: 'Seochon', transport: '徒步：從景福宮站 2 號出口出來，直走約 120 公尺，在 GS25 便利商店左轉進入紫霞門路 5 巷，直走即達。' }, { time: '14:30', title: '北村韓屋村 & 三清洞', type: 'walk', desc: '漫步於傳統韓屋群，尋找北村八景，隨後在三清洞咖啡廳休息。', location: 'Bukchon', transport: '徒步：沿著景福宮石牆路往東走，經過國立民俗博物館，穿越三清洞路，步行約 15-20 分鐘。' }, { time: '18:00', title: '仁寺洞步行街', type: 'shopping', desc: '參觀人人廣場 (Ssamzigil)，購買傳統工藝品。', location: 'Insadong', transport: '徒步：從北村沿著安國站方向往南走，過馬路即進入仁寺洞主街 (約 10 分鐘)。' }, { time: '20:00', title: '清溪川夜間散步', type: 'walk', desc: '欣賞清溪川聖誕燈飾 (如有活動) 或夜景。', location: 'Cheonggyecheon', transport: '徒步：從仁寺洞主街往南直走，經過鐘閣站，步行約 8 分鐘即可抵達清溪川廣場。' }] },
           { day: 3, date: '12/20 (六)', theme: '首爾全景 & 購物', activities: [{ time: '10:30', title: '南山公園 & N首爾塔', type: 'sight', desc: '搭乘南山纜車上山，俯瞰首爾全景，鎖上愛情鎖。', location: 'Namsan', transport: '徒步+纜車：4號線 明洞站 3號出口，沿著太平洋飯店右側坡道步行約 10 分鐘至纜車搭乘處，搭乘纜車上山。' }, { time: '13:30', title: '南山炸豬排', type: 'food', desc: '嘗試南山腳下著名的巨無霸炸豬排。', location: 'Namsan', transport: '徒步：從纜車站下山後，沿著小坡路往下走約 5 分鐘，即可看到炸豬排一條街。' }, { time: '15:00', title: '明洞商圈購物', type: 'shopping', desc: '美妝、服飾採購，體驗明洞小吃 (雞蛋糕、糖餅)。', location: 'Myeongdong', transport: '徒步：從南山走回明洞站，穿越地下道或斑馬線進入明洞商圈主街。' }, { time: '19:00', title: '亂打秀 (Nanta) 或 休息', type: 'show', desc: '可選擇觀賞韓國著名的無語言音樂劇，或回忠武路附近休息。', location: 'Myeongdong' }] },
           { day: 4, date: '12/21 (日)', theme: '圭賢演唱會 & 韓屋風情', activities: [{ time: '10:00', title: '南山谷韓屋村', type: 'sight', desc: '位於忠武路站旁，輕鬆散步體驗傳統庭園，不需門票。', location: 'Chungmuro', transport: '徒步：從 Wecostay 步行約 5 分鐘，由忠武路站 3 或 4 號出口旁入口進入。' }, { time: '12:00', title: '午餐 & 休息', type: 'food', desc: '在忠武路附近用餐，並回飯店稍作整理，準備前往演唱會。', location: 'Wecostay' }, { time: '14:30', title: '前往 Olympic Hall', type: 'train', desc: '前往奧林匹克公園。', location: 'Olympic Park', transport: '地鐵轉乘：4號線 忠武路站 -> (往當嶺方向，1站) -> 東大門歷史文化公園站，轉乘5號線 (往馬川/河南黔丹山方向，約13站) -> 奧林匹克公園站 (3號出口)。' }, { time: '17:00', title: '2025 KYUHYUN Concert', type: 'music', desc: '“The Classic” 演唱會 @ Olympic Hall。享受圭賢的歌聲！', location: 'Olympic Park' }, { time: '20:30', title: '返回市區 & 晚餐', type: 'food', desc: '演唱會結束後搭地鐵返回，吃頓熱騰騰的烤肉慶功。', location: 'Chungmuro', transport: '地鐵轉乘：原路返回至忠武路站，由 1 號出口步行至烤肉店。' }] },
@@ -150,9 +163,35 @@
           { day: 7, date: '12/24 (三)', theme: '告別首爾 & 返家', activities: [{ time: '06:00', title: '退房 & 前往機場', type: 'bus', desc: '搭乘 6015 機場巴士前往仁川機場 (或搭計程車至首爾站搭 AREX 直達車)。', location: 'Airport Bus Stop', transport: '機場巴士：前往忠武路站 1 號出口前方公車站，搭乘【6015 機場巴士】(往仁川機場方向)，車程約 70-80 分鐘。' }, { time: '07:35', title: '辦理登機 & 退稅', type: 'plane', desc: '長榮航空櫃檯報到，辦理市區退稅單據的海關蓋章 (若需要)。', location: 'ICN Airport' }, { time: '11:40', title: 'BR169 起飛', type: 'flight', desc: '仁川 (ICN) -> 桃園 (TPE)', location: 'Departure Hall' }, { time: '13:30', title: '抵達台灣', type: 'home', desc: '平安抵達溫暖的家。', location: 'Taipei' }] }
       ];
 
-      const days_KR = JSON.parse(JSON.stringify(days_ZH)); 
-      const days_EN = JSON.parse(JSON.stringify(days_ZH)); 
-      const days_JP = JSON.parse(JSON.stringify(days_ZH)); 
+      const days_EN = [
+          { day: 1, date: '12/18 (Thu)', theme: 'Arrival & Check-in', activities: [{ time: '12:00', title: 'Depart from Home', type: 'car', desc: 'Reserved Kenyi Airport Pick-up Service to TPE Airport.', location: 'Home', transport: 'Private Car' }, { time: '15:15', title: 'Depart EVA Air BR160', type: 'flight', desc: 'TPE Terminal 2 -> ICN', location: 'TPE Airport' }, { time: '18:45', title: 'Arrive at Incheon', type: 'arrival', desc: 'Immigration, Baggage Claim, Buy T-Money Card.', location: 'ICN Airport' }, { time: '20:00', title: 'Bus to Wecostay', type: 'bus', desc: 'Take Airport Bus 6015 at stop 5B/11B towards Myeongdong. Get off at "Chungmuro Station". Walk 5 mins.', info: 'Cost: 17,000 KRW / ~75 mins', transport: 'Take [Airport Bus 6015] at Incheon Airport stop 5B/11B (towards Myeongdong), 3 stops (~70 mins), get off at "Chungmuro Station". Walk back ~2 mins.' }, { time: '21:30', title: 'Check-in & Dinner', type: 'food', desc: 'Check in at Wecostay Namsan. Enjoy fried chicken nearby.', location: 'Chungmuro' }] },
+          { day: 2, date: '12/19 (Fri)', theme: 'History & Culture', activities: [{ time: '10:00', title: 'Gyeongbokgung Palace', type: 'sight', desc: 'Guard changing ceremony (10:00). Wear Hanbok for free entry.', location: 'Gyeongbokgung', transport: 'Line 3 Chungmuro -> (to Daehwa, 3 stops) -> Gyeongbokgung (Exit 5). Walk straight to Gwanghwamun Square.' }, { time: '12:30', title: 'Tosokchon Samgyetang', type: 'food', desc: 'Famous Ginseng Chicken Soup for lunch.', location: 'Seochon', transport: 'Walk: From Gyeongbokgung Stn Exit 2, go straight 120m, turn left at GS25 into Jahamun-ro 5-gil.' }, { time: '14:30', title: 'Bukchon Hanok Village', type: 'walk', desc: 'Explore traditional houses and Samcheong-dong cafes.', location: 'Bukchon', transport: 'Walk: East along Gyeongbokgung stone wall, pass Folk Museum, cross Samcheong-dong Rd (15-20 mins).' }, { time: '18:00', title: 'Insadong', type: 'shopping', desc: 'Ssamzigil crafts and souvenirs.', location: 'Insadong', transport: 'Walk: South from Bukchon towards Anguk Stn, cross street to Insadong main street (~10 mins).' }, { time: '20:00', title: 'Gwanghwamun Square', type: 'walk', desc: 'Night view of the square and statue.', location: 'Gwanghwamun', transport: 'Walk: South from Insadong main street, pass Jonggak Stn, ~8 mins to Cheonggyecheon Plaza.' }] },
+          { day: 3, date: '12/20 (Sat)', theme: 'Views & Shopping', activities: [{ time: '10:30', title: 'N Seoul Tower', type: 'sight', desc: 'Cable car to the top. Love locks and panoramic views.', location: 'Namsan', transport: 'Walk + Cable Car: Line 4 Myeongdong Exit 3, walk ~10 mins along Pacific Hotel right slope to cable car station.' }, { time: '13:30', title: 'Namsan Pork Cutlet', type: 'food', desc: 'Famous giant pork cutlet lunch.', location: 'Namsan', transport: 'Walk: Downhill from cable car station ~5 mins to Tonkatsu street.' }, { time: '15:00', title: 'Myeongdong Shopping', type: 'shopping', desc: 'Cosmetics, street food, and fashion.', location: 'Myeongdong', transport: 'Walk: Walk back to Myeongdong Stn from Namsan, cross underpass/crosswalk to main street.' }, { time: '19:00', title: 'Nanta Show or Relax', type: 'show', desc: 'Cooking percussion show or relax at hotel.', location: 'Myeongdong' }] },
+          { day: 4, date: '12/21 (Sun)', theme: 'Relaxed Afternoon & Myeongdong', activities: [{ time: '10:00', title: 'Namsangol Hanok Village', type: 'sight', desc: 'Peaceful traditional village near accommodation.', location: 'Chungmuro', transport: 'Walk: ~5 mins from Wecostay, enter near Chungmuro Stn Exit 3 or 4.' }, { time: '12:00', title: 'Lunch & Rest', type: 'food', desc: 'Lunch nearby and rest at hotel.', location: 'Wecostay' }, { time: '14:30', title: 'Starbucks Time', type: 'coffee', desc: 'Coffee break at Starbucks on the hotel 1st floor.', location: 'Wecostay 1F' }, { time: '16:30', title: 'Myeongdong Shopping', type: 'shopping', desc: 'Shopping for cosmetics and fashion in Myeongdong.', location: 'Myeongdong', transport: 'Walk: From Myeongdong Stn Exit 6/7 (~15 mins).' }, { time: '19:00', title: 'Myeongdong Dinner Top 5', type: 'food', desc: 'Recs: 1.Myeongdong Kyoja 2.Wangbijib (BBQ) 3.Baekje Samgyetang 4.Gangnam Myeonok 5.Ungteori (All-you-can-eat BBQ)', location: 'Myeongdong' }] },
+          { day: 5, date: '12/22 (Mon)', theme: 'Modern Seoul & River', activities: [{ time: '11:00', title: 'The Hyundai Seoul', type: 'shopping', desc: 'Massive department store in Yeouido.', location: 'Yeouido', transport: 'Subway Transfer: Line 4 Chungmuro -> (to Danggogae, 1 stop) -> DDP Stn, Transfer Line 5 (to Banghwa, 9 stops) -> Yeouinaru (Exit 1), connected to Dept Store.' }, { time: '15:00', title: 'Yeouido Hangang Park', type: 'walk', desc: 'Relax by the Han River. Ramyeon by the river.', location: 'Yeouido', transport: 'Walk: Exit The Hyundai Gate 1, cross street to Yeouido Hangang Park.' }, { time: '17:00', title: 'Han River Cruise', type: 'ship', desc: 'Eland Cruise for sunset/night view.', location: 'Yeouido Dock', transport: 'Walk: East along riverside (see E-land sign), ~10-15 mins to Terminal 2.' }, { time: '19:30', title: 'Hongdae', type: 'food', desc: 'Youth culture, busking, and trendy dinner.', location: 'Hongdae', transport: 'Subway Transfer: Line 5 Yeouinaru -> (to Banghwa, 2 stops) -> Yeongdeungpo-gu Office, Transfer Line 2 (to Hapjeong/Hongdae, 2 stops) -> Hongik Univ. (Exit 9).' }] },
+          { day: 6, date: '12/23 (Tue)', theme: 'Souvenirs & Chill', activities: [{ time: '10:30', title: 'Gwangjang Market', type: 'food', desc: 'Street food breakfast/lunch (Bindaetteok).', location: 'Gwangjang Market', transport: 'Subway Transfer: Line 4 Chungmuro -> (to Danggogae, 2 stops) -> Dongdaemun, Transfer Line 1 (to Seoul Stn, 1 stop) -> Jongno 5-ga (Exit 8 is entrance).' }, { time: '14:00', title: 'Lotte Mart Seoul Stn', type: 'shopping', desc: 'Last minute snacks and souvenir shopping.', location: 'Seoul Station', transport: 'Subway Direct: From Jongno 5-ga take Line 1 (to Seoul Stn/Incheon, 3 stops) -> Seoul Stn (Exit 1 up escalator).' }, { time: '17:00', title: 'Packing', type: 'hotel', desc: 'Pack luggage at hotel.', location: 'Wecostay', transport: 'Subway Direct: From Seoul Stn take Line 4 (to Danggogae, 2 stops) -> Chungmuro Stn.' }, { time: '19:00', title: 'Euljiro Vibes', type: 'food', desc: 'Farewell dinner at Hipjiro alleys.', location: 'Euljiro', transport: 'Walk: From Chungmuro Stn Exit 8, walk 5-8 mins to Euljiro 3-ga alleys.' }] },
+          { day: 7, date: '12/24 (Wed)', theme: 'Departure', activities: [{ time: '06:00', title: 'Checkout & Airport', type: 'bus', desc: 'Bus 6015 to Incheon Airport.', location: 'Airport Bus Stop', transport: 'Airport Bus: Go to bus stop in front of Chungmuro Exit 1, take [Airport Bus 6015] (to Incheon Airport), ~70-80 mins.' }, { time: '09:40', title: 'Check-in', type: 'plane', desc: 'EVA Air Counter. Tax Refund.', location: 'ICN Airport' }, { time: '11:40', title: 'Flight BR169', type: 'flight', desc: 'ICN -> TPE', location: 'Departure Hall' }, { time: '13:30', title: 'Arrive Taiwan', type: 'home', desc: 'Home Sweet Home.', location: 'Taipei' }] }
+      ];
+      
+      const days_KR = [
+          { day: 1, date: '12/18 (목)', theme: '서울 도착 & 호텔 체크인', activities: [{ time: '12:00', title: '집에서 출발', type: 'car', desc: '예약된 켄이(Kenyi) 공항 픽업 서비스로 타오위안 공항 이동.', location: 'Home', transport: '전용 차량' }, { time: '15:15', title: '에바항공 BR160 출발', type: 'flight', desc: '타오위안(TPE) 2터미널 -> 인천(ICN)', location: 'TPE Airport' }, { time: '18:45', title: '인천공항 도착', type: 'arrival', desc: '입국 심사, 수하물 수령, 티머니 카드 구입.', location: 'ICN Airport' }, { time: '20:00', title: 'Wecostay 이동', type: 'bus', desc: '5B/11B 승강장에서 6015번 공항버스 탑승 (명동 방면). 충무로역 하차, 도보 5분.', info: '비용: 17,000 KRW / 약 75분', transport: '인천공항 5B/11B 승강장에서 [6015 공항버스] 탑승 (명동 방면), 3정거장(약 70분), "충무로역" 하차, 하차 후 뒤로 약 2분 도보.' }, { time: '21:30', title: '체크인 & 저녁 식사', type: 'food', desc: '호텔 체크인. 근처에서 치킨이나 부대찌개 식사.', location: 'Chungmuro' }] },
+          { day: 2, date: '12/19 (금)', theme: '역사와 문화', activities: [{ time: '10:00', title: '경복궁 & 광화문', type: 'sight', desc: '수문장 교대식(10:00). 한복 착용 시 입장 무료.', location: 'Gyeongbokgung', transport: '3호선 충무로역 -> (대화 방면, 3정거장) -> 경복궁역 (5번 출구), 출구 나와 직진하면 광화문 광장.' }, { time: '12:30', title: '토속촌 삼계탕', type: 'food', desc: '유명한 삼계탕 맛집에서 점심.', location: 'Seochon', transport: '도보: 경복궁역 2번 출구 직진 약 120m, GS25에서 좌회전하여 자하문로 5길 진입.' }, { time: '14:30', title: '북촌 한옥마을', type: 'walk', desc: '전통 한옥 산책 및 삼청동 카페 거리.', location: 'Bukchon', transport: '도보: 경복궁 돌담길 따라 동쪽으로 이동, 국립민속박물관 지나 삼청동길 횡단 (약 15-20분).' }, { time: '18:00', title: '인사동', type: 'shopping', desc: '쌈지길 구경 및 전통 기념품 쇼핑.', location: 'Insadong', transport: '도보: 북촌에서 안국역 방면으로 남하, 길 건너 인사동 주 거리 진입 (약 10분).' }, { time: '20:00', title: '광화문 광장 야경', type: 'walk', desc: '이순신 장군 동상 및 광장 야경 감상.', location: 'Gwanghwamun', transport: '도보: 인사동 주 거리에서 남쪽으로 직진, 종각역 지나 청계천 광장까지 도보 약 8분.' }] },
+          { day: 3, date: '12/20 (토)', theme: '서울의 전경 & 명동 쇼핑', activities: [{ time: '10:30', title: 'N서울타워', type: 'sight', desc: '케이블카 탑승. 사랑의 자물쇠 및 서울 전경 감상.', location: 'Namsan', transport: '도보+케이블카: 4호선 명동역 3번 출구, 퍼시픽호텔 오른쪽 언덕길 따라 약 10분 도보, 케이블카 탑승.' }, { time: '13:30', title: '남산 돈까스', type: 'food', desc: '남산의 명물 왕돈까스로 점심.', location: 'Namsan', transport: '도보: 케이블카 하산 후, 언덕길 따라 약 5분 내려오면 돈까스 거리.' }, { time: '15:00', title: '명동 쇼핑거리', type: 'shopping', desc: '화장품, 의류 쇼핑 및 길거리 음식 체험.', location: 'Myeongdong', transport: '도보: 남산에서 명동역으로 복귀, 지하도나 횡단보도 이용해 명동 중심가 진입.' }, { time: '19:00', title: '난타 공연 또는 휴식', type: 'show', desc: '넌버벌 퍼포먼스 관람 또는 숙소 휴식.', location: 'Myeongdong' }] },
+          { day: 4, date: '12/21 (일)', theme: '여유로운 오후 & 명동 맛집', activities: [{ time: '10:00', title: '남산골 한옥마을', type: 'sight', desc: '숙소 근처의 고즈넉한 한옥 마을 산책.', location: 'Chungmuro', transport: '도보: Wecostay에서 도보 약 5분, 충무로역 3, 4번 출구 옆 입구.' }, { time: '12:00', title: '점심 & 휴식', type: 'food', desc: '충무로 근처 식사 후 호텔 휴식.', location: 'Wecostay' }, { time: '14:30', title: '호텔 1층 스타벅스', type: 'coffee', desc: '호텔 로비 스타벅스에서 즐기는 커피 타임.', location: 'Wecostay 1F' }, { time: '16:30', title: '명동 쇼핑', type: 'shopping', desc: '명동 거리에서 화장품 및 의류 쇼핑.', location: 'Myeongdong', transport: '도보: 명동역 6/7번 출구 방향 (약 15분).' }, { time: '19:00', title: '명동 맛집 저녁 (추천 5곳)', type: 'food', desc: '추천: 1.명동교자(칼국수) 2.왕비집(갈비) 3.백제삼계탕 4.강남면옥(갈비찜) 5.엉터리생고기(무한리필)', location: 'Myeongdong' }] },
+          { day: 5, date: '12/22 (월)', theme: '현대적인 서울 & 한강', activities: [{ time: '11:00', title: '더현대 서울', type: 'shopping', desc: '여의도의 대형 백화점 및 실내 정원.', location: 'Yeouido', transport: '지하철 환승: 4호선 충무로역 -> (당고개 방면, 1정거장) -> 동대문역사문화공원역, 5호선 환승 (방화 방면, 9정거장) -> 여의나루역 (1번 출구), 백화점 직통.' }, { time: '15:00', title: '여의도 한강공원', type: 'walk', desc: '한강 산책 및 한강 라면 체험.', location: 'Yeouido', transport: '도보: 더현대 1번 게이트 나와 횡단보도 건너면 여의도 한강공원.' }, { time: '17:00', title: '한강 유람선', type: 'ship', desc: '이랜드 크루즈에서 야경 감상.', location: 'Yeouido Dock', transport: '도보: 한강공원 강변 따라 동쪽으로 이동 (이랜드 표지판), 도보 약 10-15분 제2터미널.' }, { time: '19:30', title: '홍대 입구', type: 'food', desc: '젊음의 거리에서 저녁 식사 및 버스킹 구경.', location: 'Hongdae', transport: '지하철 환승: 5호선 여의나루역 -> (방화 방면, 2정거장) -> 영등포구청역, 2호선 환승 (합정/홍대 방면, 2정거장) -> 홍대입구역 (9번 출구).' }] },
+          { day: 6, date: '12/23 (화)', theme: '기념품 & 휴식', activities: [{ time: '10:30', title: '광장시장', type: 'food', desc: '빈대떡, 육회, 마약김밥 등 먹거리 탐방.', location: 'Gwangjang Market', transport: '지하철 환승: 4호선 충무로역 -> (당고개 방면, 2정거장) -> 동대문역, 1호선 환승 (서울역 방면, 1정거장) -> 종로5가역 (8번 출구 시장 입구).' }, { time: '14:00', title: '롯데마트 서울역점', type: 'shopping', desc: '과자, 김 등 마지막 기념품 쇼핑.', location: 'Seoul Station', transport: '지하철 직통: 종로5가역에서 1호선 (서울역/인천 방면, 3정거장) -> 서울역 (1번 출구 에스컬레이터).' }, { time: '17:00', title: '짐 정리', type: 'hotel', desc: '호텔에서 짐 정리 및 휴식.', location: 'Wecostay', transport: '지하철 직통: 서울역에서 4호선 (당고개 방면, 2정거장) -> 충무로역.' }, { time: '19:00', title: '을지로 (힙지로)', type: 'food', desc: '을지로 골목의 힙한 식당에서 마지막 저녁.', location: 'Euljiro', transport: '도보: 충무로역 8번 출구에서 을지로 3가 골목까지 도보 약 5-8분.' }] },
+          { day: 7, date: '12/24 (수)', theme: '출국', activities: [{ time: '06:00', title: '체크아웃 & 공항 이동', type: 'bus', desc: '6015번 버스로 인천공항 이동.', location: 'Airport Bus Stop', transport: '공항버스: 충무로역 1번 출구 앞 정류장 이동, [6015 공항버스] 탑승 (인천공항 방면), 약 70-80분 소요.' }, { time: '07:35', title: '체크인', type: 'plane', desc: '탑승 수속 및 세금 환급.', location: 'ICN Airport' }, { time: '11:40', title: 'BR169 이륙', type: 'flight', desc: '인천(ICN) -> 타오위안(TPE)', location: 'Departure Hall' }, { time: '13:30', title: '대만 도착', type: 'home', desc: '즐거운 여행 종료.', location: 'Taipei' }] }
+      ];
+      
+      const days_JP = [
+          { day: 1, date: '12/18 (木)', theme: 'ソウル到着 & チェックイン', activities: [{ time: '12:00', title: '自宅を出発', type: 'car', desc: '予約済みの空港送迎サービス（Kenyi）で空港へ。', location: 'Home', transport: '専用車' }, { time: '15:15', title: 'エバー航空 BR160 出発', type: 'flight', desc: '桃園 (TPE) -> 仁川 (ICN)', location: 'TPE Airport' }, { time: '18:45', title: '仁川空港到着', type: 'arrival', desc: '入国審査、荷物受取、T-Moneyカード購入。', location: 'ICN Airport' }, { time: '20:00', title: 'Wecostayへ移動', type: 'bus', desc: '5B/11B乗り場から6015番バス（明洞方面）。「忠武路駅」下車、徒歩5分。', info: '費用: 17,000 KRW / 約75分', transport: '仁川空港5B/11B乗り場から【6015空港バス】(明洞方面)乗車、3駅(約70分)、「忠武路駅」下車、戻る方向に徒歩約2分。' }, { time: '21:30', title: 'チェックイン & 夕食', type: 'food', desc: 'ホテル到着。近くでチキンやプデチゲを堪能。', location: 'Chungmuro' }] },
+          { day: 2, date: '12/19 (金)', theme: '歴史と文化', activities: [{ time: '10:00', title: '景福宮 (キョンボックン)', type: 'sight', desc: '守門将交代式 (10:00)。韓服着用で入場無料。', location: 'Gyeongbokgung', transport: '3号線 忠武路駅 -> (大化方面、3駅) -> 景福宮駅 (5番出口)、直進して光化門広場へ。' }, { time: '12:30', title: '土俗村参鶏湯', type: 'food', desc: '有名なサムゲタンでランチ。', location: 'Seochon', transport: '徒歩：景福宮駅2番出口から直進約120m、GS25で左折し紫霞門路5キルへ。' }, { time: '14:30', title: '北村韓屋村', type: 'walk', desc: '伝統家屋の街並みを散策。三清洞でお茶。', location: 'Bukchon', transport: '徒歩：景福宮の石垣道を東へ、国立民俗博物館を通り、三清洞路を横断 (徒歩約15-20分)。' }, { time: '18:00', title: '仁寺洞 (インサドン)', type: 'shopping', desc: 'サムジキルで雑貨ショッピング。', location: 'Insadong', transport: '徒歩：北村から安国駅方面へ南下、道を渡り仁寺洞メインストリートへ (約10分)。' }, { time: '20:00', title: '清渓川 (チョンゲチョン)', type: 'walk', desc: '夜の川沿いを散歩。', location: 'Cheonggyecheon', transport: '徒歩：仁寺洞メインストリートを南下、鐘閣駅を過ぎて清渓川広場まで徒歩約8分。' }] },
+          { day: 3, date: '12/20 (土)', theme: 'ソウルの絶景 & 明洞', activities: [{ time: '10:30', title: 'Nソウルタワー', type: 'sight', desc: 'ケーブルカーで山頂へ。愛の南京錠とパノラマビュー。', location: 'Namsan', transport: '徒歩+ケーブルカー：4号線 明洞駅3番出口、パシフィックホテル右側の坂道を約10分歩き乗り場へ。' }, { time: '13:30', title: '南山トンカツ', type: 'food', desc: '名物のジャンボトンカツランチ。', location: 'Namsan', transport: '徒歩：ケーブルカー駅から下山、坂道を約5分下るとトンカツ通り。' }, { time: '15:00', title: '明洞ショッピング', type: 'shopping', desc: 'コスメ、服、屋台グルメ。', location: 'Myeongdong', transport: '徒歩：南山から明洞駅へ戻り、地下道または横断歩道で明洞メインストリートへ。' }, { time: '19:00', title: 'NANTAショー または 休憩', type: 'show', desc: 'ノンバーバルパフォーマンス鑑賞、またはホテルで休憩。', location: 'Myeongdong' }] },
+          { day: 4, date: '12/21 (日)', theme: 'ゆったり午後 & 明洞グルメ', activities: [{ time: '10:00', title: '南山谷韓屋村', type: 'sight', desc: 'ホテルのすぐ近くにある静かな韓屋村。', location: 'Chungmuro', transport: '徒歩：Wecostayから徒歩約5分、忠武路駅3・4番出口横の入口から。' }, { time: '12:00', title: 'ランチ & 休憩', type: 'food', desc: '忠武路周辺でランチ後、ホテルで休憩。', location: 'Wecostay' }, { time: '14:30', title: 'ホテル1階のスタバ', type: 'coffee', desc: 'ホテルのロビーにあるスターバックスでコーヒータイム。', location: 'Wecostay 1F' }, { time: '16:30', title: '明洞ショッピング', type: 'shopping', desc: '明洞でコスメやファッションのショッピング。', location: 'Myeongdong', transport: '徒歩：明洞駅6/7番出口方面へ（約15分）。' }, { time: '19:00', title: '明洞ディナーおすすめ5選', type: 'food', desc: '1.明洞餃子 2.王妃家(焼肉) 3.百済参鶏湯 4.江南麺屋(カルビチム) 5.オントリセンコギ(焼肉食べ放題)', location: 'Myeongdong' }] },
+          { day: 5, date: '12/22 (月)', theme: '現代ソウル & 漢江', activities: [{ time: '11:00', title: 'ザ・現代ソウル', type: 'shopping', desc: '汝矣島の巨大デパート。室内庭園。', location: 'Yeouido', transport: '地下鉄乗換：4号線 忠武路駅 -> (タンゴゲ方面、1駅) -> 東大門歴史文化公園駅、5号線に乗換 (傍花方面、9駅) -> 汝矣ナル駅 (1番出口)、直結。' }, { time: '15:00', title: '汝矣島漢江公園', type: 'walk', desc: '漢江ラーメン体験と散歩。', location: 'Yeouido', transport: '徒歩：ザ・現代の1番ゲートを出て、道を渡れば汝矣島漢江公園。' }, { time: '17:00', title: '漢江遊覧船', type: 'ship', desc: 'イーランドクルーズで夜景鑑賞。', location: 'Yeouido Dock', transport: '徒歩：漢江公園の川沿いを東へ (E-landの看板)、第2ターミナルまで徒歩約10-15分。' }, { time: '19:30', title: '弘大 (ホンデ)', type: 'food', desc: '若者の街でディナーとショッピング。', location: 'Hongdae', transport: '地下鉄乗換：5号線 汝矣ナル駅 -> (傍花方面、2駅) -> 永登浦区庁駅、2号線に乗換 (合井/弘大方面、2駅) -> 弘大入口駅 (9番出口)。' }] },
+          { day: 6, date: '12/23 (火)', theme: 'お土産 & リラックス', activities: [{ time: '10:30', title: '広蔵市場', type: 'food', desc: 'ピンデトッ、ユッケ、麻薬キンパ。', location: 'Gwangjang Market', transport: '地下鉄乗換：4号線 忠武路駅 -> (タンゴゲ方面、2駅) -> 東大門駅、1号線に乗換 (ソウル駅方面、1駅) -> 鍾路5街駅 (8番出口が市場入口)。' }, { time: '14:00', title: 'ロッテマート ソウル駅', type: 'shopping', desc: 'お菓子や海苔などのお土産購入。', location: 'Seoul Station', transport: '地下鉄直通：鍾路5街駅から1号線 (ソウル駅/仁川方面、3駅) -> ソウル駅 (1番出口のエスカレーター上がる)。' }, { time: '17:00', title: 'パッキング', type: 'hotel', desc: '荷造り。', location: 'Wecostay', transport: '地下鉄直通：ソウル駅から4号線 (タンゴゲ方面、2駅) -> 忠武路駅。' }, { time: '19:00', title: '乙支路 (ウルチロ)', type: 'food', desc: 'ヒップジロで最後の夕食。', location: 'Euljiro', transport: '徒歩：忠武路駅8番出口から乙支路3街方面の路地へ徒歩約5-8分。' }] },
+          { day: 7, date: '12/24 (水)', theme: '帰国 (仙台へ)', activities: [{ time: '06:00', title: 'チェックアウト & 移動', type: 'bus', desc: 'フライトに合わせて早朝出発。6015番バスまたはタクシーで仁川空港へ。', location: 'Airport Bus Stop', transport: '空港バス：忠武路駅1番出口前のバス停へ、【6015空港バス】(仁川空港行)乗車、所要約70-80分。' }, { time: '07:35', title: 'チェックイン', type: 'plane', desc: '搭乗手続き、荷物預け、出国審査。', location: 'ICN Airport' }, { time: '09:35', title: '仁川発 仙台行', type: 'flight', desc: 'ICN -> SDJ (仙台空港)', location: 'Departure Hall' }, { time: '11:45', title: '仙台空港到着', type: 'home', desc: 'お疲れ様でした。', location: 'Sendai Airport' }] }
+      ];
 
       const data = {
         ZH: [day0_ZH, ...days_ZH],
@@ -176,29 +215,25 @@
     // Transport Formatter Component
     const TransportDisplay = ({ text }) => {
       if (!text) return null;
-      
-      // Regex to find line patterns: e.g., "1號線", "Line 2", "AREX"
-      const parts = text.split(/([1-9]號線|Line\s*[1-9]|AREX|[1-9]호선)/g);
-      
+      const parts = text.split(/([1-9]號線|Line\s*[1-9]|AREX|[1-9]호선|[1-9]号線)/g);
       return (
         <span className="inline-flex flex-wrap items-center gap-1 align-middle ml-1">
           {parts.map((part, idx) => {
             let color = null;
-            if (part.match(/1號線|Line\s*1|1호선/)) color = SUBWAY_COLORS['1'];
-            else if (part.match(/2號線|Line\s*2|2호선/)) color = SUBWAY_COLORS['2'];
-            else if (part.match(/3號線|Line\s*3|3호선/)) color = SUBWAY_COLORS['3'];
-            else if (part.match(/4號線|Line\s*4|4호선/)) color = SUBWAY_COLORS['4'];
-            else if (part.match(/5號線|Line\s*5|5호선/)) color = SUBWAY_COLORS['5'];
-            else if (part.match(/6號線|Line\s*6|6호선/)) color = SUBWAY_COLORS['6'];
-            else if (part.match(/7號線|Line\s*7|7호선/)) color = SUBWAY_COLORS['7'];
-            else if (part.match(/8號線|Line\s*8|8호선/)) color = SUBWAY_COLORS['8'];
-            else if (part.match(/9號線|Line\s*9|9호선/)) color = SUBWAY_COLORS['9'];
+            if (part.match(/1號線|Line\s*1|1호선|1号線/)) color = SUBWAY_COLORS['1'];
+            else if (part.match(/2號線|Line\s*2|2호선|2号線/)) color = SUBWAY_COLORS['2'];
+            else if (part.match(/3號線|Line\s*3|3호선|3号線/)) color = SUBWAY_COLORS['3'];
+            else if (part.match(/4號線|Line\s*4|4호선|4号線/)) color = SUBWAY_COLORS['4'];
+            else if (part.match(/5號線|Line\s*5|5호선|5号線/)) color = SUBWAY_COLORS['5'];
+            else if (part.match(/6號線|Line\s*6|6호선|6号線/)) color = SUBWAY_COLORS['6'];
+            else if (part.match(/7號線|Line\s*7|7호선|7号線/)) color = SUBWAY_COLORS['7'];
+            else if (part.match(/8號線|Line\s*8|8호선|8号線/)) color = SUBWAY_COLORS['8'];
+            else if (part.match(/9號線|Line\s*9|9호선|9号線/)) color = SUBWAY_COLORS['9'];
             else if (part.match(/AREX/i)) color = SUBWAY_COLORS['AREX'];
 
             if (color) {
               return <span key={idx} className="px-1.5 py-0.5 rounded text-white font-bold text-[10px] inline-block" style={{ backgroundColor: color }}>{part}</span>;
             }
-            // Render non-matching parts only if they have meaningful content
             return part.trim() ? <span key={idx} className="text-xs text-stone-500">{part}</span> : null;
           })}
         </span>
@@ -284,10 +319,43 @@
       return <div onClick={() => setIsEditing(true)} className={`cursor-pointer hover:bg-rose-50/50 rounded px-1 transition-colors border border-transparent hover:border-rose-100 group relative ${className}`}>{value}<Edit3 className="w-3 h-3 text-rose-300 absolute -right-4 top-1 opacity-0 group-hover:opacity-100 transition-opacity" /></div>;
     };
 
-    const MagicPhraseModal = ({ activity, lang, onClose }) => {
+    const MagicPhraseModal = ({ activity, lang, onClose, onSavePhrases }) => {
       const [phrases, setPhrases] = useState([]);
-      const [loading, setLoading] = useState(true);
-      const [errorMsg, setErrorMsg] = useState(null);
+      const [isAdding, setIsAdding] = useState(false);
+      const [newMeaning, setNewMeaning] = useState('');
+      const [newKorean, setNewKorean] = useState('');
+      const [newPronunciation, setNewPronunciation] = useState('');
+      
+      useEffect(() => {
+        const fallback = getFallbackPhrases(activity.type, lang);
+        const custom = activity.customPhrases || [];
+        setPhrases([...custom, ...fallback]);
+      }, [activity, lang]);
+
+      const handleAddPhrase = () => {
+        if (!newMeaning || !newKorean) return;
+        const newPhrase = { meaning: newMeaning, korean: newKorean, pronunciation: newPronunciation };
+        const updatedCustom = [...(activity.customPhrases || []), newPhrase];
+        
+        onSavePhrases(updatedCustom); 
+        setPhrases([...updatedCustom, ...getFallbackPhrases(activity.type, lang)]);
+        
+        setNewMeaning('');
+        setNewKorean('');
+        setNewPronunciation('');
+        setIsAdding(false);
+      };
+
+      const handleDeletePhrase = (index) => {
+        const customCount = (activity.customPhrases || []).length;
+        if (index < customCount) {
+             const updatedCustom = [...(activity.customPhrases || [])];
+             updatedCustom.splice(index, 1);
+             onSavePhrases(updatedCustom);
+             setPhrases([...updatedCustom, ...getFallbackPhrases(activity.type, lang)]);
+        }
+      };
+
       const speak = (text) => {
         window.speechSynthesis.cancel();
         const utterance = new SpeechSynthesisUtterance(text);
@@ -295,45 +363,61 @@
         utterance.rate = 0.9;
         window.speechSynthesis.speak(utterance);
       };
-      useEffect(() => {
-        const generatePhrases = async () => {
-          const targetLang = lang === 'ZH' || lang === 'KR' ? 'Traditional Chinese' : (lang === 'JP' ? 'Japanese' : 'English');
-          const prompt = `Context: Tourist in Seoul doing "${activity.title}" (${activity.type}). Generate 4 short, useful Korean phrases. Output JSON only: [{"korean": "...", "pronunciation": "...", "meaning": "..."}]. Meaning in ${targetLang}.`;
-          const custom = activity.customPhrases || [];
-          const result = await callGeminiAPI(prompt, "You are a Korean tutor. Output pure JSON.");
-          if (result.success) {
-            try {
-               const cleanJson = result.data.replace(/```json/g, '').replace(/```/g, '').trim();
-               const aiPhrases = JSON.parse(cleanJson);
-               setPhrases([...custom, ...aiPhrases]);
-            } catch (e) { setPhrases([...custom, ...(FALLBACK_PHRASES_BY_TYPE[activity.type] || FALLBACK_PHRASES_BY_TYPE.default)]); setErrorMsg(UI_LABELS[lang].fallbackMsg); }
-          } else {
-            setPhrases([...custom, ...(FALLBACK_PHRASES_BY_TYPE[activity.type] || FALLBACK_PHRASES_BY_TYPE.default)]);
-            setErrorMsg(UI_LABELS[lang].fallbackMsg);
-          }
-          setLoading(false);
-        };
-        generatePhrases();
-      }, [activity, lang]);
+
+      const handleTranslate = () => {
+        if (!newMeaning) return;
+        const slMap = { ZH: 'zh-TW', KR: 'ko', EN: 'en', JP: 'ja' };
+        const sl = slMap[lang] || 'auto';
+        window.open(`https://translate.google.com/?sl=${sl}&tl=ko&text=${encodeURIComponent(newMeaning)}&op=translate`, '_blank');
+      };
+
       return (
         <div className="fixed inset-0 bg-black/40 backdrop-blur-sm z-[60] flex items-center justify-center p-4" onClick={onClose}>
-          <div className="bg-white rounded-3xl shadow-2xl max-w-sm w-full overflow-hidden animate-fade-in" onClick={(e) => e.stopPropagation()}>
-            <div className="bg-gradient-to-r from-rose-300 to-rose-400 p-4 flex justify-between items-center text-white">
+          <div className="bg-white rounded-3xl shadow-2xl max-w-sm w-full overflow-hidden animate-fade-in flex flex-col max-h-[80vh]" onClick={(e) => e.stopPropagation()}>
+            <div className="bg-gradient-to-r from-rose-300 to-rose-400 p-4 flex justify-between items-center text-white shrink-0">
               <div className="flex items-center gap-2"><Languages size={20} /><div><h3 className="font-bold text-sm">{UI_LABELS[lang].phrasesTitle}</h3><p className="text-[10px] opacity-90 truncate max-w-[200px]">{activity.title}</p></div></div>
               <button onClick={onClose}><X size={20} /></button>
             </div>
-            <div className="p-4 min-h-[200px]">
-              {loading ? <div className="flex flex-col items-center justify-center h-32"><Loader2 className="animate-spin text-rose-400" /></div> : (
-                <div className="space-y-2">
-                  {errorMsg && <div className="flex items-center gap-2 bg-amber-50 text-amber-600 text-xs p-2 rounded">{errorMsg}</div>}
-                  {phrases.map((p, i) => (
-                    <div key={i} className="bg-rose-50 rounded-xl p-3 border border-rose-100 flex justify-between items-center gap-2">
-                      <div className="flex-1"><span className="font-bold text-rose-900 block">{p.korean}</span><div className="text-xs text-rose-600/80">{p.pronunciation}</div><div className="text-sm text-stone-600">{p.meaning}</div></div>
-                      <button onClick={() => speak(p.korean)} className="p-2 bg-white text-rose-400 rounded-full shadow-sm"><Volume2 size={18} /></button>
-                    </div>
-                  ))}
+            <div className="p-4 overflow-y-auto flex-1 space-y-3">
+              {phrases.map((p, i) => (
+                <div key={i} className="bg-rose-50 rounded-xl p-3 border border-rose-100 flex justify-between items-center gap-2 relative group">
+                  <div className="flex-1"><span className="font-bold text-rose-900 block">{p.korean}</span><div className="text-xs text-rose-600/80">{p.pronunciation}</div><div className="text-sm text-stone-600">{p.meaning}</div></div>
+                  <div className="flex flex-col gap-1">
+                    <button onClick={() => speak(p.korean)} className="p-2 bg-white text-rose-400 rounded-full shadow-sm"><Volume2 size={18} /></button>
+                    {i < (activity.customPhrases || []).length && (
+                        <button onClick={() => handleDeletePhrase(i)} className="p-2 bg-white text-red-400 rounded-full shadow-sm"><Trash2 size={18} /></button>
+                    )}
+                  </div>
                 </div>
-              )}
+              ))}
+            </div>
+            
+            <div className="p-3 border-t bg-stone-50 shrink-0">
+                {!isAdding ? (
+                    <button 
+                        onClick={() => setIsAdding(true)}
+                        className="w-full py-2 rounded-xl border-2 border-dashed border-rose-200 text-rose-400 font-bold text-sm hover:bg-rose-50 hover:border-rose-300 transition-colors flex items-center justify-center gap-1"
+                    >
+                        <Plus size={16} /> {UI_LABELS[lang].addPhrase || '新增自訂短句'}
+                    </button>
+                ) : (
+                    <div className="space-y-2 animate-fade-in">
+                        <div className="flex justify-between items-center mb-1">
+                            <div className="text-xs font-bold text-stone-500">新增自訂短句</div>
+                            <button onClick={() => setIsAdding(false)} className="text-stone-400 hover:text-stone-600"><XCircle size={16}/></button>
+                        </div>
+                        <div className="flex gap-2">
+                            <input className="flex-1 border rounded p-1.5 text-sm outline-none focus:ring-1 focus:ring-rose-300" placeholder={UI_LABELS[lang].phraseMeaningPlaceholder} value={newMeaning} onChange={e => setNewMeaning(e.target.value)} />
+                            <button onClick={handleTranslate} className="bg-blue-100 text-blue-600 px-2 rounded text-xs flex items-center gap-1 whitespace-nowrap"><Search size={12}/> 翻譯</button>
+                        </div>
+                        <input className="w-full border rounded p-1.5 text-sm outline-none focus:ring-1 focus:ring-rose-300" placeholder="韓文 (貼上翻譯結果)" value={newKorean} onChange={e => setNewKorean(e.target.value)} />
+                        <input className="w-full border rounded p-1.5 text-sm outline-none focus:ring-1 focus:ring-rose-300" placeholder="發音 (選填)" value={newPronunciation} onChange={e => setNewPronunciation(e.target.value)} />
+                        <div className="flex gap-2">
+                            <button onClick={() => setIsAdding(false)} className="flex-1 bg-stone-200 text-stone-600 py-2 rounded-lg font-bold text-sm">取消</button>
+                            <button onClick={handleAddPhrase} disabled={!newMeaning || !newKorean} className="flex-1 bg-rose-400 text-white py-2 rounded-lg font-bold text-sm disabled:opacity-50">確認新增</button>
+                        </div>
+                    </div>
+                )}
             </div>
           </div>
         </div>
@@ -525,49 +609,6 @@
       );
     };
 
-    // --- Settings Modal ---
-    const SettingsModal = ({ onClose, lang }) => {
-        const [apiKey, setApiKey] = useState('');
-        
-        useEffect(() => {
-            const savedKey = localStorage.getItem('gemini_api_key') || '';
-            setApiKey(savedKey);
-        }, []);
-
-        const handleSave = () => {
-            localStorage.setItem('gemini_api_key', apiKey.trim());
-            alert('API Key 已儲存！');
-            onClose();
-        };
-
-        return (
-            <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-[90] flex items-center justify-center p-4" onClick={onClose}>
-                <div className="bg-white rounded-2xl shadow-2xl w-full max-w-sm overflow-hidden animate-fade-in" onClick={e => e.stopPropagation()}>
-                    <div className="bg-stone-700 p-4 text-white font-bold text-center flex justify-between items-center">
-                        <div className="flex items-center gap-2"><Settings size={20} /> {UI_LABELS[lang].settings}</div>
-                        <button onClick={onClose}><X size={20} /></button>
-                    </div>
-                    <div className="p-5 space-y-4">
-                        <div>
-                            <label className="block text-xs text-stone-500 mb-1">Google Gemini API Key</label>
-                            <input 
-                                type="password" 
-                                className="w-full border border-stone-200 rounded-lg p-2 text-stone-700 outline-none focus:ring-2 focus:ring-stone-400 font-mono text-sm" 
-                                placeholder={UI_LABELS[lang].apiKeyPlaceholder}
-                                value={apiKey} 
-                                onChange={(e) => setApiKey(e.target.value)} 
-                            />
-                            <p className="text-[10px] text-stone-400 mt-1">Key 將儲存於您的瀏覽器中，不會上傳至其他伺服器。</p>
-                        </div>
-                        <button onClick={handleSave} className="w-full bg-stone-700 text-white py-2 rounded-lg font-bold shadow-md hover:bg-stone-800 transition-colors">
-                            {UI_LABELS[lang].addModalSubmit}
-                        </button>
-                    </div>
-                </div>
-            </div>
-        );
-    };
-
     const loadData = (language) => {
         const key = `seoul_trip_2025_${language}`;
         try { 
@@ -594,7 +635,6 @@
       const [selectedActivity, setSelectedActivity] = useState(null);
       const [showAddEventModal, setShowAddEventModal] = useState(false);
       const [showSplitBill, setShowSplitBill] = useState(false);
-      const [showSettings, setShowSettings] = useState(false);
       
       const touchStartX = useRef(null);
       const onTouchStart = e => touchStartX.current = e.targetTouches[0].clientX;
@@ -608,12 +648,6 @@
           setLang(newLang);
           const savedData = loadData(newLang);
           setItinerary(savedData);
-      };
-
-      const forceSave = () => {
-          const key = `seoul_trip_2025_${lang}`; 
-          localStorage.setItem(key, JSON.stringify(itinerary));
-          alert('行程已儲存！');
       };
 
       const updateActivity = (d, a, f, v) => { 
@@ -644,6 +678,21 @@
         newItinerary[activeDay] = newDay;
         setItinerary(newItinerary);
         setShowAddEventModal(false);
+      };
+
+      // Handler for updating custom phrases in a specific activity
+      const handleUpdatePhrases = (activityIndex, newCustomPhrases) => {
+          const newItinerary = [...itinerary];
+          const newDay = { ...newItinerary[activeDay] };
+          const newActivities = [...newDay.activities];
+          const newActivity = { ...newActivities[activityIndex] };
+          
+          newActivity.customPhrases = newCustomPhrases;
+          
+          newActivities[activityIndex] = newActivity;
+          newDay.activities = newActivities;
+          newItinerary[activeDay] = newDay;
+          setItinerary(newItinerary);
       };
       
       const toggleCheck = (dayIdx, actIdx, itemIdx) => {
@@ -718,7 +767,6 @@
                 <div className="flex flex-col items-end gap-2 shrink-0">
                    <TimeWeatherWidget />
                    <div className="flex items-center gap-2">
-                     <button onClick={() => setShowSettings(true)} className="p-1.5 bg-stone-100 text-stone-600 rounded-full hover:bg-stone-200 transition-colors"><Settings size={16} /></button>
                      <button onClick={() => setShowSplitBill(true)} className="p-1.5 bg-[#FF7F50] text-white rounded-full hover:bg-[#ff6b35] transition-colors"><Banknote size={16} /></button>
                      <div className="flex bg-rose-100/50 p-1 rounded-full">{Object.keys(LANGUAGES).map(l => <button key={l} onClick={() => handleLangChange(l)} className={`px-2 py-1 rounded-full text-[10px] font-bold transition-all ${lang === l ? 'bg-white text-rose-600 shadow-sm' : 'text-rose-400'}`}>{l}</button>)}</div>
                    </div>
@@ -744,7 +792,6 @@
                   <h2 className="text-xl font-bold text-stone-800"><EditableText text={currentDay.theme} onSave={(v) => updateTheme(activeDay, v)} /></h2>
                 </div>
                 <div className="flex gap-2">
-                  <button onClick={forceSave} className="flex items-center gap-1 text-xs font-bold text-emerald-600 bg-emerald-50 px-3 py-1.5 rounded-full shadow-sm hover:bg-emerald-100 transition-colors shrink-0"><Save size={14} /><span>儲存</span></button>
                   {activeDay !== 0 && activeDay !== 1 && activeDay !== 7 && (
                     <button onClick={() => setShowAddEventModal(true)} className="flex items-center gap-1 text-xs font-bold text-white bg-rose-400 px-3 py-1.5 rounded-full shadow-sm hover:bg-rose-500 transition-colors shrink-0"><Plus size={14} /><span>{UI_LABELS[lang].addEvent}</span></button>
                   )}
@@ -813,7 +860,12 @@
                             <ActivityWeather day={activeDay} index={i} location={item.location} />
                           </div>
                           <div className="text-stone-600 text-sm mb-3 leading-relaxed"><EditableText multiline text={item.desc} onSave={(v) => updateActivity(activeDay, i, 'desc', v)} /></div>
-                          <button onClick={() => setSelectedActivity(item)} className="flex items-center gap-1 text-[10px] font-bold text-rose-500 bg-rose-50 px-2 py-1 rounded hover:bg-rose-100 transition-colors w-fit mb-2"><Sparkles size={10} />{UI_LABELS[lang].genPhrases}</button>
+                          <button 
+                            onClick={() => setSelectedActivity({ ...item, index: i })} 
+                            className="flex items-center gap-1 text-[10px] font-bold text-rose-500 bg-rose-50 px-2 py-1 rounded hover:bg-rose-100 transition-colors w-fit mb-2"
+                          >
+                            <Sparkles size={10} />{UI_LABELS[lang].genPhrases}
+                          </button>
                           {(item.location || item.transport || item.duration) && (
                             <div className="mt-2 flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-stone-500">
                               {item.location && (
@@ -842,10 +894,16 @@
           </main>
 
           <AIChatWidget itinerary={itinerary} lang={lang} />
-          {selectedActivity && <MagicPhraseModal activity={selectedActivity} lang={lang} onClose={() => setSelectedActivity(null)} />}
+          {selectedActivity && (
+            <MagicPhraseModal 
+                activity={selectedActivity} 
+                lang={lang} 
+                onClose={() => setSelectedActivity(null)} 
+                onSavePhrases={(newPhrases) => handleUpdatePhrases(selectedActivity.index, newPhrases)}
+            />
+          )}
           {showAddEventModal && <AddEventModal onClose={() => setShowAddEventModal(false)} onSave={handleSaveNewEvent} lang={lang} />}
           {showSplitBill && <SplitBillModal onClose={() => setShowSplitBill(false)} lang={lang} />}
-          {showSettings && <SettingsModal onClose={() => setShowSettings(false)} lang={lang} />}
         </div>
       );
     }
