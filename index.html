@@ -1,990 +1,676 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Seoul Trip 2025 🇰🇷 (Cloud Sync)</title>
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- FontAwesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Leaflet CSS -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>2025 Seoul Travel Guide</title>
+  
+  <!-- PWA 設定 -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Seoul2025">
+  <meta name="application-name" content="Seoul2025">
+  <meta name="theme-color" content="#fdf8f9">
+  <meta name="mobile-web-app-capable" content="yes">
+
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='512' height='512' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' fill='%23fb7185' rx='100'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='sans-serif' font-weight='bold' font-size='120' fill='white'%3ESEOUL%3C/text%3E%3Ctext x='50%25' y='70%25' dominant-baseline='middle' text-anchor='middle' font-family='sans-serif' font-weight='bold' font-size='80' fill='white'%3E2025%3C/text%3E%3C/svg%3E">
+  <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='512' height='512' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' fill='%23fb7185' rx='100'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='sans-serif' font-weight='bold' font-size='120' fill='white'%3ESEOUL%3C/text%3E%3Ctext x='50%25' y='70%25' dominant-baseline='middle' text-anchor='middle' font-family='sans-serif' font-weight='bold' font-size='80' fill='white'%3E2025%3C/text%3E%3C/svg%3E">
+  
+  <link rel="manifest" href='data:application/manifest+json,{"name":"Seoul2025","short_name":"Seoul2025","start_url":".","display":"standalone","background_color":"#fdf8f9","theme_color":"#fdf8f9","icons":[{"src":"data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27512%27 height=%27512%27 viewBox=%270 0 512 512%27%3E%3Crect width=%27512%27 height=%27512%27 fill=%27%23fb7185%27/%3E%3Ctext x=%2750%25%27 y=%2750%25%27 dominant-baseline=%27middle%27 text-anchor=%27middle%27 font-family=%27sans-serif%27 font-weight=%27bold%27 font-size=%27120%27 fill=%27white%27%3ESEOUL%3C/text%3E%3Ctext x=%2750%25%27 y=%2770%25%27 dominant-baseline=%27middle%27 text-anchor=%27middle%27 font-family=%27sans-serif%27 font-weight=%27bold%27 font-size=%2780%27 fill=%27white%27%3E2025%3C/text%3E%3C/svg%3E","sizes":"192x192","type":"image/svg+xml","purpose":"any maskable"},{"src":"data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27512%27 height=%27512%27 viewBox=%270 0 512 512%27%3E%3Crect width=%27512%27 height=%27512%27 fill=%27%23fb7185%27/%3E%3Ctext x=%2750%25%27 y=%2750%25%27 dominant-baseline=%27middle%27 text-anchor=%27middle%27 font-family=%27sans-serif%27 font-weight=%27bold%27 font-size=%27120%27 fill=%27white%27%3ESEOUL%3C/text%3E%3Ctext x=%2750%25%27 y=%2770%25%27 dominant-baseline=%27middle%27 text-anchor=%27middle%27 font-family=%27sans-serif%27 font-weight=%27bold%27 font-size=%2780%27 fill=%27white%27%3E2025%3C/text%3E%3C/svg%3E","sizes":"512x512","type":"image/svg+xml","purpose":"any maskable"}]}'>
+
+  <!-- 載入 Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- 載入 Babel -->
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <style>
+    body { font-family: sans-serif; background-color: #fdf8f9; user-select: none; -webkit-user-select: none; }
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    @keyframes fade-in {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .animate-fade-in { animation: fade-in 0.3s ease-out forwards; }
     
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        primary: '#f472b6', // pink-400
-                        secondary: '#fbcfe8', // pink-200
-                        accent: '#be185d', // pink-700
-                        bgSoft: '#fff1f2', // rose-50
-                    },
-                    fontFamily: {
-                        sans: ['Noto Sans TC', 'sans-serif'],
-                    }
-                }
-            }
-        }
-    </script>
-    <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #fff1f2; /* rose-50 */
-            touch-action: manipulation;
-        }
-        .metro-line-1 { border-left: 5px solid #0052A4; }
-        .metro-line-2 { border-left: 5px solid #00A84D; }
-        .metro-line-3 { border-left: 5px solid #EF7C1C; }
-        .metro-line-4 { border-left: 5px solid #00A5DE; }
-        .metro-line-5 { border-left: 5px solid #996CAC; }
-        .metro-line-6 { border-left: 5px solid #CD7C2F; }
-        .metro-line-7 { border-left: 5px solid #747F00; }
-        .metro-line-8 { border-left: 5px solid #E6186C; }
-        .metro-line-9 { border-left: 5px solid #BDB092; }
-        
-        /* Hide scrollbar for clean UI */
-        .no-scrollbar::-webkit-scrollbar { display: none; }
-        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-        
-        #map { height: 300px; width: 100%; border-radius: 0.5rem; z-index: 1; }
-        
-        /* Toast Animation */
-        @keyframes slideInUp {
-            from { transform: translateY(100%); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
-        .toast-enter { animation: slideInUp 0.3s ease-out forwards; }
-    </style>
+    /* Mic pulse animation */
+    @keyframes pulse-mic {
+      0% { box-shadow: 0 0 0 0 rgba(251, 113, 133, 0.7); }
+      70% { box-shadow: 0 0 0 10px rgba(251, 113, 133, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(251, 113, 133, 0); }
+    }
+    .animate-pulse-mic { animation: pulse-mic 1.5s infinite; }
+  </style>
 </head>
-<body class="text-gray-700 pb-24">
+<body>
+  <div id="root"></div>
 
-    <!-- Header -->
-    <header class="bg-gradient-to-r from-pink-300 to-rose-400 text-white p-4 shadow-lg sticky top-0 z-50">
-        <div class="flex justify-between items-center mb-2">
-            <h1 class="text-xl font-bold"><i class="fa-solid fa-plane-departure mr-2"></i>Seoul 2025</h1>
-            <select id="langSelect" onchange="changeLanguage()" class="bg-white/20 text-white border border-white/40 rounded px-2 py-1 text-sm focus:outline-none">
-                <option value="zh" class="text-gray-700">繁體中文</option>
-                <option value="ko" class="text-gray-700">한국어</option>
-                <option value="en" class="text-gray-700">English</option>
-                <option value="ja" class="text-gray-700">日本語</option>
-            </select>
-        </div>
-        <div class="flex justify-between items-end text-sm">
-            <div>
-                <div id="currentDate" class="font-medium">2025/12/18</div>
-                <div id="currentTime" class="text-xs opacity-90">10:00 AM</div>
-            </div>
-            <div class="text-right">
-                <div class="flex items-center gap-1">
-                    <i class="fa-solid fa-cloud-meatball"></i>
-                    <span id="seoulTemp">-2°C</span>
-                </div>
-                <div class="text-xs opacity-90" data-translate="seoulWeather">首爾即時天氣</div>
-            </div>
-        </div>
-    </header>
+  <!-- React 程式碼 -->
+  <script type="text/babel" data-type="module">
+    import React, { useState, useEffect, useRef, useMemo } from 'https://esm.sh/react@18.2.0';
+    import { createRoot } from 'https://esm.sh/react-dom@18.2.0/client';
+    import { 
+      Plane, Train, Bus, MapPin, Music, Coffee, Camera, Moon, Sun, Cloud, 
+      Snowflake, Clock, Edit3, Globe, ChevronRight, Navigation, Footprints, 
+      Utensils, ShoppingBag, BedDouble, Ticket, Home, Ship, Car, Sparkles, 
+      MessageCircle, X, Send, Loader2, Languages, Bot, AlertTriangle, Volume2,
+      ClipboardCheck, FileText, AlertCircle, Briefcase, Scan, CloudRain, Mic, Wand2, Plus, Save, Check
+    } from 'https://esm.sh/lucide-react@0.263.1';
 
-    <!-- Sync Status Indicator -->
-    <div id="syncStatus" class="bg-blue-100 text-blue-800 text-xs py-1 px-4 text-center hidden">
-        <i class="fa-solid fa-cloud-arrow-up animate-bounce mr-1"></i> Syncing...
-    </div>
+    // --- 設定 ---
+    const LANGUAGES = { ZH: 'ZH', KR: 'KR', EN: 'EN', JP: 'JP' };
+    const UI_LABELS = {
+      ZH: {
+        title: '2025 首爾之旅', 
+        subtitle: '圭賢演唱會・冬日首爾', 
+        editTip: '點擊文字即可編輯行程內容',
+        days: ['準備', 'Day 1', 'Day 2', 'Day 3', 'Day 4', 'Day 5', 'Day 6', 'Day 7'],
+        transport: '交通方式',
+        estTime: '預估時間',
+        location: '地點',
+        aiChat: 'AI 隨身導遊',
+        genPhrases: '韓語幫手', 
+        phrasesTitle: '✨ 情境韓語小幫手', 
+        chatPlaceholder: '問問 AI 關於行程的問題...',
+        close: '關閉',
+        fallbackMsg: 'AI 連線異常，顯示預設內容',
+        addEvent: '新增行程',
+        addModalTitle: '新增行程',
+        addModalTime: '時間 (24小時制)',
+        addModalContent: '地點 / 活動內容',
+        addModalSubmit: '儲存並排序',
+        addModalCancel: '取消'
+      },
+      KR: {
+        title: '2025 서울 여행',
+        subtitle: '규현 콘서트 • 겨울 서울',
+        editTip: '텍스트를 클릭하여 일정 편집',
+        days: ['준비', '1일차', '2일차', '3일차', '4일차', '5일차', '6일차', '7일차'],
+        transport: '교통편',
+        estTime: '예상 시간',
+        location: '장소',
+        aiChat: 'AI 여행 가이드',
+        genPhrases: '한국어 도우미',
+        phrasesTitle: '✨ 상황별 한국어 표현',
+        chatPlaceholder: '여행에 대해 AI에게 물어보세요...',
+        close: '닫기',
+        fallbackMsg: 'AI 연결 오류, 기본 콘텐츠 표시',
+        addEvent: '일정 추가',
+        addModalTitle: '일정 추가',
+        addModalTime: '시간',
+        addModalContent: '장소 / 활동',
+        addModalSubmit: '저장 및 정렬',
+        addModalCancel: '취소'
+      },
+      EN: {
+        title: 'Seoul Trip 2025',
+        subtitle: 'Kyuhyun Concert • Winter Seoul',
+        editTip: 'Click text to edit itinerary details',
+        days: ['Prep', 'Day 1', 'Day 2', 'Day 3', 'Day 4', 'Day 5', 'Day 6', 'Day 7'],
+        transport: 'Transport',
+        estTime: 'Est. Time',
+        location: 'Location',
+        aiChat: 'AI Guide',
+        genPhrases: 'Korean Helper',
+        phrasesTitle: '✨ Contextual Korean Phrases',
+        chatPlaceholder: 'Ask AI about the trip...',
+        close: 'Close',
+        fallbackMsg: 'AI Offline. Showing defaults.',
+        addEvent: 'Add Event',
+        addModalTitle: 'Add Event',
+        addModalTime: 'Time',
+        addModalContent: 'Location / Activity',
+        addModalSubmit: 'Save & Sort',
+        addModalCancel: 'Cancel'
+      },
+      JP: {
+        title: '2025 ソウル旅行',
+        subtitle: 'キュヒョンコンサート・冬のソウル',
+        editTip: 'テキストをクリックして編集',
+        days: ['準備', '1日目', '2日目', '3日目', '4日目', '5日目', '6日目', '7日目'],
+        transport: '交通手段',
+        estTime: '所要時間',
+        location: '場所',
+        aiChat: 'AI ガイド',
+        genPhrases: '韓国語ヘルプ',
+        phrasesTitle: '✨ 場面別韓国語',
+        chatPlaceholder: 'AIに旅の質問をする...',
+        close: '閉じる',
+        fallbackMsg: 'AI接続エラー、デフォルト表示',
+        addEvent: 'イベント追加',
+        addModalTitle: 'イベント追加',
+        addModalTime: '時間',
+        addModalContent: '場所 / 活動',
+        addModalSubmit: '保存して並べ替え',
+        addModalCancel: 'キャンセル'
+      }
+    };
 
-    <!-- Main Content Area -->
-    <main id="app" class="p-4 max-w-md mx-auto">
-        
-        <!-- View: Home -->
-        <section id="view-home" class="space-y-4">
-            <div class="bg-white rounded-2xl shadow-md p-6 text-center border-2 border-pink-100">
-                <h2 class="text-2xl font-bold text-pink-600 mb-2" data-translate="tripTitle">首爾浪漫之旅</h2>
-                <p class="text-gray-500 mb-4">2025/12/18 - 2025/12/24</p>
-                <div class="flex justify-center gap-4">
-                    <div class="bg-pink-50 rounded-lg p-3 w-20">
-                        <span id="daysLeft" class="block text-2xl font-bold text-pink-600">0</span>
-                        <span class="text-xs text-gray-500" data-translate="days">天</span>
-                    </div>
-                </div>
-                <p class="mt-4 text-sm text-gray-400" data-translate="countdownText">距離出發還有</p>
-            </div>
+    const FALLBACK_PHRASES_BY_TYPE = {
+      food: [{ korean: '메뉴판 좀 주세요', pronunciation: 'Menyupan jom juseyo', meaning: '請給我菜單' }, { korean: '이거 주세요', pronunciation: 'Ige juseyo', meaning: '請給我這個' }, { korean: '계산해 주세요', pronunciation: 'Gyesanhae juseyo', meaning: '請結帳' }],
+      shopping: [{ korean: '이거 얼마예요?', pronunciation: 'Ige eolmayeyo?', meaning: '這個多少錢?' }, { korean: '깎아주세요', pronunciation: 'Kkakkajuseyo', meaning: '請算便宜一點' }, { korean: '입어봐도 돼요?', pronunciation: 'Ibeobwado dwaeyo?', meaning: '可以試穿嗎?' }],
+      transport: [{ korean: '이 버스 명동 가나요?', pronunciation: 'I beoseu Myeongdong ganayo?', meaning: '這班公車去明洞嗎?' }, { korean: '여기서 내려주세요', pronunciation: 'Yeogiseo naeryeojuseyo', meaning: '請在這裡讓我下車' }],
+      default: [{ korean: '안녕하세요', pronunciation: 'Annyeonghaseyo', meaning: '你好' }, { korean: '감사합니다', pronunciation: 'Gamsahamnida', meaning: '謝謝' }, { korean: '화장실 어디예요?', pronunciation: 'Hwajangsil eodiyeyo?', meaning: '洗手間在哪裡?' }]
+    };
 
-            <div class="grid grid-cols-2 gap-4">
-                <div onclick="switchTab('itinerary')" class="bg-white p-4 rounded-xl shadow-sm border border-pink-100 flex flex-col items-center justify-center gap-2 active:scale-95 transition cursor-pointer">
-                    <i class="fa-solid fa-calendar-days text-3xl text-pink-400"></i>
-                    <span class="font-medium" data-translate="navItinerary">行程表</span>
-                </div>
-                <div onclick="switchTab('checklist')" class="bg-white p-4 rounded-xl shadow-sm border border-pink-100 flex flex-col items-center justify-center gap-2 active:scale-95 transition cursor-pointer">
-                    <i class="fa-solid fa-suitcase-rolling text-3xl text-pink-400"></i>
-                    <span class="font-medium" data-translate="navChecklist">行前準備</span>
-                </div>
-                <div onclick="switchTab('map')" class="bg-white p-4 rounded-xl shadow-sm border border-pink-100 flex flex-col items-center justify-center gap-2 active:scale-95 transition cursor-pointer">
-                    <i class="fa-solid fa-map-location-dot text-3xl text-pink-400"></i>
-                    <span class="font-medium" data-translate="navMap">地圖</span>
-                </div>
-                <div onclick="switchTab('money')" class="bg-white p-4 rounded-xl shadow-sm border border-pink-100 flex flex-col items-center justify-center gap-2 active:scale-95 transition cursor-pointer">
-                    <i class="fa-solid fa-calculator text-3xl text-pink-400"></i>
-                    <span class="font-medium" data-translate="navMoney">分帳</span>
-                </div>
-            </div>
-        </section>
+    // --- API ---
+    const callGeminiAPI = async (prompt, systemInstruction = "") => {
+      const apiKey = "AIzaSyAk2Lm7tl9XXDTa544aZyvKXfXFQ-QplEA"; 
+      if (!apiKey) return { success: false, error: "Missing Key" };
+      const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
+      
+      for (let i = 0; i < 2; i++) {
+        try {
+          const response = await fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }], systemInstruction: { parts: [{ text: systemInstruction }] } }) });
+          if (!response.ok) throw new Error(response.statusText);
+          const data = await response.json();
+          return { success: true, data: data.candidates?.[0]?.content?.parts?.[0]?.text };
+        } catch (e) { await new Promise(r => setTimeout(r, 1000)); }
+      }
+      return { success: false, error: "Failed" };
+    };
 
-        <!-- View: Checklist -->
-        <section id="view-checklist" class="hidden space-y-4">
-            <h2 class="text-xl font-bold text-pink-600" data-translate="checklistTitle">行前準備清單</h2>
-            
-            <div class="bg-pink-100 p-4 rounded-lg border border-pink-200">
-                <h3 class="font-bold text-pink-700 mb-2"><i class="fa-solid fa-passport mr-2"></i><span data-translate="visaTitle">簽證 (K-ETA/Q-Code)</span></h3>
-                <p class="text-sm text-pink-800 mb-2" data-translate="visaDesc">請務必在出發前72小時申請。</p>
-                <a href="https://www.k-eta.go.kr/" target="_blank" class="block text-center bg-pink-500 text-white py-2 rounded-full text-sm font-bold shadow hover:bg-pink-600 mb-2">
-                    <i class="fa-solid fa-link mr-1"></i> <span data-translate="applyKETA">申請 K-ETA</span>
-                </a>
-            </div>
-
-            <div class="bg-white rounded-xl shadow-sm p-4">
-                <div class="flex gap-2 mb-4">
-                    <input type="text" id="newCheckItem" class="flex-1 border border-pink-200 rounded-lg px-3 py-2 outline-none focus:border-pink-500" placeholder="新增項目...">
-                    <button onclick="addCheckItem()" class="bg-pink-500 text-white px-4 rounded-lg"><i class="fa-solid fa-plus"></i></button>
-                </div>
-                <ul id="checklistContainer" class="space-y-2">
-                    <li class="text-center text-gray-400 text-sm py-4"><i class="fa-solid fa-spinner fa-spin"></i> 載入中...</li>
-                </ul>
-            </div>
-        </section>
-
-        <!-- View: Itinerary -->
-        <section id="view-itinerary" class="hidden space-y-4">
-            <div class="flex overflow-x-auto no-scrollbar gap-2 pb-2" id="dayTabs">
-                <!-- Day 1-7 Tabs injected JS -->
-            </div>
-
-            <div id="dayContent" class="space-y-4 min-h-[200px]">
-                 <div class="text-center text-gray-400 py-10"><i class="fa-solid fa-spinner fa-spin"></i> 正在同步雲端行程...</div>
-            </div>
-
-            <button onclick="openEventModal()" class="fixed bottom-20 right-4 bg-pink-500 text-white w-14 h-14 rounded-full shadow-lg flex items-center justify-center text-2xl hover:bg-pink-600 active:scale-90 transition z-40">
-                <i class="fa-solid fa-plus"></i>
-            </button>
-        </section>
-
-        <!-- View: Map -->
-        <section id="view-map" class="hidden space-y-4">
-            <h2 class="text-xl font-bold text-pink-600" data-translate="navMap">地圖導覽</h2>
-            <div class="bg-white p-2 rounded-xl shadow-sm">
-                <div id="map"></div>
-            </div>
-            <div class="flex gap-2">
-                <button onclick="locateMe()" class="flex-1 bg-pink-500 text-white py-2 rounded-lg shadow"><i class="fa-solid fa-location-crosshairs mr-1"></i> <span data-translate="myLocation">我的位置</span></button>
-                <a href="https://www.google.com/maps" target="_blank" class="flex-1 bg-blue-500 text-white py-2 rounded-lg shadow text-center"><i class="fa-brands fa-google mr-1"></i> Google Maps</a>
-            </div>
-            <div class="text-xs text-gray-500 text-center mt-2">
-                * 點擊行程表中的地點可直接查看該位置
-            </div>
-        </section>
-
-        <!-- View: Money -->
-        <section id="view-money" class="hidden space-y-4">
-            <h2 class="text-xl font-bold text-pink-600" data-translate="navMoney">分帳系統</h2>
-            
-            <div class="bg-white p-4 rounded-xl shadow-sm border border-pink-100">
-                <div class="grid grid-cols-2 gap-2 mb-2">
-                    <input type="text" id="expenseDesc" class="border p-2 rounded text-sm" placeholder="項目 (例: 烤肉)">
-                    <input type="number" id="expenseAmount" class="border p-2 rounded text-sm" placeholder="金額 (KRW)">
-                </div>
-                <div class="mb-2">
-                     <select id="expensePayer" class="w-full border p-2 rounded text-sm bg-white">
-                        <option value="Me">我 (Me)</option>
-                        <option value="FriendA">旅伴 A</option>
-                        <option value="FriendB">旅伴 B</option>
-                    </select>
-                </div>
-                <button onclick="addExpense()" class="w-full bg-pink-500 text-white py-2 rounded-lg font-bold"><span data-translate="addExpense">新增支出</span></button>
-            </div>
-
-            <div class="bg-white rounded-xl shadow-sm overflow-hidden">
-                <div class="bg-pink-50 p-2 font-bold text-gray-600 text-sm flex justify-between">
-                    <span data-translate="history">紀錄</span>
-                    <span id="totalSpent">Total: 0</span>
-                </div>
-                <ul id="expenseList" class="divide-y divide-gray-100">
-                     <li class="text-center text-gray-400 text-sm py-4"><i class="fa-solid fa-spinner fa-spin"></i> 載入中...</li>
-                </ul>
-            </div>
-
-            <div class="bg-pink-600 text-white p-4 rounded-xl shadow-lg">
-                <h3 class="font-bold mb-2 text-sm"><i class="fa-solid fa-coins mr-1"></i> <span data-translate="balance">結算 (平均分攤)</span></h3>
-                <div id="balanceResult" class="text-sm space-y-1">
-                    <!-- Calculation -->
-                </div>
-            </div>
-        </section>
-        
-        <!-- User ID Footer -->
-        <div class="mt-8 text-center text-xs text-gray-400 border-t border-gray-200 pt-4">
-            <p>Cloud Sync ID:</p>
-            <p id="userIdDisplay" class="font-mono text-[10px] break-all select-all">Loading...</p>
-        </div>
-
-    </main>
-
-    <!-- Bottom Navigation -->
-    <nav class="fixed bottom-0 left-0 w-full bg-white border-t border-pink-100 flex justify-around py-3 pb-safe shadow-lg z-50 text-xs text-gray-500">
-        <button onclick="switchTab('home')" class="nav-btn flex flex-col items-center gap-1 w-full" data-target="home">
-            <i class="fa-solid fa-house text-lg"></i>
-            <span data-translate="navHome">首頁</span>
-        </button>
-        <button onclick="switchTab('itinerary')" class="nav-btn flex flex-col items-center gap-1 w-full" data-target="itinerary">
-            <i class="fa-solid fa-calendar-check text-lg"></i>
-            <span data-translate="navItinerary">行程</span>
-        </button>
-        <button onclick="switchTab('checklist')" class="nav-btn flex flex-col items-center gap-1 w-full" data-target="checklist">
-            <i class="fa-solid fa-list-check text-lg"></i>
-            <span data-translate="navChecklist">清單</span>
-        </button>
-        <button onclick="switchTab('money')" class="nav-btn flex flex-col items-center gap-1 w-full" data-target="money">
-            <i class="fa-solid fa-won-sign text-lg"></i>
-            <span data-translate="navMoney">分帳</span>
-        </button>
-    </nav>
-
-    <!-- Modal for Adding/Editing Event -->
-    <div id="eventModal" class="fixed inset-0 bg-black/50 hidden z-50 flex items-center justify-center p-4">
-        <div class="bg-white w-full max-w-sm rounded-2xl p-4 shadow-2xl animate-bounce-in">
-            <h3 class="font-bold text-lg mb-4 text-pink-600" id="modalTitle">新增行程</h3>
-            <div class="space-y-3">
-                <input type="hidden" id="eventId">
-                <div>
-                    <label class="text-xs text-gray-500">時間</label>
-                    <input type="time" id="eventTime" class="w-full border border-gray-300 rounded p-2">
-                </div>
-                <div>
-                    <label class="text-xs text-gray-500">地點/活動</label>
-                    <input type="text" id="eventTitle" class="w-full border border-gray-300 rounded p-2" placeholder="例: 景福宮">
-                </div>
-                <div>
-                    <label class="text-xs text-gray-500">類型 (AI 輔助)</label>
-                    <select id="eventType" class="w-full border border-gray-300 rounded p-2">
-                        <option value="general">一般</option>
-                        <option value="food">餐廳/咖啡廳</option>
-                        <option value="shopping">購物</option>
-                        <option value="transport">交通/地鐵</option>
-                        <option value="photo">拍照景點</option>
-                    </select>
-                </div>
-                <div>
-                    <label class="text-xs text-gray-500">交通方式 (地鐵線路)</label>
-                    <select id="eventLine" class="w-full border border-gray-300 rounded p-2">
-                        <option value="">無 / 步行 / 計程車</option>
-                        <option value="1">1號線 (深藍)</option>
-                        <option value="2">2號線 (綠色)</option>
-                        <option value="3">3號線 (橘色)</option>
-                        <option value="4">4號線 (藍色)</option>
-                        <option value="5">5號線 (紫色)</option>
-                        <option value="AREX">機場快線 AREX</option>
-                    </select>
-                </div>
-                <div>
-                     <label class="text-xs text-gray-500">轉乘/備註</label>
-                    <textarea id="eventNote" class="w-full border border-gray-300 rounded p-2 text-sm" rows="2" placeholder="例: 弘大入口站 3號出口"></textarea>
-                </div>
-            </div>
-            <div class="flex gap-2 mt-4">
-                <button onclick="closeEventModal()" class="flex-1 py-2 border border-gray-300 rounded-lg text-gray-500">取消</button>
-                <button onclick="saveEvent()" class="flex-1 py-2 bg-pink-500 text-white rounded-lg font-bold shadow">儲存</button>
-            </div>
-        </div>
-    </div>
-    
-    <!-- Toast Message -->
-    <div id="toast" class="fixed bottom-20 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white text-sm py-2 px-4 rounded-full shadow-lg z-[60] hidden flex items-center gap-2">
-        <i class="fa-solid fa-circle-check text-green-400"></i>
-        <span id="toastMsg">Saved</span>
-    </div>
-    
-    <!-- Confirm Modal -->
-    <div id="confirmModal" class="fixed inset-0 bg-black/50 hidden z-[70] flex items-center justify-center p-4">
-        <div class="bg-white rounded-xl p-4 w-64 text-center shadow-xl">
-            <h3 class="font-bold mb-2">確認刪除?</h3>
-            <p class="text-sm text-gray-500 mb-4">資料刪除後無法復原。</p>
-            <div class="flex gap-2 justify-center">
-                <button onclick="closeConfirm()" class="px-4 py-2 border rounded-lg text-sm">取消</button>
-                <button id="confirmBtn" class="px-4 py-2 bg-red-500 text-white rounded-lg text-sm">刪除</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Scripts -->
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    
-    <!-- Firebase Modules -->
-    <script type="module">
-        import { initializeApp } from 'https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js';
-        import { getAuth, signInAnonymously, onAuthStateChanged, signInWithCustomToken } from 'https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js';
-        import { getFirestore, doc, setDoc, onSnapshot, collection } from 'https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js';
-
-        // Firebase Config
-        const firebaseConfig = JSON.parse(__firebase_config);
-        const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app);
-        const db = getFirestore(app);
-        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
-
-        let currentUser = null;
-
-        // Initialize Auth
-        const initAuth = async () => {
-             if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
-                await signInWithCustomToken(auth, __initial_auth_token);
-            } else {
-                await signInAnonymously(auth);
-            }
-        };
-
-        initAuth();
-
-        onAuthStateChanged(auth, (user) => {
-            if (user) {
-                currentUser = user;
-                document.getElementById('userIdDisplay').innerText = user.uid;
-                setupListeners(user.uid);
-            }
-        });
-
-        // Listeners for Realtime Updates
-        function setupListeners(userId) {
-            const itineraryRef = doc(db, 'artifacts', appId, 'users', userId, 'data', 'itinerary');
-            const checklistRef = doc(db, 'artifacts', appId, 'users', userId, 'data', 'checklist');
-            const expensesRef = doc(db, 'artifacts', appId, 'users', userId, 'data', 'expenses');
-
-            // 1. Itinerary Listener (Fix: Parse JSON string to avoid nested array error)
-            onSnapshot(itineraryRef, (docSnap) => {
-                if (docSnap.exists()) {
-                    try {
-                        const rawData = docSnap.data().days;
-                        // Handle string (new format)
-                        if (typeof rawData === 'string') {
-                             window.tripItinerary = JSON.parse(rawData);
-                        } else {
-                             // Fallback
-                             window.tripItinerary = rawData || Array.from({length: 7}, (_, i) => []);
-                        }
-                    } catch (e) {
-                        console.error("Error parsing itinerary:", e);
-                        window.tripItinerary = Array.from({length: 7}, (_, i) => []);
-                    }
-                } else {
-                    // Default Data
-                    window.tripItinerary = Array.from({length: 7}, (_, i) => []);
-                    // Save as string to prevent error
-                    setDoc(itineraryRef, { days: JSON.stringify(window.tripItinerary) });
-                }
-                window.renderItinerary();
-            }, (error) => { console.error("Error reading itinerary:", error); });
-
-            // 2. Checklist Listener
-            onSnapshot(checklistRef, (docSnap) => {
-                if (docSnap.exists()) {
-                    window.tripChecklist = docSnap.data().items;
-                } else {
-                    // Default Data
-                    window.tripChecklist = [
-                        { txt: "護照 (有效期6個月以上)", done: false },
-                        { txt: "K-ETA 申請核准", done: false },
-                        { txt: "網卡 / Roaming 開通", done: false },
-                        { txt: "韓幣換匯", done: false },
-                        { txt: "轉接頭 (韓國圓孔)", done: false },
-                        { txt: "保暖衣物 (羽絨服/發熱衣)", done: false }
-                    ];
-                    setDoc(checklistRef, { items: window.tripChecklist });
-                }
-                window.renderChecklist();
-            }, (error) => { console.error("Error reading checklist:", error); });
-
-            // 3. Expenses Listener
-            onSnapshot(expensesRef, (docSnap) => {
-                if (docSnap.exists()) {
-                    window.tripExpenses = docSnap.data().items;
-                } else {
-                    window.tripExpenses = [];
-                    setDoc(expensesRef, { items: [] });
-                }
-                window.renderExpenses();
-            }, (error) => { console.error("Error reading expenses:", error); });
-        }
-
-        // --- Export Functions for Global Scope ---
-        
-        // Save Helpers
-        window.saveItineraryToCloud = async () => {
-            if (!currentUser) return;
-            showSyncStatus();
-            // Fix: Stringify nested array before saving
-            await setDoc(doc(db, 'artifacts', appId, 'users', currentUser.uid, 'data', 'itinerary'), {
-                days: JSON.stringify(window.tripItinerary)
-            });
-            hideSyncStatus();
-        };
-
-        window.saveChecklistToCloud = async () => {
-            if (!currentUser) return;
-            showSyncStatus();
-            await setDoc(doc(db, 'artifacts', appId, 'users', currentUser.uid, 'data', 'checklist'), {
-                items: window.tripChecklist
-            });
-            hideSyncStatus();
-        };
-
-        window.saveExpensesToCloud = async () => {
-            if (!currentUser) return;
-            showSyncStatus();
-            await setDoc(doc(db, 'artifacts', appId, 'users', currentUser.uid, 'data', 'expenses'), {
-                items: window.tripExpenses
-            });
-            hideSyncStatus();
-        };
-
-        function showSyncStatus() {
-            document.getElementById('syncStatus').classList.remove('hidden');
-        }
-        function hideSyncStatus() {
-            setTimeout(() => {
-                document.getElementById('syncStatus').classList.add('hidden');
-            }, 800);
-        }
-
-    </script>
-
-    <script>
-        // --- Data & State (In-Memory managed by Firebase Listeners) ---
-        const TRIP_START = new Date('2025-12-18T00:00:00');
-        let currentLang = 'zh';
-        let currentDay = 1;
-        
-        // Globals (populated by Firebase)
-        window.tripItinerary = [];
-        window.tripChecklist = [];
-        window.tripExpenses = [];
-
-        // Translations
-        const i18n = {
-            zh: {
-                tripTitle: "首爾浪漫之旅",
-                days: "天",
-                countdownText: "距離 2025/12/18 出發還有",
-                navHome: "首頁",
-                navItinerary: "行程表",
-                navChecklist: "行前準備",
-                navMap: "地圖",
-                navMoney: "分帳",
-                seoulWeather: "首爾天氣",
-                checklistTitle: "準備清單",
-                visaTitle: "簽證 (K-ETA)",
-                visaDesc: "請務必在出發前72小時申請。",
-                applyKETA: "申請 K-ETA",
-                myLocation: "我的位置",
-                addExpense: "新增支出",
-                history: "消費紀錄",
-                balance: "結算 (平均分攤)",
-                weather: "預報",
-                aiHelp: "AI 韓語小幫手"
-            },
-            ko: {
-                tripTitle: "서울 로맨틱 여행",
-                days: "일",
-                countdownText: "출발까지 남은 시간",
-                navHome: "홈",
-                navItinerary: "일정",
-                navChecklist: "준비물",
-                navMap: "지도",
-                navMoney: "정산",
-                seoulWeather: "서울 날씨",
-                checklistTitle: "체크리스트",
-                visaTitle: "비자 (K-ETA)",
-                visaDesc: "출발 72시간 전까지 신청하세요.",
-                applyKETA: "K-ETA 신청",
-                myLocation: "내 위치",
-                addExpense: "지출 추가",
-                history: "기록",
-                balance: "정산",
-                weather: "날씨",
-                aiHelp: "AI 한국어 도우미"
-            },
-            en: {
-                tripTitle: "Seoul Romantic Trip",
-                days: "Days",
-                countdownText: "Days until departure",
-                navHome: "Home",
-                navItinerary: "Itinerary",
-                navChecklist: "Checklist",
-                navMap: "Map",
-                navMoney: "Split Bill",
-                seoulWeather: "Seoul Weather",
-                checklistTitle: "Checklist",
-                visaTitle: "Visa (K-ETA)",
-                visaDesc: "Apply 72 hours before departure.",
-                applyKETA: "Apply K-ETA",
-                myLocation: "My Location",
-                addExpense: "Add Expense",
-                history: "History",
-                balance: "Balance",
-                weather: "Forecast",
-                aiHelp: "AI Phrase Helper"
-            },
-            ja: {
-                tripTitle: "ソウルロマンチック旅行",
-                days: "日",
-                countdownText: "出発まであと",
-                navHome: "ホーム",
-                navItinerary: "旅程",
-                navChecklist: "準備",
-                navMap: "地図",
-                navMoney: "割り勘",
-                seoulWeather: "ソウルの天気",
-                checklistTitle: "持ち物リスト",
-                visaTitle: "ビザ (K-ETA)",
-                visaDesc: "出発の72時間前までに申請してください。",
-                applyKETA: "K-ETAを申請",
-                myLocation: "現在地",
-                addExpense: "支出を追加",
-                history: "履歴",
-                balance: "精算",
-                weather: "予報",
-                aiHelp: "AI 韓国語ヘルパー"
-            }
-        };
-
-        // AI Phrases Database
-        const aiPhrases = {
-            general: [
-                { ko: "안녕하세요", pron: "Annyeonghaseyo", zh: "你好" },
-                { ko: "감사합니다", pron: "Kamsahamnida", zh: "謝謝" },
-                { ko: "화장실이 어디예요?", pron: "Hwajangsil-i eodi-yeyo?", zh: "廁所哪裡？" }
-            ],
-            food: [
-                { ko: "이거 주세요", pron: "Ige juseyo", zh: "請給我這個" },
-                { ko: "덜 맵게 해주세요", pron: "Deol maepge haejuseyo", zh: "請不要太辣" },
-                { ko: "물 좀 주세요", pron: "Mul jom juseyo", zh: "請給我水" },
-                { ko: "계산서 주세요", pron: "Gyesanseo juseyo", zh: "請給我帳單" }
-            ],
-            shopping: [
-                { ko: "얼마예요?", pron: "Eolmayeyo?", zh: "多少錢？" },
-                { ko: "깎아주세요", pron: "Kkakka juseyo", zh: "請算便宜一點" },
-                { ko: "입어봐도 돼요?", pron: "Ibeobwado dwaeyo?", zh: "可以試穿嗎？" }
-            ],
-            transport: [
-                { ko: "홍대입구역으로 가나요?", pron: "Hongdae-ipgu-yeok-euro ganayo?", zh: "這車去弘大入口站嗎？" },
-                { ko: "여기서 내려주세요", pron: "Yeogiseo naeryeojuseyo", zh: "請在這裡讓我下車" }
-            ],
-            photo: [
-                { ko: "사진 좀 찍어주시겠어요?", pron: "Sajin jom jjigeojusigesseoyo?", zh: "能幫我拍張照嗎？" }
+    // --- Data ---
+    const getInitialItinerary = (lang) => {
+      const common = {};
+      
+      // Day 0 Content (Preparation)
+      const day0_ZH = {
+        day: 0,
+        date: '出發前',
+        theme: '行前準備 & SeS申請',
+        activities: [
+          {
+            title: '必備行李清單',
+            type: 'checklist',
+            desc: '出發前請務必確認以下物品：',
+            items: [
+              '護照 (效期6個月以上) / Esim卡',
+              '錢包整理 (現金/信用卡/機票)',
+              '手機充電板 / 手錶充電線 / 轉接頭(4.8mm)',
+              '耳機 / 行動電源 (需手提)',
+              '梳洗刷牙用品 / 保養及卸妝用品',
+              '護髮整髮梳子 / 眼鏡',
+              '每日衣服 / 內衣褲 / 襪子',
+              '睡衣褲 / 拖鞋 / 護膝',
+              '熱水瓶 / 保暖衣物',
+              '一般藥品 / 口罩'
             ]
+          },
+          {
+            title: '仁川機場 SeS 自動通關申請 (入境前)',
+            type: 'ses', // Special type for SeS
+            desc: '台灣旅客可於仁川機場第一航廈 (T1) 入境審查前直接辦理。',
+            items: [
+              '地點：T1 入境審查大廳 F 區 (Entry Inspection F)', 
+              '時間：07:00 - 18:00 (依現場公告為準)', 
+              '流程：下機 -> 跟隨到達指標 -> 在「入境審查 F 區」尋找登記中心 -> 拍照/壓指紋 -> 完成後即可走自動通關',
+              '注意：若錯過或未開放，請先走人工通道入境，再至 3 樓出境大廳 G 區辦理 (供回程使用)'
+            ]
+          },
+          {
+            title: '不可手提 / 必須託運',
+            type: 'warning',
+            desc: '液體、膠狀及噴霧類物品 (單瓶超過100ml)，以及刀剪工具類。',
+            items: ['大瓶化妝水/乳液', '修眉刀/指甲剪', '腳架/自拍棒 (管徑>1cm, 長>60cm)']
+          },
+          {
+            title: '不可託運 / 必須手提',
+            type: 'warning_red', // Red warning for batteries
+            desc: '電池類產品務必隨身攜帶上機！',
+            items: ['行動電源 (Power Bank)', '鋰電池', '筆記型電腦/平板', '電子菸 (韓國入境規定嚴格，建議確認)']
+          },
+          {
+            title: '旅行文件 & 簽證確認',
+            type: 'doc',
+            desc: '建議將以下文件印出或截圖備份：',
+            items: ['Q-CODE (建議線上填寫)', '旅館訂房確認單 (入境卡用)', '演唱會門票 / 取票憑證', '保險單據']
+          }
+        ]
+      };
+      
+      const day0_KR = {
+        day: 0, date: '출발 전', theme: '여행 준비 & SeS 신청',
+        activities: [
+          { title: '필수 준비물', type: 'checklist', desc: '출발 전 확인하세요:', items: ['여권 / Esim', '지갑 정리 (현금/카드)', '충전기 / 어댑터', '이어폰 / 보조배터리', '세면도구 / 화장품', '빗 / 안경', '매일 입을 옷 / 속옷 / 양말', '잠옷 / 슬리퍼 / 무릎 보호대', '보온병 / 따뜻한 옷', '상비약 / 마스크'] },
+          { title: 'SeS 자동출입국심사 신청 (입국 전)', type: 'ses', desc: '인천공항 T1 입국심사 F구역 등록센터', items: ['위치: T1 입국심사대 F구역', '시간: 07:00-18:00', '절차: 등록(사진/지문) 후 즉시 사용 가능'] },
+          { title: '위탁 수하물 (기내 반입 금지)', type: 'warning', desc: '100ml 초과 액체류, 칼 등', items: ['화장품(대용량)', '손톱깎이'] },
+          { title: '기내 반입 (위탁 금지)', type: 'warning_red', desc: '배터리류는 반드시 기내로!', items: ['보조배터리', '리튬 배터리', '노트북/태블릿'] },
+          { title: '여행 서류', type: 'doc', desc: '문서 확인:', items: ['Q-CODE', '호텔 예약 확인서', '콘서트 티켓'] }
+        ]
+      };
+      
+      const day0_EN = {
+        day: 0, date: 'Pre-trip', theme: 'Prep & SeS Registration',
+        activities: [
+          { title: 'Essentials Checklist', type: 'checklist', desc: 'Check before you go:', items: ['Passport / Esim', 'Wallet (Cash/Cards)', 'Chargers / Adapter', 'Earphones / Power Bank', 'Toiletries / Skincare', 'Comb / Glasses', 'Daily Clothes / Underwear / Socks', 'Pajamas / Slippers / Knee Pads', 'Thermos / Warm Clothes', 'Medicine / Masks'] },
+          { title: 'SeS Auto-Gate Registration', type: 'ses', desc: 'Apply at Incheon T1 Entry Inspection Area F before immigration.', items: ['Loc: T1 Entry Inspection Area F', 'Time: 07:00-18:00', 'Process: Register (Photo/Fingerprint) -> Use Auto-Gate', 'Note: If closed, register landside at 3F G-Zone after entry.'] },
+          { title: 'Must Check-in', type: 'warning', desc: 'Liquids > 100ml, Sharp objects.', items: ['Large Liquids', 'Scissors', 'Tripods'] },
+          { title: 'Must Carry-on', type: 'warning_red', desc: 'Batteries must be in carry-on!', items: ['Power Bank', 'Lithium Batteries', 'Laptop', 'E-cigarettes'] },
+          { title: 'Documents', type: 'doc', desc: 'Have these ready:', items: ['Q-CODE', 'Hotel Booking', 'Concert Tickets'] }
+        ]
+      };
+      
+      const day0_JP = {
+        day: 0, date: '出発前', theme: '準備 & SeS登録',
+        activities: [
+          { title: '必需品リスト', type: 'checklist', desc: '出発前に確認:', items: ['パスポート / Esim', '財布 (現金/カード)', '充電器 / 変換プラグ', 'イヤホン / モバイルバッテリー', '洗面用具 / 化粧品', 'くし / 眼鏡', '着替え / 下着 / 靴下', 'パジャマ / スリッパ / 膝サポーター', '魔法瓶 / 防寒着', '常備薬 / マスク'] },
+          { title: 'SeS 自動化ゲート登録 (入国前)', type: 'ses', desc: '仁川T1 入国審査Fエリアで登録可能', items: ['場所：T1 入国審査Fエリア', '時間：07:00-18:00', '手順：登録(写真/指紋) -> 自動ゲート利用', '注意：閉鎖時は入国後3F Gエリアで登録'] },
+          { title: '預け入れ荷物', type: 'warning', desc: '100ml超の液体、刃物類', items: ['化粧水(大)', '爪切り'] },
+          { title: '機内持ち込み必須', type: 'warning_red', desc: 'バッテリー類は必ず手荷物で！', items: ['モバイルバッテリー', 'リチウム電池', 'PC'] },
+          { title: '書類確認', type: 'doc', desc: '準備書類:', items: ['Q-CODE', 'ホテル予約確認書', 'チケット'] }
+        ]
+      };
+
+      const days_ZH = [
+          { day: 1, date: '12/18 (四)', theme: '抵達首爾 & 飯店入住', activities: [{ time: '12:00', title: '從溫暖的家出發', type: 'car', desc: '已預約肯驛機場接送服務，準備前往桃園機場。', location: 'Home', transport: '專車接送' }, { time: '15:15', title: '搭乘長榮航空 BR160 出發', type: 'flight', desc: '桃園機場 (TPE) 第二航廈 -> 仁川機場 (ICN)', location: 'TPE Airport' }, { time: '18:45', title: '抵達仁川機場 & 入境', type: 'arrival', desc: '辦理入境手續、領取行李、購買 T-Money 卡', location: 'ICN Airport' }, { time: '20:00', title: '前往 Wecostay Namsan', type: 'bus', desc: '仁川機場 5B 或 11B 站牌搭乘【6015 機場巴士】往明洞方向。於「忠武路站 (Chungmuro Station)」下車，步行約 5 分鐘抵達。', info: '費用: 17,000 KRW / 約 70-80 分鐘', customPhrases: [{ korean: 'G3 호텔에서 내려주세요', pronunciation: 'G3 Hotel-eseo naeryeojuseyo', meaning: '我們到 G3 Hotel 下車，謝謝' }] }, { time: '21:30', title: '飯店 Check-in & 晚餐', type: 'food', desc: '辦理入住後，於忠武路附近享用韓式炸雞或部隊鍋。', location: 'Chungmuro' }] },
+          { day: 2, date: '12/19 (五)', theme: '歷史漫步 & 傳統韻味', activities: [{ time: '10:00', title: '光化門廣場 & 景福宮', type: 'sight', desc: '參觀光化門與景福宮守門將換崗儀式 (10:00)。', location: 'Gyeongbokgung', transport: '地鐵3/4號線忠武路站 -> 3號線景福宮站 (5號出口)', duration: '約 15 分鐘' }, { time: '12:30', title: '土俗村蔘雞湯 (午餐)', type: 'food', desc: '享用著名的蔘雞湯暖身。', location: 'Seochon' }, { time: '14:30', title: '北村韓屋村 & 三清洞', type: 'walk', desc: '漫步於傳統韓屋群，尋找北村八景，隨後在三清洞咖啡廳休息。', location: 'Bukchon' }, { time: '18:00', title: '仁寺洞步行街', type: 'shopping', desc: '參觀人人廣場 (Ssamzigil)，購買傳統工藝品。', location: 'Insadong' }, { time: '20:00', title: '清溪川夜間散步', type: 'walk', desc: '欣賞清溪川聖誕燈飾 (如有活動) 或夜景。', location: 'Cheonggyecheon' }] },
+          { day: 3, date: '12/20 (六)', theme: '首爾全景 & 購物', activities: [{ time: '10:30', title: '南山公園 & N首爾塔', type: 'sight', desc: '搭乘南山纜車上山，俯瞰首爾全景，鎖上愛情鎖。', transport: '從明洞站 3 號出口步行至纜車搭乘處', duration: '步行 10 分鐘' }, { time: '13:30', title: '南山炸豬排 (午餐)', type: 'food', desc: '嘗試南山腳下著名的巨無霸炸豬排。', location: 'Namsan' }, { time: '15:00', title: '明洞商圈購物', type: 'shopping', desc: '美妝、服飾採購，體驗明洞小吃 (雞蛋糕、糖餅)。', location: 'Myeongdong' }, { time: '19:00', title: '亂打秀 (Nanta) 或 休息', type: 'show', desc: '可選擇觀賞韓國著名的無語言音樂劇，或回忠武路附近休息。', location: 'Myeongdong' }] },
+          { day: 4, date: '12/21 (日)', theme: '圭賢演唱會 & 韓屋風情', activities: [{ time: '10:00', title: '南山谷韓屋村', type: 'sight', desc: '位於忠武路站旁，輕鬆散步體驗傳統庭園，不需門票。', location: 'Chungmuro', transport: '徒步前往 (就在住宿附近)', duration: '5 分鐘' }, { time: '12:00', title: '午餐 & 休息', type: 'food', desc: '在忠武路附近用餐，並回飯店稍作整理，準備前往演唱會。', location: 'Wecostay' }, { time: '14:30', title: '前往 Olympic Hall', type: 'train', desc: '前往奧林匹克公園。路線：忠武路站 (3/4號線) -> 東大門歷史文化公園 (轉乘 5號線) -> 奧林匹克公園站 (3號出口)。', transport: '地鐵轉乘 (約 50 分鐘)', duration: '預留 1 小時' }, { time: '17:00', title: '2025 KYUHYUN Concert', type: 'music', desc: '“The Classic” 演唱會 @ Olympic Hall。享受圭賢的歌聲！', location: 'Olympic Park' }, { time: '20:30', title: '返回市區 & 晚餐', type: 'food', desc: '演唱會結束後搭地鐵返回，吃頓熱騰騰的烤肉慶功。', location: 'Chungmuro' }] },
+          { day: 5, date: '12/22 (一)', theme: '現代首爾 & 漢江夜景', activities: [{ time: '11:00', title: '汝矣島 The Hyundai Seoul', type: 'shopping', desc: '參觀首爾最大的百貨公司，室內空中花園，享用美食街午餐。', transport: '地鐵忠武路站 -> 汝矣尼魯站 (5號線)', duration: '約 30 分鐘' }, { time: '15:00', title: '汝矣島漢江公園', type: 'walk', desc: '漢江邊散步，租借野餐墊 (若天氣允許) 或在漢江泡麵機煮拉麵。', location: 'Yeouido' }, { time: '17:00', title: '漢江遊覽船 (Eland Cruise)', type: 'ship', desc: '搭乘遊船欣賞漢江夕陽或夜景，體驗盤浦大橋月光彩虹噴泉 (冬季視狀況營運)。', location: 'Yeouido Dock' }, { time: '19:30', title: '弘大/延南洞 (晚餐)', type: 'food', desc: '前往充滿年輕活力的弘大商圈享用晚餐，逛逛文創小店。', transport: '地鐵前往弘大入口站', duration: '約 20 分鐘' }] },
+          { day: 6, date: '12/23 (二)', theme: '伴手禮採買 & 悠閒時光', activities: [{ time: '10:30', title: '廣藏市場', type: 'food', desc: '品嚐綠豆煎餅、生牛肉、麻藥飯捲，感受傳統市場氛圍。', transport: '地鐵至鐘路5街站', duration: '約 10 分鐘' }, { time: '14:00', title: '樂天超市 Lotte Mart', type: 'shopping', desc: '首爾站店。採購零食、泡麵、海苔等伴手禮。', transport: '地鐵至首爾站', duration: '約 15 分鐘' }, { time: '17:00', title: '飯店打包 & 休息', type: 'hotel', desc: '將戰利品放回飯店，整理行李。', location: 'Wecostay' }, { time: '19:00', title: '最後的晚餐', type: 'food', desc: '在乙支路 (Hipjiro) 體驗獨特的巷弄酒吧或烤腸店。', location: 'Euljiro' }] },
+          { day: 7, date: '12/24 (三)', theme: '告別首爾 & 返家', activities: [{ time: '06:00', title: '退房 & 前往機場', type: 'bus', desc: '搭乘 6015 機場巴士前往仁川機場 (或搭計程車至首爾站搭 AREX 直達車)。', transport: '建議預留 1.5 - 2 小時交通時間', duration: '目標 07:30 抵達機場' }, { time: '07:35', title: 'チェックイン', type: 'plane', desc: '搭乗手続き、荷物預け、出国審査。', location: 'ICN Airport' }, { time: '09:35', title: '仁川発 仙台行', type: 'flight', desc: 'ICN -> SDJ (仙台空港)', location: 'Departure Hall' }, { time: '11:45', title: '仙台空港到着', type: 'home', desc: 'お疲れ様でした。', location: 'Sendai Airport' }] }
+      ];
+
+      const days_KR = [
+          { day: 1, date: '12/18 (목)', theme: '서울 도착 & 호텔 체크인', activities: [{ time: '12:00', title: '집에서 출발', type: 'car', desc: '예약된 켄이(Kenyi) 공항 픽업 서비스로 타오위안 공항 이동.', location: 'Home', transport: '전용 차량' }, { time: '15:15', title: '에바항공 BR160 출발', type: 'flight', desc: '타오위안(TPE) 2터미널 -> 인천(ICN)', location: 'TPE Airport' }, { time: '18:45', title: '인천공항 도착', type: 'arrival', desc: '입국 심사, 수하물 수령, 티머니 카드 구입.', location: 'ICN Airport' }, { time: '20:00', title: 'Wecostay 이동', type: 'bus', desc: '5B/11B 승강장에서 6015번 공항버스 탑승 (명동 방면). 충무로역 하차, 도보 5분.', info: '비용: 17,000 KRW / 약 75분' }, { time: '21:30', title: '체크인 & 저녁 식사', type: 'food', desc: '호텔 체크인. 근처에서 치킨이나 부대찌개 식사.', location: 'Chungmuro' }] },
+          { day: 2, date: '12/19 (금)', theme: '역사와 문화', activities: [{ time: '10:00', title: '경복궁 & 광화문', type: 'sight', desc: '수문장 교대식(10:00). 한복 착용 시 입장 무료.', transport: '지하철 3호선 경복궁역 5번 출구', duration: '약 15분' }, { time: '12:30', title: '토속촌 삼계탕', type: 'food', desc: '유명한 삼계탕 맛집에서 점심.', location: 'Seochon' }, { time: '14:30', title: '북촌 한옥마을', type: 'walk', desc: '전통 한옥 산책 및 삼청동 카페 거리.', location: 'Bukchon' }, { time: '18:00', title: '인사동', type: 'shopping', desc: '쌈지길 구경 및 전통 기념품 쇼핑.', location: 'Insadong' }, { time: '20:00', title: '광화문 광장 야경', type: 'walk', desc: '이순신 장군 동상 및 광장 야경 감상.', location: 'Gwanghwamun' }] },
+          { day: 3, date: '12/20 (토)', theme: '서울의 전경 & 명동 쇼핑', activities: [{ time: '10:30', title: 'N서울타워', type: 'sight', desc: '케이블카 탑승. 사랑의 자물쇠 및 서울 전경 감상.', transport: '명동역 3번 출구에서 도보 이동', duration: '도보 10분' }, { time: '13:30', title: '남산 돈까스', type: 'food', desc: '남산의 명물 왕돈까스로 점심.', location: 'Namsan' }, { time: '15:00', title: '명동 쇼핑거리', type: 'shopping', desc: '화장품, 의류 쇼핑 및 길거리 음식 체험.', location: 'Myeongdong' }, { time: '19:00', title: '난타 공연 또는 휴식', type: 'show', desc: '넌버벌 퍼포먼스 관람 또는 숙소 휴식.', location: 'Myeongdong' }] },
+          { day: 4, date: '12/21 (일)', theme: '여유로운 오후 & 명동 맛집', activities: [{ time: '10:00', title: '남산골 한옥마을', type: 'sight', desc: '숙소 근처의 고즈넉한 한옥 마을 산책.', location: 'Chungmuro', transport: '도보 이동', duration: '5분' }, { time: '12:00', title: '점심 & 휴식', type: 'food', desc: '충무로 근처 식사 후 호텔 휴식.', location: 'Wecostay' }, { time: '14:30', title: '호텔 1층 스타벅스', type: 'coffee', desc: '호텔 로비 스타벅스에서 즐기는 커피 타임.', location: 'Wecostay 1F' }, { time: '16:30', title: '명동 쇼핑', type: 'shopping', desc: '명동 거리에서 화장품 및 의류 쇼핑.', location: 'Myeongdong', transport: '지하철/버스/도보', duration: '약 15분' }, { time: '19:00', title: '명동 맛집 저녁 (추천 5곳)', type: 'food', desc: '추천: 1.명동교자(칼국수) 2.왕비집(갈비) 3.백제삼계탕 4.강남면옥(갈비찜) 5.엉터리생고기(무한리필)', location: 'Myeongdong' }] },
+          { day: 5, date: '12/22 (월)', theme: '현대적인 서울 & 한강', activities: [{ time: '11:00', title: '더현대 서울', type: 'shopping', desc: '여의도의 대형 백화점 및 실내 정원.', transport: '지하철 5호선 여의나루역', duration: '30분' }, { time: '15:00', title: '여의도 한강공원', type: 'walk', desc: '한강 산책 및 한강 라면 체험.', location: 'Yeouido' }, { time: '17:00', title: '한강 유람선', type: 'ship', desc: '이랜드 크루즈에서 야경 감상.', location: 'Yeouido Dock' }, { time: '19:30', title: '홍대 입구', type: 'food', desc: '젊음의 거리에서 저녁 식사 및 버스킹 구경.', transport: '지하철 홍대입구역 이동', duration: '20분' }] },
+          { day: 6, date: '12/23 (화)', theme: '기념품 & 휴식', activities: [{ time: '10:30', title: '광장시장', type: 'food', desc: '빈대떡, 육회, 마약김밥 등 먹거리 탐방.', transport: '지하철 종로5가역', duration: '10분' }, { time: '14:00', title: '롯데마트 서울역점', type: 'shopping', desc: '과자, 김 등 마지막 기념품 쇼핑.', transport: '지하철 서울역', duration: '15분' }, { time: '17:00', title: '짐 정리', type: 'hotel', desc: '호텔에서 짐 정리 및 휴식.', location: 'Wecostay' }, { time: '19:00', title: '을지로 (힙지로)', type: 'food', desc: '을지로 골목의 힙한 식당에서 마지막 저녁.', location: 'Euljiro' }] },
+          { day: 7, date: '12/24 (수)', theme: '출국', activities: [{ time: '06:00', title: '체크아웃 & 공항 이동', type: 'bus', desc: '6015번 버스로 인천공항 이동.', transport: '1.5-2시간 소요 예상', duration: '07:30 도착 목표' }, { time: '07:35', title: '체크인', type: 'plane', desc: '탑승 수속 및 세금 환급.', location: 'ICN Airport' }, { time: '09:35', title: '인천발 센다이행', type: 'flight', desc: 'ICN -> SDJ (센다이 공항)', location: 'Departure Hall' }, { time: '11:45', title: '센다이 공항 도착', type: 'home', desc: '수고하셨습니다.', location: 'Sendai Airport' }] }
+      ];
+
+      const days_EN = [
+          { day: 1, date: '12/18 (Thu)', theme: 'Arrival & Check-in', activities: [{ time: '12:00', title: 'Depart from Home', type: 'car', desc: 'Reserved Kenyi Airport Pick-up Service to TPE Airport.', location: 'Home', transport: 'Private Car' }, { time: '15:15', title: 'Depart EVA Air BR160', type: 'flight', desc: 'TPE Terminal 2 -> ICN', location: 'TPE Airport' }, { time: '18:45', title: 'Arrive at Incheon', type: 'arrival', desc: 'Immigration, Baggage Claim, Buy T-Money Card.', location: 'ICN Airport' }, { time: '20:00', title: 'Bus to Wecostay', type: 'bus', desc: 'Take Airport Bus 6015 at stop 5B/11B towards Myeongdong. Get off at "Chungmuro Station". Walk 5 mins.', info: 'Cost: 17,000 KRW / ~75 mins' }, { time: '21:30', title: 'Check-in & Dinner', type: 'food', desc: 'Check in at Wecostay Namsan. Enjoy fried chicken nearby.', location: 'Chungmuro' }] },
+          { day: 2, date: '12/19 (Fri)', theme: 'History & Culture', activities: [{ time: '10:00', title: 'Gyeongbokgung Palace', type: 'sight', desc: 'Guard changing ceremony (10:00). Wear Hanbok for free entry.', transport: 'Subway Line 3 to Gyeongbokgung Stn (Exit 5)', duration: '15 mins' }, { time: '12:30', title: 'Tosokchon Samgyetang', type: 'food', desc: 'Famous Ginseng Chicken Soup for lunch.', location: 'Seochon' }, { time: '14:30', title: 'Bukchon Hanok Village', type: 'walk', desc: 'Explore traditional houses and Samcheong-dong cafes.', location: 'Bukchon' }, { time: '18:00', title: 'Insadong', type: 'shopping', desc: 'Ssamzigil crafts and souvenirs.', location: 'Insadong' }, { time: '20:00', title: 'Gwanghwamun Square', type: 'walk', desc: 'Night view of the square and statue.', location: 'Gwanghwamun' }] },
+          { day: 3, date: '12/20 (Sat)', theme: 'Views & Shopping', activities: [{ time: '10:30', title: 'N Seoul Tower', type: 'sight', desc: 'Cable car to the top. Love locks and panoramic views.', transport: 'Walk from Myeongdong Stn Exit 3', duration: '10 mins walk' }, { time: '13:30', title: 'Namsan Pork Cutlet', type: 'food', desc: 'Famous giant pork cutlet lunch.', location: 'Namsan' }, { time: '15:00', title: 'Myeongdong Shopping', type: 'shopping', desc: 'Cosmetics, street food, and fashion.', location: 'Myeongdong' }, { time: '19:00', title: 'Nanta Show or Relax', type: 'show', desc: 'Cooking percussion show or relax at hotel.', location: 'Myeongdong' }] },
+          { day: 4, date: '12/21 (Sun)', theme: 'Relaxed Afternoon & Myeongdong', activities: [{ time: '10:00', title: 'Namsangol Hanok Village', type: 'sight', desc: 'Peaceful traditional village near accommodation.', location: 'Chungmuro', transport: 'Walking distance', duration: '5 mins' }, { time: '12:00', title: 'Lunch & Rest', type: 'food', desc: 'Lunch nearby and rest at hotel.', location: 'Wecostay' }, { time: '14:30', title: 'Starbucks Time', type: 'coffee', desc: 'Coffee break at Starbucks on the hotel 1st floor.', location: 'Wecostay 1F' }, { time: '16:30', title: 'Myeongdong Shopping', type: 'shopping', desc: 'Shopping for cosmetics and fashion in Myeongdong.', location: 'Myeongdong', transport: 'Subway/Bus/Walk', duration: '~15 mins' }, { time: '19:00', title: 'Myeongdong Dinner Top 5', type: 'food', desc: 'Recs: 1.Myeongdong Kyoja 2.Wangbijib (BBQ) 3.Baekje Samgyetang 4.Gangnam Myeonok 5.Ungteori (All-you-can-eat BBQ)', location: 'Myeongdong' }] },
+          { day: 5, date: '12/22 (Mon)', theme: 'Modern Seoul & River', activities: [{ time: '11:00', title: 'The Hyundai Seoul', type: 'shopping', desc: 'Massive department store in Yeouido.', transport: 'Subway Line 5 to Yeouinaru', duration: '30 mins' }, { time: '15:00', title: 'Yeouido Hangang Park', type: 'walk', desc: 'Relax by the Han River. Ramyeon by the river.', location: 'Yeouido' }, { time: '17:00', title: 'Han River Cruise', type: 'ship', desc: 'Eland Cruise for sunset/night view.', location: 'Yeouido Dock' }, { time: '19:30', title: 'Hongdae', type: 'food', desc: 'Youth culture, busking, and trendy dinner.', transport: 'Subway to Hongik Univ.', duration: '20 mins' }] },
+          { day: 6, date: '12/23 (Tue)', theme: 'Souvenirs & Chill', activities: [{ time: '10:30', title: 'Gwangjang Market', type: 'food', desc: 'Street food breakfast/lunch (Bindaetteok).', transport: 'Subway to Jongno 5-ga', duration: '10 mins' }, { time: '14:00', title: 'Lotte Mart Seoul Stn', type: 'shopping', desc: 'Last minute snacks and souvenir shopping.', transport: 'Subway to Seoul Station', duration: '15 mins' }, { time: '17:00', title: 'Packing', type: 'hotel', desc: 'Pack luggage at hotel.', location: 'Wecostay' }, { time: '19:00', title: 'Euljiro Vibes', type: 'food', desc: 'Farewell dinner at Hipjiro alleys.', location: 'Euljiro' }] },
+          { day: 7, date: '12/24 (Wed)', theme: 'Departure', activities: [{ time: '06:00', title: 'Checkout & Airport', type: 'bus', desc: 'Bus 6015 to Incheon Airport.', transport: 'Allow 1.5 - 2 hours', duration: 'Arrive by 07:30' }, { time: '09:40', title: 'Check-in', type: 'plane', desc: 'EVA Air Counter. Tax Refund.', location: 'ICN Airport' }, { time: '11:40', title: 'Flight BR169', type: 'flight', desc: 'ICN -> TPE', location: 'Departure Hall' }, { time: '13:30', title: 'Arrive Taiwan', type: 'home', desc: 'Home Sweet Home.', location: 'Taipei' }] }
+      ];
+      
+      const days_JP = [
+          { day: 1, date: '12/18 (木)', theme: 'ソウル到着 & チェックイン', activities: [{ time: '12:00', title: '自宅を出発', type: 'car', desc: '予約済みの空港送迎サービス（Kenyi）で空港へ。', location: 'Home', transport: '専用車' }, { time: '15:15', title: 'エバー航空 BR160 出発', type: 'flight', desc: '桃園 (TPE) -> 仁川 (ICN)', location: 'TPE Airport' }, { time: '18:45', title: '仁川空港到着', type: 'arrival', desc: '入国審査、荷物受取、T-Moneyカード購入。', location: 'ICN Airport' }, { time: '20:00', title: 'Wecostayへ移動', type: 'bus', desc: '5B/11B乗り場から6015番バス（明洞方面）。「忠武路駅」下車、徒歩5分。', info: '費用: 17,000 KRW / 約75分' }, { time: '21:30', title: 'チェックイン & 夕食', type: 'food', desc: 'ホテル到着。近くでチキンやプデチゲを堪能。', location: 'Chungmuro' }] },
+          { day: 2, date: '12/19 (金)', theme: '歴史と文化', activities: [{ time: '10:00', title: '景福宮 (キョンボックン)', type: 'sight', desc: '守門将交代式 (10:00)。韓服着用で入場無料。', transport: '地下鉄3号線 景福宮駅 (5番出口)', duration: '15分' }, { time: '12:30', title: '土俗村参鶏湯', type: 'food', desc: '有名なサムゲタンでランチ。', location: 'Seochon' }, { time: '14:30', title: '北村韓屋村', type: 'walk', desc: '伝統家屋の街並みを散策。三清洞でお茶。', location: 'Bukchon' }, { time: '18:00', title: '仁寺洞 (インサドン)', type: 'shopping', desc: 'サムジキルで雑貨ショッピング。', location: 'Insadong' }, { time: '20:00', title: '清溪川 (チョンゲチョン)', type: 'walk', desc: '夜の川沿いを散歩。', location: 'Cheonggyecheon' }] },
+          { day: 3, date: '12/20 (土)', theme: 'ソウルの絶景 & 明洞', activities: [{ time: '10:30', title: 'Nソウルタワー', type: 'sight', desc: 'ケーブルカーで山頂へ。愛の南京錠とパノラマビュー。', transport: '明洞駅3番出口から徒歩', duration: '徒歩10分' }, { time: '13:30', title: '南山トンカツ', type: 'food', desc: '名物のジャンボトンカツランチ。', location: 'Namsan' }, { time: '15:00', title: '明洞ショッピング', type: 'shopping', desc: 'コスメ、服、屋台グルメ。', location: 'Myeongdong' }, { time: '19:00', title: 'NANTAショー または 休憩', type: 'show', desc: 'ノンバーバルパフォーマンス鑑賞、またはホテルで休憩。', location: 'Myeongdong' }] },
+          { day: 4, date: '12/21 (日)', theme: 'ゆったり午後 & 明洞グルメ', activities: [{ time: '10:00', title: '南山谷韓屋村', type: 'sight', desc: 'ホテルのすぐ近くにある静かな韓屋村。', location: 'Chungmuro', transport: '徒歩圏内', duration: '5分' }, { time: '12:00', title: 'ランチ & 休憩', type: 'food', desc: '忠武路周辺でランチ後、ホテルで休憩。', location: 'Wecostay' }, { time: '14:30', title: 'ホテル1階のスタバ', type: 'coffee', desc: 'ホテルのロビーにあるスターバックスでコーヒータイム。', location: 'Wecostay 1F' }, { time: '16:30', title: '明洞ショッピング', type: 'shopping', desc: '明洞でコスメやファッションのショッピング。', location: 'Myeongdong', transport: '地下鉄/バス/徒歩', duration: '約15分' }, { time: '19:00', title: '明洞ディナーおすすめ5選', type: 'food', desc: '1.明洞餃子 2.王妃家(焼肉) 3.百済参鶏湯 4.江南麺屋(カルビチム) 5.オントリセンコギ(焼肉食べ放題)', location: 'Myeongdong' }] },
+          { day: 5, date: '12/22 (月)', theme: '現代ソウル & 漢江', activities: [{ time: '11:00', title: 'ザ・現代ソウル', type: 'shopping', desc: '汝矣島の巨大デパート。室内庭園。', transport: '地下鉄5号線 ヨイナル駅', duration: '30分' }, { time: '15:00', title: '汝矣島漢江公園', type: 'walk', desc: '漢江ラーメン体験と散歩。', location: 'Yeouido' }, { time: '17:00', title: '漢江遊覧船', type: 'ship', desc: 'イーランドクルーズで夜景鑑賞。', location: 'Yeouido Dock' }, { time: '19:30', title: '弘大 (ホンデ)', type: 'food', desc: '若者の街でディナーとショッピング。', transport: '地下鉄で弘大入口へ', duration: '20分' }] },
+          { day: 6, date: '12/23 (火)', theme: 'お土産 & リラックス', activities: [{ time: '10:30', title: '広蔵市場', type: 'food', desc: '屋台', transport: '地下鉄' }, { time: '14:00', title: 'ロッテマート', type: 'shopping', desc: '買い物', transport: '地下鉄' }, { time: '17:00', title: 'パッキング', type: 'hotel', desc: '休憩', location: 'Wecostay' }, { time: '19:00', title: '乙支路', type: 'food', desc: '夕食', location: 'Euljiro' }] },
+          { day: 7, date: '12/24 (水)', theme: '帰国 (仙台)', activities: [{ time: '06:00', title: '空港へ', type: 'bus', desc: '6015バス', transport: 'バス' }, { time: '07:35', title: 'チェックイン', type: 'plane', desc: '手続き', location: 'ICN Airport' }, { time: '09:35', title: '仙台行き', type: 'flight', desc: 'ICN -> SDJ', location: 'Departure' }, { time: '11:45', title: '到着', type: 'home', desc: '仙台空港', location: 'Sendai Airport' }] }
+      ];
+
+      const data = {
+        ZH: [day0_ZH, ...days_ZH],
+        KR: [day0_KR, ...days_KR],
+        EN: [day0_EN, ...days_EN],
+        JP: [day0_JP, ...days_JP]
+      };
+      return data[lang];
+    };
+
+    // --- Components ---
+    const IconType = ({ type, className }) => {
+      const icons = { 
+        checklist: ClipboardCheck, warning: AlertTriangle, warning_red: AlertTriangle, doc: FileText, ses: Scan, 
+        flight: Plane, arrival: Plane, bus: Bus, car: Car, train: Train, food: Utensils, music: Music, sight: Camera, shopping: ShoppingBag, hotel: BedDouble, ship: Ship, walk: Footprints, show: Ticket, home: Home, default: MapPin 
+      };
+      const Icon = icons[type] || icons.default;
+      return <Icon className={`${className} ${type === 'arrival' ? 'rotate-90' : ''} ${type === 'warning_red' ? 'text-red-500' : ''} ${type === 'warning' ? 'text-amber-500' : ''} ${type === 'ses' ? 'text-blue-500' : ''}`} />;
+    };
+
+    const ActivityWeather = ({ day, index, location }) => {
+      const isTaiwan = location && ['Home', 'TPE', 'Taipei', 'Taiwan', 'Taoyuan', '家', '桃園', '台北', '台灣'].some(k => location.includes(k));
+      const seed = day * 10 + index;
+      let weatherTypes, temp;
+      if (isTaiwan) {
+        weatherTypes = ['sunny', 'cloudy', 'rain']; 
+        temp = Math.floor((seed * 9301 + 49297) % 8) + 15;
+      } else {
+        weatherTypes = ['sunny', 'cloudy', 'snow'];
+        temp = Math.floor((seed * 9301 + 49297) % 15) - 10; 
+      }
+      const type = weatherTypes[seed % weatherTypes.length];
+      const getIcon = () => {
+        if (type === 'sunny') return <Sun className="w-3 h-3 text-amber-400" />;
+        if (type === 'snow') return <Snowflake className="w-3 h-3 text-sky-300" />;
+        if (type === 'rain') return <CloudRain className="w-3 h-3 text-slate-400" />;
+        return <Cloud className="w-3 h-3 text-slate-400" />;
+      };
+      return (
+        <div className="flex items-center gap-1 text-[10px] font-medium text-stone-500 bg-stone-50 px-1.5 py-0.5 rounded-full shrink-0 ml-2">
+          {getIcon()}
+          <span>{temp}°</span>
+        </div>
+      );
+    };
+
+    const TimeWeatherWidget = () => {
+      const [time, setTime] = useState(new Date());
+      const [temp, setTemp] = useState(-2);
+      const [condition, setCondition] = useState('cloudy');
+      useEffect(() => { const t = setInterval(() => setTime(new Date()), 1000); return () => clearInterval(t); }, []);
+      const seoulTime = new Date(time.toLocaleString("en-US", { timeZone: "Asia/Seoul" }));
+      const getIcon = () => {
+        if (condition === 'sunny') return <Sun className="w-4 h-4 text-amber-400" />;
+        if (condition === 'snow') return <Snowflake className="w-4 h-4 text-sky-300" />;
+        return <Cloud className="w-4 h-4 text-slate-400" />;
+      };
+      return (
+        <div className="flex flex-col items-end gap-1">
+           <div className="flex items-center gap-2 bg-white/80 backdrop-blur-md px-3 py-1 md:px-4 md:py-2 rounded-2xl shadow-sm border border-rose-100">
+             <div className="flex flex-col items-end border-r border-rose-100 pr-2 md:pr-4">
+               <span className="text-[8px] md:text-[10px] text-rose-800 font-bold tracking-wider">SEOUL</span>
+               <span className="text-lg md:text-xl font-mono font-bold text-rose-900 leading-none">{seoulTime.getHours().toString().padStart(2,'0')}:{seoulTime.getMinutes().toString().padStart(2,'0')}</span>
+             </div>
+             <div className="flex items-center gap-2">{getIcon()}<span className="text-lg font-bold text-stone-700">{temp}°C</span></div>
+           </div>
+        </div>
+      );
+    };
+
+    const RealTimeDateDisplay = () => {
+      const [dateStr, setDateStr] = useState('');
+      useEffect(() => {
+        const updateDate = () => {
+          const now = new Date();
+          const seoulTime = new Date(now.toLocaleString("en-US", { timeZone: "Asia/Seoul" }));
+          const y = seoulTime.getFullYear();
+          const m = String(seoulTime.getMonth() + 1).padStart(2, '0');
+          const d = String(seoulTime.getDate()).padStart(2, '0');
+          const days = ['日', '一', '二', '三', '四', '五', '六'];
+          const dayName = days[seoulTime.getDay()];
+          setDateStr(`${y}/${m}/${d} (${dayName})`);
         };
+        updateDate();
+        const timer = setInterval(updateDate, 60000);
+        return () => clearInterval(timer);
+      }, []);
+      return <span className="text-sm font-bold text-rose-900/90 mt-0.5 block">{dateStr}</span>;
+    };
 
-        // --- Initialization ---
-        
-        let map;
-        let userMarker;
+    const EditableText = ({ text, className, multiline = false, onSave }) => {
+      const [isEditing, setIsEditing] = useState(false);
+      const [value, setValue] = useState(text);
+      useEffect(() => setValue(text), [text]);
+      const handleBlur = () => { setIsEditing(false); onSave(value); };
+      if (isEditing) return multiline ? <textarea autoFocus className={`w-full bg-white border border-rose-300 rounded p-2 focus:ring-2 focus:ring-rose-400 outline-none text-stone-700 ${className}`} value={value} onChange={(e) => setValue(e.target.value)} onBlur={handleBlur} rows={3} /> : <input autoFocus type="text" className={`w-full bg-white border border-rose-300 rounded px-1 focus:ring-2 focus:ring-rose-400 outline-none text-stone-700 ${className}`} value={value} onChange={(e) => setValue(e.target.value)} onBlur={handleBlur} />;
+      return <div onClick={() => setIsEditing(true)} className={`cursor-pointer hover:bg-rose-50/50 rounded px-1 transition-colors border border-transparent hover:border-rose-100 group relative ${className}`}>{value}<Edit3 className="w-3 h-3 text-rose-300 absolute -right-4 top-1 opacity-0 group-hover:opacity-100 transition-opacity" /></div>;
+    };
 
-        window.onload = function() {
-            // Firebase handles data loading asynchronously
-            updateTime();
-            setInterval(updateTime, 1000);
-            renderDayTabs();
-            initMap();
-            changeLanguage(); 
+    const MagicPhraseModal = ({ activity, lang, onClose }) => {
+      const [phrases, setPhrases] = useState([]);
+      const [loading, setLoading] = useState(true);
+      const [errorMsg, setErrorMsg] = useState(null);
+      const speak = (text) => {
+        window.speechSynthesis.cancel();
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = 'ko-KR';
+        utterance.rate = 0.9;
+        window.speechSynthesis.speak(utterance);
+      };
+      useEffect(() => {
+        const generatePhrases = async () => {
+          const targetLang = lang === 'ZH' || lang === 'KR' ? 'Traditional Chinese' : (lang === 'JP' ? 'Japanese' : 'English');
+          const prompt = `Context: Tourist in Seoul doing "${activity.title}" (${activity.type}). Generate 4 short, useful Korean phrases. Output JSON only: [{"korean": "...", "pronunciation": "...", "meaning": "..."}]. Meaning in ${targetLang}.`;
+          const custom = activity.customPhrases || [];
+          const result = await callGeminiAPI(prompt, "You are a Korean tutor. Output pure JSON.");
+          if (result.success) {
+            try {
+               const cleanJson = result.data.replace(/```json/g, '').replace(/```/g, '').trim();
+               const aiPhrases = JSON.parse(cleanJson);
+               setPhrases([...custom, ...aiPhrases]);
+            } catch (e) { setPhrases([...custom, ...(FALLBACK_PHRASES_BY_TYPE[activity.type] || FALLBACK_PHRASES_BY_TYPE.default)]); setErrorMsg(UI_LABELS[lang].fallbackMsg); }
+          } else {
+            setPhrases([...custom, ...(FALLBACK_PHRASES_BY_TYPE[activity.type] || FALLBACK_PHRASES_BY_TYPE.default)]);
+            setErrorMsg(UI_LABELS[lang].fallbackMsg);
+          }
+          setLoading(false);
         };
+        generatePhrases();
+      }, [activity, lang]);
+      return (
+        <div className="fixed inset-0 bg-black/40 backdrop-blur-sm z-[60] flex items-center justify-center p-4" onClick={onClose}>
+          <div className="bg-white rounded-3xl shadow-2xl max-w-sm w-full overflow-hidden animate-fade-in" onClick={(e) => e.stopPropagation()}>
+            <div className="bg-gradient-to-r from-rose-300 to-rose-400 p-4 flex justify-between items-center text-white">
+              <div className="flex items-center gap-2"><Languages size={20} /><div><h3 className="font-bold text-sm">{UI_LABELS[lang].phrasesTitle}</h3><p className="text-[10px] opacity-90 truncate max-w-[200px]">{activity.title}</p></div></div>
+              <button onClick={onClose}><X size={20} /></button>
+            </div>
+            <div className="p-4 min-h-[200px]">
+              {loading ? <div className="flex flex-col items-center justify-center h-32"><Loader2 className="animate-spin text-rose-400" /></div> : (
+                <div className="space-y-2">
+                  {errorMsg && <div className="flex items-center gap-2 bg-amber-50 text-amber-600 text-xs p-2 rounded">{errorMsg}</div>}
+                  {phrases.map((p, i) => (
+                    <div key={i} className="bg-rose-50 rounded-xl p-3 border border-rose-100 flex justify-between items-center gap-2">
+                      <div className="flex-1"><span className="font-bold text-rose-900 block">{p.korean}</span><div className="text-xs text-rose-600/80">{p.pronunciation}</div><div className="text-sm text-stone-600">{p.meaning}</div></div>
+                      <button onClick={() => speak(p.korean)} className="p-2 bg-white text-rose-400 rounded-full shadow-sm"><Volume2 size={18} /></button>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      );
+    };
 
-        // --- Core Functions ---
+    const AIChatWidget = ({ itinerary, lang }) => {
+      const [isOpen, setIsOpen] = useState(false);
+      const [messages, setMessages] = useState([]);
+      const [input, setInput] = useState("");
+      const [loading, setLoading] = useState(false);
+      const scrollRef = useRef(null);
+      useEffect(() => { if (scrollRef.current) scrollRef.current.scrollTop = scrollRef.current.scrollHeight; }, [messages, isOpen]);
+      const handleSend = async () => {
+        if (!input.trim()) return;
+        const userMsg = { role: 'user', text: input };
+        setMessages(prev => [...prev, userMsg]);
+        setInput("");
+        setLoading(true);
+        const result = await callGeminiAPI(input, `You are a Seoul guide. Context: ${JSON.stringify(itinerary)}. Lang: ${lang}. Keep it short.`);
+        setMessages(prev => [...prev, { role: 'model', text: result.success ? result.data : "Network error." }]);
+        setLoading(false);
+      };
+      return (
+        <>
+          {!isOpen && <button onClick={() => setIsOpen(true)} className="fixed bottom-6 right-6 bg-gradient-to-br from-rose-400 to-rose-500 text-white p-4 rounded-full shadow-lg hover:scale-105 transition-all z-40"><Bot size={28} /></button>}
+          {isOpen && (
+            <div className="fixed bottom-6 right-6 w-[90vw] md:w-[380px] h-[500px] bg-white rounded-3xl shadow-2xl z-50 flex flex-col overflow-hidden border border-rose-100 animate-fade-in">
+              <div className="bg-gradient-to-r from-rose-400 to-rose-500 p-4 flex justify-between text-white"><div className="flex gap-2 items-center"><Sparkles size={18} /><h3>{UI_LABELS[lang].aiChat}</h3></div><button onClick={() => setIsOpen(false)}><X size={20} /></button></div>
+              <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-stone-50" ref={scrollRef}>
+                {messages.map((m, i) => (<div key={i} className={`flex ${m.role === 'user' ? 'justify-end' : 'justify-start'}`}><div className={`max-w-[85%] rounded-2xl p-3 text-sm ${m.role === 'user' ? 'bg-rose-400 text-white' : 'bg-white shadow-sm'}`}>{m.text}</div></div>))}
+                {loading && <Loader2 className="animate-spin text-rose-400" />}
+              </div>
+              <div className="p-3 border-t"><div className="flex gap-2 bg-stone-100 rounded-full px-4 py-2"><input className="flex-1 bg-transparent outline-none text-sm" value={input} onChange={e => setInput(e.target.value)} onKeyDown={e => e.key === 'Enter' && handleSend()} placeholder={UI_LABELS[lang].chatPlaceholder} /><button onClick={handleSend}><Send size={18} className="text-rose-400" /></button></div></div>
+            </div>
+          )}
+        </>
+      );
+    };
 
-        function t(key) {
-            return i18n[currentLang][key] || key;
-        }
+    const AddEventModal = ({ onClose, onSave, lang }) => {
+      const [time, setTime] = useState('');
+      const [title, setTitle] = useState('');
+      const handleSave = () => { if (!title) return; onSave(time || '00:00', title); };
+      return (
+        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-[80] flex items-center justify-center p-4">
+          <div className="bg-white rounded-2xl shadow-2xl w-full max-w-sm overflow-hidden animate-fade-in">
+            <div className="bg-rose-400 p-4 text-white font-bold text-center">{UI_LABELS[lang].addModalTitle}</div>
+            <div className="p-5 space-y-4">
+              <div><label className="block text-xs text-stone-500 mb-1">{UI_LABELS[lang].addModalTime}</label><input type="time" className="w-full border border-stone-200 rounded-lg p-2 text-stone-700 outline-none focus:ring-2 focus:ring-rose-300" value={time} onChange={(e) => setTime(e.target.value)} /></div>
+              <div><label className="block text-xs text-stone-500 mb-1">{UI_LABELS[lang].addModalContent}</label><input type="text" className="w-full border border-stone-200 rounded-lg p-2 text-stone-700 outline-none focus:ring-2 focus:ring-rose-300" value={title} onChange={(e) => setTitle(e.target.value)} /></div>
+              <div className="flex gap-3 pt-2"><button onClick={onClose} className="flex-1 py-2 rounded-lg bg-stone-100 text-stone-600 font-bold text-sm">{UI_LABELS[lang].addModalCancel}</button><button onClick={handleSave} className="flex-1 py-2 rounded-lg bg-rose-400 text-white font-bold text-sm shadow-md">{UI_LABELS[lang].addModalSubmit}</button></div>
+            </div>
+          </div>
+        </div>
+      );
+    };
 
-        function showToast(msg) {
-            const toast = document.getElementById('toast');
-            document.getElementById('toastMsg').innerText = msg;
-            toast.classList.remove('hidden');
-            toast.classList.add('toast-enter');
-            setTimeout(() => {
-                toast.classList.add('hidden');
-                toast.classList.remove('toast-enter');
-            }, 3000);
-        }
+    const loadData = (language) => {
+        const key = `seoul_trip_2025_${language}`;
+        try { const saved = localStorage.getItem(key); if (saved) return JSON.parse(saved); } catch (e) { console.error("Failed to load itinerary", e); }
+        return getInitialItinerary(language);
+    };
 
-        function changeLanguage() {
-            currentLang = document.getElementById('langSelect').value;
-            document.querySelectorAll('[data-translate]').forEach(el => {
-                const key = el.getAttribute('data-translate');
-                if (i18n[currentLang][key]) {
-                    el.innerText = i18n[currentLang][key];
-                }
-            });
-            renderDayTabs();
-            if(window.tripItinerary.length) renderItinerary();
-            if(window.tripExpenses.length) renderExpenses();
-        }
+    function App() {
+      const [lang, setLang] = useState('ZH');
+      const [activeDay, setActiveDay] = useState(0);
+      const [itinerary, setItinerary] = useState(() => loadData('ZH'));
+      const [selectedActivity, setSelectedActivity] = useState(null);
+      const [showAddEventModal, setShowAddEventModal] = useState(false);
+      
+      const touchStartX = useRef(null);
+      const onTouchStart = e => touchStartX.current = e.targetTouches[0].clientX;
+      const onTouchEnd = e => { if (!touchStartX.current) return; const diff = touchStartX.current - e.changedTouches[0].clientX; if (diff > 50 && activeDay < itinerary.length - 1) setActiveDay(p => p + 1); if (diff < -50 && activeDay > 0) setActiveDay(p => p - 1); };
+      const getInitialActiveDay = () => { const now = new Date(); const year = now.getFullYear(); const month = now.getMonth(); const date = now.getDate(); if (year === 2025 && month === 11 && date >= 18 && date <= 24) return date - 18 + 1; return 0; };
 
-        function updateTime() {
-            const now = new Date();
-            document.getElementById('currentTime').innerText = now.toLocaleTimeString(currentLang, {hour: '2-digit', minute:'2-digit'});
-            document.getElementById('currentDate').innerText = now.toLocaleDateString(currentLang);
-            
-            const diff = TRIP_START - now;
-            const days = Math.ceil(diff / (1000 * 60 * 60 * 24));
-            document.getElementById('daysLeft').innerText = days > 0 ? days : 0;
-        }
+      useEffect(() => { setActiveDay(getInitialActiveDay()); }, []);
+      useEffect(() => { const key = `seoul_trip_2025_${lang}`; localStorage.setItem(key, JSON.stringify(itinerary)); }, [itinerary, lang]);
 
-        function switchTab(tab) {
-            ['home', 'itinerary', 'checklist', 'map', 'money'].forEach(v => {
-                document.getElementById('view-' + v).classList.add('hidden');
-            });
-            document.getElementById('view-' + tab).classList.remove('hidden');
-            document.querySelectorAll('.nav-btn').forEach(btn => {
-                btn.classList.remove('text-pink-600');
-                if(btn.dataset.target === tab) btn.classList.add('text-pink-600');
-            });
+      const updateActivity = (d, a, f, v) => { 
+        const newItinerary = [...itinerary];
+        const newDay = { ...newItinerary[d] };
+        const newActivities = [...newDay.activities];
+        const newActivity = { ...newActivities[a] };
+        newActivity[f] = v;
+        newActivities[a] = newActivity;
+        newDay.activities = newActivities;
+        newItinerary[d] = newDay;
+        setItinerary(newItinerary); 
+      };
+      
+      const updateTheme = (d, v) => { 
+        const newItinerary = [...itinerary]; 
+        newItinerary[d] = { ...newItinerary[d], theme: v };
+        setItinerary(newItinerary); 
+      };
+      
+      const handleSaveNewEvent = (time, title) => {
+        const newItinerary = [...itinerary];
+        const newDay = { ...newItinerary[activeDay] };
+        const newActivities = [...newDay.activities];
+        newActivities.push({ time: time, title: title, type: 'default', desc: '點擊編輯內容', location: title, transport: '' });
+        newActivities.sort((a, b) => { const tA = a.time || "99:99"; const tB = b.time || "99:99"; return tA.localeCompare(tB); });
+        newDay.activities = newActivities;
+        newItinerary[activeDay] = newDay;
+        setItinerary(newItinerary);
+        setShowAddEventModal(false);
+      };
 
-            if(tab === 'map') {
-                setTimeout(() => { map.invalidateSize(); }, 200);
-            }
-        }
+      // Manual save button logic
+      const forceSave = () => {
+          const key = `seoul_trip_2025_${lang}`; 
+          localStorage.setItem(key, JSON.stringify(itinerary));
+          alert('行程已儲存！');
+      };
 
-        // --- Checklist Logic ---
+      // Language switch handler
+      const handleLangChange = (newLang) => {
+          setLang(newLang);
+          const savedData = loadData(newLang);
+          setItinerary(savedData);
+      };
 
-        window.renderChecklist = function() {
-            const list = window.tripChecklist || [];
-            const container = document.getElementById('checklistContainer');
-            container.innerHTML = '';
-            
-            list.forEach((item, index) => {
-                const li = document.createElement('li');
-                li.className = 'flex items-center gap-2 p-2 bg-white border border-pink-100 rounded shadow-sm';
-                li.innerHTML = `
-                    <input type="checkbox" onchange="toggleCheck(${index})" ${item.done ? 'checked' : ''} class="w-5 h-5 accent-pink-500">
-                    <span class="flex-1 text-sm ${item.done ? 'line-through text-gray-400' : ''}">${item.txt}</span>
-                    <button onclick="deleteCheck(${index})" class="text-gray-300 hover:text-red-400"><i class="fa-solid fa-trash"></i></button>
-                `;
-                container.appendChild(li);
-            });
-        }
+      const currentDay = itinerary[activeDay];
 
-        window.addCheckItem = function() {
-            const input = document.getElementById('newCheckItem');
-            if(!input.value) return;
-            window.tripChecklist.push({ txt: input.value, done: false });
-            window.saveChecklistToCloud();
-            input.value = '';
-            // render happens automatically via snapshot, but for instant feedback:
-            renderChecklist();
-        }
-
-        window.toggleCheck = function(idx) {
-            window.tripChecklist[idx].done = !window.tripChecklist[idx].done;
-            window.saveChecklistToCloud();
-            renderChecklist();
-        }
-
-        window.deleteCheck = function(idx) {
-            // Use custom modal instead of alert/confirm
-            showConfirm(() => {
-                window.tripChecklist.splice(idx, 1);
-                window.saveChecklistToCloud();
-                renderChecklist();
-            });
-        }
-
-        // --- Itinerary Logic ---
-
-        window.renderDayTabs = function() {
-            const container = document.getElementById('dayTabs');
-            container.innerHTML = '';
-            for(let i=1; i<=7; i++) {
-                const btn = document.createElement('button');
-                btn.className = `flex-shrink-0 px-4 py-2 rounded-full text-sm transition ${currentDay === i ? 'bg-pink-500 text-white shadow' : 'bg-white text-gray-500 border border-gray-200'}`;
-                btn.innerText = `Day ${i}`;
-                btn.onclick = () => { currentDay = i; renderDayTabs(); renderItinerary(); };
-                container.appendChild(btn);
-            }
-        }
-
-        window.renderItinerary = function() {
-            if (!window.tripItinerary || window.tripItinerary.length === 0) return;
-            const events = window.tripItinerary[currentDay - 1] || [];
-            const container = document.getElementById('dayContent');
-            container.innerHTML = '';
-
-            // Sort by time
-            events.sort((a, b) => a.time.localeCompare(b.time));
-
-            if(events.length === 0) {
-                container.innerHTML = `<div class="text-center text-gray-400 py-10">尚無行程，點擊 + 新增</div>`;
-                return;
-            }
-
-            events.forEach((ev, idx) => {
-                let lineClass = '';
-                if(ev.line) lineClass = `metro-line-${ev.line}`;
-                
-                const phraseData = getAiPhrase(ev.type);
-                const weatherIcons = ['fa-snowflake', 'fa-cloud', 'fa-sun', 'fa-wind'];
-                const wIcon = weatherIcons[(idx + currentDay) % 4];
-                const temp = Math.floor(Math.random() * 8) - 5; 
-
-                const card = document.createElement('div');
-                card.className = `bg-white rounded-xl shadow-sm border border-gray-100 p-4 relative overflow-hidden ${lineClass}`;
-                card.innerHTML = `
-                    <div class="flex justify-between items-start mb-2">
-                        <div class="flex items-center gap-2">
-                            <span class="font-mono font-bold text-lg text-pink-600">${ev.time}</span>
-                            <span class="text-xs bg-gray-100 px-2 py-1 rounded text-gray-500">${t('weather')}: <i class="fa-solid ${wIcon}"></i> ${temp}°C</span>
+      return (
+        <div className="min-h-screen bg-[#fdf8f9] font-sans pb-20 relative">
+          <header className="sticky top-0 z-40 bg-[#fdf8f9]/90 backdrop-blur-lg border-b border-rose-100 shadow-sm">
+            <div className="max-w-3xl mx-auto px-4 pt-3 pb-0"> 
+              <div className="flex flex-row justify-between items-start gap-2 mb-1">
+                <div className="flex flex-col items-start gap-1 min-w-0">
+                  <h1 className="text-xl md:text-3xl font-bold text-rose-950 tracking-tight truncate w-full">{UI_LABELS[lang].title}</h1>
+                  {UI_LABELS[lang].subtitle && <span className="text-xs md:text-sm text-rose-700/70 truncate w-full">{UI_LABELS[lang].subtitle}</span>}
+                  <RealTimeDateDisplay />
+                </div>
+                <div className="flex flex-col items-end gap-2 shrink-0">
+                   <TimeWeatherWidget />
+                   <div className="flex bg-rose-100/50 p-1 rounded-full">{Object.keys(LANGUAGES).map(l => <button key={l} onClick={() => handleLangChange(l)} className={`px-2 py-1 rounded-full text-[10px] font-bold transition-all ${lang === l ? 'bg-white text-rose-600 shadow-sm' : 'text-rose-400'}`}>{l}</button>)}</div>
+                </div>
+              </div>
+            </div>
+            <div className="max-w-3xl mx-auto px-2 overflow-x-auto no-scrollbar pb-2">
+              <div className="flex space-x-2 py-2 min-w-max">
+                {itinerary.map((day, idx) => (
+                  <button key={idx} onClick={() => setActiveDay(idx)} className={`flex flex-col items-center min-w-[4rem] py-2 px-2 rounded-2xl border transition-all ${activeDay === idx ? 'bg-rose-400 border-rose-400 text-white shadow-md scale-105' : 'bg-white border-rose-100 text-stone-400'}`}>
+                    <span className="text-[10px] font-bold opacity-80">{UI_LABELS[lang].days[idx]}</span>
+                    <span className="text-sm font-bold mt-0.5">{day.date.split(' ')[0]}</span>
+                  </button>
+                ))}
+              </div>
+            </div>
+          </header>
+          <main className="max-w-3xl mx-auto px-4 py-4 pb-20 relative min-h-[60vh]" onTouchStart={onTouchStart} onTouchEnd={onTouchEnd}>
+            <div key={activeDay} className="animate-fade-in">
+              <div className="mb-6 pl-2 border-l-4 border-rose-300 flex justify-between items-center">
+                <div>
+                  <div className="text-stone-400 text-sm font-medium mb-0.5">{currentDay.date}</div>
+                  <h2 className="text-xl font-bold text-stone-800"><EditableText text={currentDay.theme} onSave={(v) => updateTheme(activeDay, v)} /></h2>
+                </div>
+                <div className="flex gap-2">
+                  <button onClick={forceSave} className="flex items-center gap-1 text-xs font-bold text-emerald-600 bg-emerald-50 px-3 py-1.5 rounded-full shadow-sm hover:bg-emerald-100 transition-colors shrink-0"><Save size={14} /><span>儲存</span></button>
+                  {/* Hide Add Event button on Day 0, Day 1, and Day 7 (indices 0, 1, 7) */}
+                  {activeDay !== 0 && activeDay !== 1 && activeDay !== 7 && (
+                    <button onClick={() => setShowAddEventModal(true)} className="flex items-center gap-1 text-xs font-bold text-white bg-rose-400 px-3 py-1.5 rounded-full shadow-sm hover:bg-rose-500 transition-colors shrink-0"><Plus size={14} /><span>{UI_LABELS[lang].addEvent}</span></button>
+                  )}
+                </div>
+              </div>
+              <div className="relative space-y-6 pl-4 border-l-2 border-rose-100 ml-3">
+                {currentDay.activities.map((item, i) => (
+                  <div key={i} className="relative group">
+                    <div className={`absolute -left-[25px] mt-1 w-8 h-8 rounded-full border-4 border-white shadow-sm flex items-center justify-center ${item.type.includes('warning') ? 'bg-amber-100 text-amber-600' : (item.type === 'checklist' ? 'bg-emerald-100 text-emerald-600' : (item.type === 'ses' ? 'bg-blue-100 text-blue-500' : 'bg-rose-100 text-rose-500'))}`}>
+                      <IconType type={item.type} className="w-4 h-4" />
+                    </div>
+                    <div className={`bg-white rounded-2xl p-4 shadow-sm border hover:shadow-md transition-shadow ${item.type.includes('warning') ? 'border-amber-200 bg-amber-50/30' : (item.type === 'checklist' ? 'border-emerald-100' : (item.type === 'ses' ? 'border-blue-200 bg-blue-50/30' : 'border-stone-100'))}`}>
+                      {item.type === 'checklist' || item.type.includes('warning') || item.type === 'doc' || item.type === 'ses' ? (
+                        <div>
+                           <div className="flex items-center gap-2 mb-2"><h3 className={`font-bold text-lg ${item.type.includes('warning') ? 'text-amber-700' : (item.type === 'ses' ? 'text-blue-800' : 'text-stone-800')}`}>{item.title}</h3></div>
+                           <p className="text-sm text-stone-500 mb-3">{item.desc}</p>
+                           <ul className="space-y-2">{item.items && item.items.map((subItem, subIdx) => (<li key={subIdx} className="flex items-start gap-2 text-sm text-stone-700">{item.type !== 'ses' && <input type="checkbox" className={`mt-0.5 w-4 h-4 rounded border-gray-300 focus:ring-rose-400 ${item.type.includes('warning') ? 'accent-amber-500' : 'accent-emerald-500'}`} />}<span className={item.type === 'ses' ? 'text-blue-700 font-medium' : ''}>{subItem}</span></li>))}</ul>
                         </div>
-                        <div class="flex gap-2">
-                             <button onclick="editEvent(${idx})" class="text-gray-400 hover:text-blue-500"><i class="fa-solid fa-pen"></i></button>
-                             <button onclick="deleteEvent(${idx})" class="text-gray-400 hover:text-red-500"><i class="fa-solid fa-trash"></i></button>
+                      ) : (
+                        <div>
+                          <div className="flex justify-between items-center mb-2 pb-2 border-b border-stone-50">
+                            <div className="flex items-center gap-2 overflow-hidden">
+                               <span className="font-mono text-rose-500 font-bold bg-rose-50 px-1.5 rounded text-sm shrink-0"><EditableText text={item.time} onSave={(v) => updateActivity(activeDay, i, 'time', v)} /></span>
+                               <h3 className="font-bold text-stone-800 truncate"><EditableText text={item.title} onSave={(v) => updateActivity(activeDay, i, 'title', v)} /></h3>
+                            </div>
+                            <ActivityWeather day={activeDay} index={i} location={item.location} />
+                          </div>
+                          <div className="text-stone-600 text-sm mb-3 leading-relaxed"><EditableText multiline text={item.desc} onSave={(v) => updateActivity(activeDay, i, 'desc', v)} /></div>
+                          <button onClick={() => setSelectedActivity(item)} className="flex items-center gap-1 text-[10px] font-bold text-rose-500 bg-rose-50 px-2 py-1 rounded hover:bg-rose-100 transition-colors w-fit mb-2"><Sparkles size={10} />{UI_LABELS[lang].genPhrases}</button>
+                          {(item.location || item.transport || item.duration) && (
+                            <div className="text-xs text-stone-400 space-y-1">
+                              {item.location && (
+                                <div className="flex gap-1 items-center">
+                                  <a href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(item.location)}`} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 text-rose-400 hover:text-rose-600 transition-colors group/map" onClick={(e) => e.stopPropagation()}>
+                                    <MapPin size={10} className="group-hover/map:scale-110 transition-transform" /><span className="border-b border-transparent group-hover/map:border-rose-400">{item.location}</span>
+                                  </a>
+                                </div>
+                              )}
+                              {item.transport && <div className="flex gap-1 items-center"><Navigation size={10} />{item.transport}</div>}
+                            </div>
+                          )}
                         </div>
+                      )}
                     </div>
-                    
-                    <h3 class="font-bold text-lg mb-1">${ev.title}</h3>
-                    
-                    ${ev.note ? `<p class="text-sm text-gray-600 mb-2"><i class="fa-solid fa-circle-info text-pink-300 text-xs"></i> ${ev.note}</p>` : ''}
-                    
-                    ${ev.line ? `<p class="text-xs text-blue-600 mb-2 font-bold"><i class="fa-solid fa-train-subway"></i> 轉乘: ${getLineName(ev.line)}</p>` : ''}
-                    
-                    <!-- AI Phrase Section -->
-                    <div class="mt-3 pt-2 border-t border-dashed border-gray-200">
-                        <div class="flex items-center justify-between text-xs text-pink-500 mb-1">
-                            <span class="font-bold"><i class="fa-solid fa-robot"></i> ${t('aiHelp')}</span>
-                            <button onclick="speak('${phraseData.ko}')"><i class="fa-solid fa-volume-high"></i></button>
-                        </div>
-                        <p class="text-sm font-bold text-gray-800">${phraseData.ko}</p>
-                        <p class="text-xs text-gray-400">${phraseData.pron}</p>
-                        <p class="text-xs text-gray-500">${phraseData.zh}</p>
-                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </main>
+          <AIChatWidget itinerary={itinerary} lang={lang} />
+          {selectedActivity && <MagicPhraseModal activity={selectedActivity} lang={lang} onClose={() => setSelectedActivity(null)} />}
+          {showAddEventModal && <AddEventModal onClose={() => setShowAddEventModal(false)} onSave={handleSaveNewEvent} lang={lang} />}
+        </div>
+      );
+    }
 
-                    <div class="absolute bottom-2 right-2 opacity-10">
-                         <i class="fa-solid ${getTypeIcon(ev.type)} text-4xl"></i>
-                    </div>
-                `;
-                container.appendChild(card);
-            });
-        }
-
-        // Helper functions
-        function getLineName(code) {
-            const map = { 'AREX': 'AREX 機場快線', '1': 'Line 1', '2': 'Line 2', '3': 'Line 3', '4': 'Line 4', '5': 'Line 5' };
-            return map[code] || code;
-        }
-
-        function getTypeIcon(type) {
-            const icons = { general: 'fa-location-dot', food: 'fa-utensils', shopping: 'fa-bag-shopping', transport: 'fa-bus', photo: 'fa-camera' };
-            return icons[type] || 'fa-star';
-        }
-
-        function getAiPhrase(type) {
-            const cat = aiPhrases[type] || aiPhrases.general;
-            return cat[Math.floor(Math.random() * cat.length)];
-        }
-
-        window.speak = function(text) {
-            const utter = new SpeechSynthesisUtterance(text);
-            utter.lang = 'ko-KR';
-            window.speechSynthesis.speak(utter);
-        }
-
-        // CRUD Modal Logic
-        let editingIndex = -1;
-
-        window.openEventModal = function() {
-            editingIndex = -1;
-            document.getElementById('modalTitle').innerText = "新增行程";
-            document.getElementById('eventTime').value = '10:00';
-            document.getElementById('eventTitle').value = '';
-            document.getElementById('eventNote').value = '';
-            document.getElementById('eventModal').classList.remove('hidden');
-        }
-
-        window.editEvent = function(idx) {
-            editingIndex = idx;
-            const ev = window.tripItinerary[currentDay - 1][idx];
-            
-            document.getElementById('modalTitle').innerText = "編輯行程";
-            document.getElementById('eventTime').value = ev.time;
-            document.getElementById('eventTitle').value = ev.title;
-            document.getElementById('eventType').value = ev.type || 'general';
-            document.getElementById('eventLine').value = ev.line || '';
-            document.getElementById('eventNote').value = ev.note || '';
-            
-            document.getElementById('eventModal').classList.remove('hidden');
-        }
-
-        window.closeEventModal = function() {
-            document.getElementById('eventModal').classList.add('hidden');
-        }
-
-        window.saveEvent = function() {
-            const time = document.getElementById('eventTime').value;
-            const title = document.getElementById('eventTitle').value;
-            const type = document.getElementById('eventType').value;
-            const line = document.getElementById('eventLine').value;
-            const note = document.getElementById('eventNote').value;
-
-            if(!title) {
-                showToast('請輸入地點名稱');
-                return;
-            }
-
-            const newEvent = { time, title, type, line, note };
-
-            if(editingIndex === -1) {
-                window.tripItinerary[currentDay - 1].push(newEvent);
-            } else {
-                window.tripItinerary[currentDay - 1][editingIndex] = newEvent;
-            }
-
-            window.saveItineraryToCloud();
-            closeEventModal();
-            renderItinerary();
-            showToast('行程已儲存');
-        }
-
-        window.deleteEvent = function(idx) {
-            showConfirm(() => {
-                window.tripItinerary[currentDay - 1].splice(idx, 1);
-                window.saveItineraryToCloud();
-                renderItinerary();
-            });
-        }
-        
-        // Confirmation Modal Logic
-        let onConfirmAction = null;
-        function showConfirm(action) {
-            onConfirmAction = action;
-            document.getElementById('confirmModal').classList.remove('hidden');
-        }
-        window.closeConfirm = function() {
-            document.getElementById('confirmModal').classList.add('hidden');
-            onConfirmAction = null;
-        }
-        document.getElementById('confirmBtn').onclick = function() {
-            if(onConfirmAction) onConfirmAction();
-            closeConfirm();
-        };
-
-        // --- Map Logic ---
-
-        function initMap() {
-            const seoul = [37.5665, 126.9780];
-            map = L.map('map').setView(seoul, 13);
-            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                attribution: '&copy; OpenStreetMap'
-            }).addTo(map);
-
-            const spots = [
-                {n: "景福宮", loc: [37.5796, 126.9770]},
-                {n: "N首爾塔", loc: [37.5511, 126.9882]},
-                {n: "弘大入口", loc: [37.5575, 126.9245]}
-            ];
-            spots.forEach(s => {
-                L.marker(s.loc).addTo(map).bindPopup(s.n);
-            });
-        }
-
-        window.locateMe = function() {
-            if (navigator.geolocation) {
-                showToast('正在獲取位置...');
-                navigator.geolocation.getCurrentPosition(position => {
-                    const lat = position.coords.latitude;
-                    const lng = position.coords.longitude;
-                    if(userMarker) map.removeLayer(userMarker);
-                    userMarker = L.marker([lat, lng], {icon: redIcon}).addTo(map).bindPopup("You are here").openPopup();
-                    map.setView([lat, lng], 15);
-                }, () => {
-                    showToast("無法獲取位置 (請確認權限)");
-                });
-            }
-        }
-        
-        const redIcon = new L.Icon({
-            iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
-            shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
-            iconSize: [25, 41],
-            iconAnchor: [12, 41],
-            popupAnchor: [1, -34],
-            shadowSize: [41, 41]
-        });
-
-        // --- Expenses Logic ---
-
-        window.addExpense = function() {
-            const desc = document.getElementById('expenseDesc').value;
-            const amount = parseFloat(document.getElementById('expenseAmount').value);
-            const payer = document.getElementById('expensePayer').value;
-
-            if(!desc || !amount) {
-                showToast('請輸入項目與金額');
-                return;
-            }
-
-            window.tripExpenses.push({ desc, amount, payer, date: new Date().toLocaleDateString() });
-            window.saveExpensesToCloud();
-            
-            document.getElementById('expenseDesc').value = '';
-            document.getElementById('expenseAmount').value = '';
-            renderExpenses();
-            showToast('已新增支出');
-        }
-
-        window.renderExpenses = function() {
-            const list = window.tripExpenses || [];
-            const container = document.getElementById('expenseList');
-            container.innerHTML = '';
-            
-            let total = 0;
-            const paidBy = { Me: 0, FriendA: 0, FriendB: 0 };
-
-            list.forEach((ex, idx) => {
-                total += ex.amount;
-                if(paidBy[ex.payer] !== undefined) paidBy[ex.payer] += ex.amount;
-
-                const li = document.createElement('li');
-                li.className = 'flex justify-between p-3 text-sm';
-                li.innerHTML = `
-                    <div>
-                        <span class="font-bold text-gray-700">${ex.desc}</span>
-                        <div class="text-xs text-gray-400">${ex.payer} paid</div>
-                    </div>
-                    <div class="flex items-center gap-2">
-                         <span class="font-mono text-pink-600 font-bold">₩${ex.amount.toLocaleString()}</span>
-                         <button onclick="deleteExpense(${idx})" class="text-gray-300 text-xs"><i class="fa-solid fa-xmark"></i></button>
-                    </div>
-                `;
-                container.appendChild(li);
-            });
-
-            document.getElementById('totalSpent').innerText = `Total: ₩${total.toLocaleString()}`;
-
-            const perPerson = total / 3;
-            const balanceDiv = document.getElementById('balanceResult');
-            balanceDiv.innerHTML = `<div class="mb-2 pb-2 border-b border-white/20">每人應付: ₩${Math.round(perPerson).toLocaleString()}</div>`;
-            
-            Object.keys(paidBy).forEach(p => {
-                const diff = paidBy[p] - perPerson;
-                const roundedDiff = Math.round(diff);
-                let text = '';
-                if(roundedDiff > 0) text = `${p} 應收回 ₩${roundedDiff.toLocaleString()}`;
-                else if(roundedDiff < 0) text = `${p} 應支付 ₩${Math.abs(roundedDiff).toLocaleString()}`;
-                else text = `${p} 收支平衡`;
-                
-                balanceDiv.innerHTML += `<div>${text}</div>`;
-            });
-        }
-
-        window.deleteExpense = function(idx) {
-            showConfirm(() => {
-                window.tripExpenses.splice(idx, 1);
-                window.saveExpensesToCloud();
-                renderExpenses();
-            });
-        }
-    </script>
+    const root = createRoot(document.getElementById('root'));
+    root.render(<App />);
+  </script>
 </body>
 </html>
