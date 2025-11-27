@@ -1,1 +1,990 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seoul Trip 2025 🇰🇷 (Cloud Sync)</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#f472b6', // pink-400
+                        secondary: '#fbcfe8', // pink-200
+                        accent: '#be185d', // pink-700
+                        bgSoft: '#fff1f2', // rose-50
+                    },
+                    fontFamily: {
+                        sans: ['Noto Sans TC', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #fff1f2; /* rose-50 */
+            touch-action: manipulation;
+        }
+        .metro-line-1 { border-left: 5px solid #0052A4; }
+        .metro-line-2 { border-left: 5px solid #00A84D; }
+        .metro-line-3 { border-left: 5px solid #EF7C1C; }
+        .metro-line-4 { border-left: 5px solid #00A5DE; }
+        .metro-line-5 { border-left: 5px solid #996CAC; }
+        .metro-line-6 { border-left: 5px solid #CD7C2F; }
+        .metro-line-7 { border-left: 5px solid #747F00; }
+        .metro-line-8 { border-left: 5px solid #E6186C; }
+        .metro-line-9 { border-left: 5px solid #BDB092; }
+        
+        /* Hide scrollbar for clean UI */
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        #map { height: 300px; width: 100%; border-radius: 0.5rem; z-index: 1; }
+        
+        /* Toast Animation */
+        @keyframes slideInUp {
+            from { transform: translateY(100%); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        .toast-enter { animation: slideInUp 0.3s ease-out forwards; }
+    </style>
+</head>
+<body class="text-gray-700 pb-24">
 
+    <!-- Header -->
+    <header class="bg-gradient-to-r from-pink-300 to-rose-400 text-white p-4 shadow-lg sticky top-0 z-50">
+        <div class="flex justify-between items-center mb-2">
+            <h1 class="text-xl font-bold"><i class="fa-solid fa-plane-departure mr-2"></i>Seoul 2025</h1>
+            <select id="langSelect" onchange="changeLanguage()" class="bg-white/20 text-white border border-white/40 rounded px-2 py-1 text-sm focus:outline-none">
+                <option value="zh" class="text-gray-700">繁體中文</option>
+                <option value="ko" class="text-gray-700">한국어</option>
+                <option value="en" class="text-gray-700">English</option>
+                <option value="ja" class="text-gray-700">日本語</option>
+            </select>
+        </div>
+        <div class="flex justify-between items-end text-sm">
+            <div>
+                <div id="currentDate" class="font-medium">2025/12/18</div>
+                <div id="currentTime" class="text-xs opacity-90">10:00 AM</div>
+            </div>
+            <div class="text-right">
+                <div class="flex items-center gap-1">
+                    <i class="fa-solid fa-cloud-meatball"></i>
+                    <span id="seoulTemp">-2°C</span>
+                </div>
+                <div class="text-xs opacity-90" data-translate="seoulWeather">首爾即時天氣</div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Sync Status Indicator -->
+    <div id="syncStatus" class="bg-blue-100 text-blue-800 text-xs py-1 px-4 text-center hidden">
+        <i class="fa-solid fa-cloud-arrow-up animate-bounce mr-1"></i> Syncing...
+    </div>
+
+    <!-- Main Content Area -->
+    <main id="app" class="p-4 max-w-md mx-auto">
+        
+        <!-- View: Home -->
+        <section id="view-home" class="space-y-4">
+            <div class="bg-white rounded-2xl shadow-md p-6 text-center border-2 border-pink-100">
+                <h2 class="text-2xl font-bold text-pink-600 mb-2" data-translate="tripTitle">首爾浪漫之旅</h2>
+                <p class="text-gray-500 mb-4">2025/12/18 - 2025/12/24</p>
+                <div class="flex justify-center gap-4">
+                    <div class="bg-pink-50 rounded-lg p-3 w-20">
+                        <span id="daysLeft" class="block text-2xl font-bold text-pink-600">0</span>
+                        <span class="text-xs text-gray-500" data-translate="days">天</span>
+                    </div>
+                </div>
+                <p class="mt-4 text-sm text-gray-400" data-translate="countdownText">距離出發還有</p>
+            </div>
+
+            <div class="grid grid-cols-2 gap-4">
+                <div onclick="switchTab('itinerary')" class="bg-white p-4 rounded-xl shadow-sm border border-pink-100 flex flex-col items-center justify-center gap-2 active:scale-95 transition cursor-pointer">
+                    <i class="fa-solid fa-calendar-days text-3xl text-pink-400"></i>
+                    <span class="font-medium" data-translate="navItinerary">行程表</span>
+                </div>
+                <div onclick="switchTab('checklist')" class="bg-white p-4 rounded-xl shadow-sm border border-pink-100 flex flex-col items-center justify-center gap-2 active:scale-95 transition cursor-pointer">
+                    <i class="fa-solid fa-suitcase-rolling text-3xl text-pink-400"></i>
+                    <span class="font-medium" data-translate="navChecklist">行前準備</span>
+                </div>
+                <div onclick="switchTab('map')" class="bg-white p-4 rounded-xl shadow-sm border border-pink-100 flex flex-col items-center justify-center gap-2 active:scale-95 transition cursor-pointer">
+                    <i class="fa-solid fa-map-location-dot text-3xl text-pink-400"></i>
+                    <span class="font-medium" data-translate="navMap">地圖</span>
+                </div>
+                <div onclick="switchTab('money')" class="bg-white p-4 rounded-xl shadow-sm border border-pink-100 flex flex-col items-center justify-center gap-2 active:scale-95 transition cursor-pointer">
+                    <i class="fa-solid fa-calculator text-3xl text-pink-400"></i>
+                    <span class="font-medium" data-translate="navMoney">分帳</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- View: Checklist -->
+        <section id="view-checklist" class="hidden space-y-4">
+            <h2 class="text-xl font-bold text-pink-600" data-translate="checklistTitle">行前準備清單</h2>
+            
+            <div class="bg-pink-100 p-4 rounded-lg border border-pink-200">
+                <h3 class="font-bold text-pink-700 mb-2"><i class="fa-solid fa-passport mr-2"></i><span data-translate="visaTitle">簽證 (K-ETA/Q-Code)</span></h3>
+                <p class="text-sm text-pink-800 mb-2" data-translate="visaDesc">請務必在出發前72小時申請。</p>
+                <a href="https://www.k-eta.go.kr/" target="_blank" class="block text-center bg-pink-500 text-white py-2 rounded-full text-sm font-bold shadow hover:bg-pink-600 mb-2">
+                    <i class="fa-solid fa-link mr-1"></i> <span data-translate="applyKETA">申請 K-ETA</span>
+                </a>
+            </div>
+
+            <div class="bg-white rounded-xl shadow-sm p-4">
+                <div class="flex gap-2 mb-4">
+                    <input type="text" id="newCheckItem" class="flex-1 border border-pink-200 rounded-lg px-3 py-2 outline-none focus:border-pink-500" placeholder="新增項目...">
+                    <button onclick="addCheckItem()" class="bg-pink-500 text-white px-4 rounded-lg"><i class="fa-solid fa-plus"></i></button>
+                </div>
+                <ul id="checklistContainer" class="space-y-2">
+                    <li class="text-center text-gray-400 text-sm py-4"><i class="fa-solid fa-spinner fa-spin"></i> 載入中...</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- View: Itinerary -->
+        <section id="view-itinerary" class="hidden space-y-4">
+            <div class="flex overflow-x-auto no-scrollbar gap-2 pb-2" id="dayTabs">
+                <!-- Day 1-7 Tabs injected JS -->
+            </div>
+
+            <div id="dayContent" class="space-y-4 min-h-[200px]">
+                 <div class="text-center text-gray-400 py-10"><i class="fa-solid fa-spinner fa-spin"></i> 正在同步雲端行程...</div>
+            </div>
+
+            <button onclick="openEventModal()" class="fixed bottom-20 right-4 bg-pink-500 text-white w-14 h-14 rounded-full shadow-lg flex items-center justify-center text-2xl hover:bg-pink-600 active:scale-90 transition z-40">
+                <i class="fa-solid fa-plus"></i>
+            </button>
+        </section>
+
+        <!-- View: Map -->
+        <section id="view-map" class="hidden space-y-4">
+            <h2 class="text-xl font-bold text-pink-600" data-translate="navMap">地圖導覽</h2>
+            <div class="bg-white p-2 rounded-xl shadow-sm">
+                <div id="map"></div>
+            </div>
+            <div class="flex gap-2">
+                <button onclick="locateMe()" class="flex-1 bg-pink-500 text-white py-2 rounded-lg shadow"><i class="fa-solid fa-location-crosshairs mr-1"></i> <span data-translate="myLocation">我的位置</span></button>
+                <a href="https://www.google.com/maps" target="_blank" class="flex-1 bg-blue-500 text-white py-2 rounded-lg shadow text-center"><i class="fa-brands fa-google mr-1"></i> Google Maps</a>
+            </div>
+            <div class="text-xs text-gray-500 text-center mt-2">
+                * 點擊行程表中的地點可直接查看該位置
+            </div>
+        </section>
+
+        <!-- View: Money -->
+        <section id="view-money" class="hidden space-y-4">
+            <h2 class="text-xl font-bold text-pink-600" data-translate="navMoney">分帳系統</h2>
+            
+            <div class="bg-white p-4 rounded-xl shadow-sm border border-pink-100">
+                <div class="grid grid-cols-2 gap-2 mb-2">
+                    <input type="text" id="expenseDesc" class="border p-2 rounded text-sm" placeholder="項目 (例: 烤肉)">
+                    <input type="number" id="expenseAmount" class="border p-2 rounded text-sm" placeholder="金額 (KRW)">
+                </div>
+                <div class="mb-2">
+                     <select id="expensePayer" class="w-full border p-2 rounded text-sm bg-white">
+                        <option value="Me">我 (Me)</option>
+                        <option value="FriendA">旅伴 A</option>
+                        <option value="FriendB">旅伴 B</option>
+                    </select>
+                </div>
+                <button onclick="addExpense()" class="w-full bg-pink-500 text-white py-2 rounded-lg font-bold"><span data-translate="addExpense">新增支出</span></button>
+            </div>
+
+            <div class="bg-white rounded-xl shadow-sm overflow-hidden">
+                <div class="bg-pink-50 p-2 font-bold text-gray-600 text-sm flex justify-between">
+                    <span data-translate="history">紀錄</span>
+                    <span id="totalSpent">Total: 0</span>
+                </div>
+                <ul id="expenseList" class="divide-y divide-gray-100">
+                     <li class="text-center text-gray-400 text-sm py-4"><i class="fa-solid fa-spinner fa-spin"></i> 載入中...</li>
+                </ul>
+            </div>
+
+            <div class="bg-pink-600 text-white p-4 rounded-xl shadow-lg">
+                <h3 class="font-bold mb-2 text-sm"><i class="fa-solid fa-coins mr-1"></i> <span data-translate="balance">結算 (平均分攤)</span></h3>
+                <div id="balanceResult" class="text-sm space-y-1">
+                    <!-- Calculation -->
+                </div>
+            </div>
+        </section>
+        
+        <!-- User ID Footer -->
+        <div class="mt-8 text-center text-xs text-gray-400 border-t border-gray-200 pt-4">
+            <p>Cloud Sync ID:</p>
+            <p id="userIdDisplay" class="font-mono text-[10px] break-all select-all">Loading...</p>
+        </div>
+
+    </main>
+
+    <!-- Bottom Navigation -->
+    <nav class="fixed bottom-0 left-0 w-full bg-white border-t border-pink-100 flex justify-around py-3 pb-safe shadow-lg z-50 text-xs text-gray-500">
+        <button onclick="switchTab('home')" class="nav-btn flex flex-col items-center gap-1 w-full" data-target="home">
+            <i class="fa-solid fa-house text-lg"></i>
+            <span data-translate="navHome">首頁</span>
+        </button>
+        <button onclick="switchTab('itinerary')" class="nav-btn flex flex-col items-center gap-1 w-full" data-target="itinerary">
+            <i class="fa-solid fa-calendar-check text-lg"></i>
+            <span data-translate="navItinerary">行程</span>
+        </button>
+        <button onclick="switchTab('checklist')" class="nav-btn flex flex-col items-center gap-1 w-full" data-target="checklist">
+            <i class="fa-solid fa-list-check text-lg"></i>
+            <span data-translate="navChecklist">清單</span>
+        </button>
+        <button onclick="switchTab('money')" class="nav-btn flex flex-col items-center gap-1 w-full" data-target="money">
+            <i class="fa-solid fa-won-sign text-lg"></i>
+            <span data-translate="navMoney">分帳</span>
+        </button>
+    </nav>
+
+    <!-- Modal for Adding/Editing Event -->
+    <div id="eventModal" class="fixed inset-0 bg-black/50 hidden z-50 flex items-center justify-center p-4">
+        <div class="bg-white w-full max-w-sm rounded-2xl p-4 shadow-2xl animate-bounce-in">
+            <h3 class="font-bold text-lg mb-4 text-pink-600" id="modalTitle">新增行程</h3>
+            <div class="space-y-3">
+                <input type="hidden" id="eventId">
+                <div>
+                    <label class="text-xs text-gray-500">時間</label>
+                    <input type="time" id="eventTime" class="w-full border border-gray-300 rounded p-2">
+                </div>
+                <div>
+                    <label class="text-xs text-gray-500">地點/活動</label>
+                    <input type="text" id="eventTitle" class="w-full border border-gray-300 rounded p-2" placeholder="例: 景福宮">
+                </div>
+                <div>
+                    <label class="text-xs text-gray-500">類型 (AI 輔助)</label>
+                    <select id="eventType" class="w-full border border-gray-300 rounded p-2">
+                        <option value="general">一般</option>
+                        <option value="food">餐廳/咖啡廳</option>
+                        <option value="shopping">購物</option>
+                        <option value="transport">交通/地鐵</option>
+                        <option value="photo">拍照景點</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="text-xs text-gray-500">交通方式 (地鐵線路)</label>
+                    <select id="eventLine" class="w-full border border-gray-300 rounded p-2">
+                        <option value="">無 / 步行 / 計程車</option>
+                        <option value="1">1號線 (深藍)</option>
+                        <option value="2">2號線 (綠色)</option>
+                        <option value="3">3號線 (橘色)</option>
+                        <option value="4">4號線 (藍色)</option>
+                        <option value="5">5號線 (紫色)</option>
+                        <option value="AREX">機場快線 AREX</option>
+                    </select>
+                </div>
+                <div>
+                     <label class="text-xs text-gray-500">轉乘/備註</label>
+                    <textarea id="eventNote" class="w-full border border-gray-300 rounded p-2 text-sm" rows="2" placeholder="例: 弘大入口站 3號出口"></textarea>
+                </div>
+            </div>
+            <div class="flex gap-2 mt-4">
+                <button onclick="closeEventModal()" class="flex-1 py-2 border border-gray-300 rounded-lg text-gray-500">取消</button>
+                <button onclick="saveEvent()" class="flex-1 py-2 bg-pink-500 text-white rounded-lg font-bold shadow">儲存</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Toast Message -->
+    <div id="toast" class="fixed bottom-20 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white text-sm py-2 px-4 rounded-full shadow-lg z-[60] hidden flex items-center gap-2">
+        <i class="fa-solid fa-circle-check text-green-400"></i>
+        <span id="toastMsg">Saved</span>
+    </div>
+    
+    <!-- Confirm Modal -->
+    <div id="confirmModal" class="fixed inset-0 bg-black/50 hidden z-[70] flex items-center justify-center p-4">
+        <div class="bg-white rounded-xl p-4 w-64 text-center shadow-xl">
+            <h3 class="font-bold mb-2">確認刪除?</h3>
+            <p class="text-sm text-gray-500 mb-4">資料刪除後無法復原。</p>
+            <div class="flex gap-2 justify-center">
+                <button onclick="closeConfirm()" class="px-4 py-2 border rounded-lg text-sm">取消</button>
+                <button id="confirmBtn" class="px-4 py-2 bg-red-500 text-white rounded-lg text-sm">刪除</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    
+    <!-- Firebase Modules -->
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js';
+        import { getAuth, signInAnonymously, onAuthStateChanged, signInWithCustomToken } from 'https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js';
+        import { getFirestore, doc, setDoc, onSnapshot, collection } from 'https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js';
+
+        // Firebase Config
+        const firebaseConfig = JSON.parse(__firebase_config);
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+
+        let currentUser = null;
+
+        // Initialize Auth
+        const initAuth = async () => {
+             if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+                await signInWithCustomToken(auth, __initial_auth_token);
+            } else {
+                await signInAnonymously(auth);
+            }
+        };
+
+        initAuth();
+
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                currentUser = user;
+                document.getElementById('userIdDisplay').innerText = user.uid;
+                setupListeners(user.uid);
+            }
+        });
+
+        // Listeners for Realtime Updates
+        function setupListeners(userId) {
+            const itineraryRef = doc(db, 'artifacts', appId, 'users', userId, 'data', 'itinerary');
+            const checklistRef = doc(db, 'artifacts', appId, 'users', userId, 'data', 'checklist');
+            const expensesRef = doc(db, 'artifacts', appId, 'users', userId, 'data', 'expenses');
+
+            // 1. Itinerary Listener (Fix: Parse JSON string to avoid nested array error)
+            onSnapshot(itineraryRef, (docSnap) => {
+                if (docSnap.exists()) {
+                    try {
+                        const rawData = docSnap.data().days;
+                        // Handle string (new format)
+                        if (typeof rawData === 'string') {
+                             window.tripItinerary = JSON.parse(rawData);
+                        } else {
+                             // Fallback
+                             window.tripItinerary = rawData || Array.from({length: 7}, (_, i) => []);
+                        }
+                    } catch (e) {
+                        console.error("Error parsing itinerary:", e);
+                        window.tripItinerary = Array.from({length: 7}, (_, i) => []);
+                    }
+                } else {
+                    // Default Data
+                    window.tripItinerary = Array.from({length: 7}, (_, i) => []);
+                    // Save as string to prevent error
+                    setDoc(itineraryRef, { days: JSON.stringify(window.tripItinerary) });
+                }
+                window.renderItinerary();
+            }, (error) => { console.error("Error reading itinerary:", error); });
+
+            // 2. Checklist Listener
+            onSnapshot(checklistRef, (docSnap) => {
+                if (docSnap.exists()) {
+                    window.tripChecklist = docSnap.data().items;
+                } else {
+                    // Default Data
+                    window.tripChecklist = [
+                        { txt: "護照 (有效期6個月以上)", done: false },
+                        { txt: "K-ETA 申請核准", done: false },
+                        { txt: "網卡 / Roaming 開通", done: false },
+                        { txt: "韓幣換匯", done: false },
+                        { txt: "轉接頭 (韓國圓孔)", done: false },
+                        { txt: "保暖衣物 (羽絨服/發熱衣)", done: false }
+                    ];
+                    setDoc(checklistRef, { items: window.tripChecklist });
+                }
+                window.renderChecklist();
+            }, (error) => { console.error("Error reading checklist:", error); });
+
+            // 3. Expenses Listener
+            onSnapshot(expensesRef, (docSnap) => {
+                if (docSnap.exists()) {
+                    window.tripExpenses = docSnap.data().items;
+                } else {
+                    window.tripExpenses = [];
+                    setDoc(expensesRef, { items: [] });
+                }
+                window.renderExpenses();
+            }, (error) => { console.error("Error reading expenses:", error); });
+        }
+
+        // --- Export Functions for Global Scope ---
+        
+        // Save Helpers
+        window.saveItineraryToCloud = async () => {
+            if (!currentUser) return;
+            showSyncStatus();
+            // Fix: Stringify nested array before saving
+            await setDoc(doc(db, 'artifacts', appId, 'users', currentUser.uid, 'data', 'itinerary'), {
+                days: JSON.stringify(window.tripItinerary)
+            });
+            hideSyncStatus();
+        };
+
+        window.saveChecklistToCloud = async () => {
+            if (!currentUser) return;
+            showSyncStatus();
+            await setDoc(doc(db, 'artifacts', appId, 'users', currentUser.uid, 'data', 'checklist'), {
+                items: window.tripChecklist
+            });
+            hideSyncStatus();
+        };
+
+        window.saveExpensesToCloud = async () => {
+            if (!currentUser) return;
+            showSyncStatus();
+            await setDoc(doc(db, 'artifacts', appId, 'users', currentUser.uid, 'data', 'expenses'), {
+                items: window.tripExpenses
+            });
+            hideSyncStatus();
+        };
+
+        function showSyncStatus() {
+            document.getElementById('syncStatus').classList.remove('hidden');
+        }
+        function hideSyncStatus() {
+            setTimeout(() => {
+                document.getElementById('syncStatus').classList.add('hidden');
+            }, 800);
+        }
+
+    </script>
+
+    <script>
+        // --- Data & State (In-Memory managed by Firebase Listeners) ---
+        const TRIP_START = new Date('2025-12-18T00:00:00');
+        let currentLang = 'zh';
+        let currentDay = 1;
+        
+        // Globals (populated by Firebase)
+        window.tripItinerary = [];
+        window.tripChecklist = [];
+        window.tripExpenses = [];
+
+        // Translations
+        const i18n = {
+            zh: {
+                tripTitle: "首爾浪漫之旅",
+                days: "天",
+                countdownText: "距離 2025/12/18 出發還有",
+                navHome: "首頁",
+                navItinerary: "行程表",
+                navChecklist: "行前準備",
+                navMap: "地圖",
+                navMoney: "分帳",
+                seoulWeather: "首爾天氣",
+                checklistTitle: "準備清單",
+                visaTitle: "簽證 (K-ETA)",
+                visaDesc: "請務必在出發前72小時申請。",
+                applyKETA: "申請 K-ETA",
+                myLocation: "我的位置",
+                addExpense: "新增支出",
+                history: "消費紀錄",
+                balance: "結算 (平均分攤)",
+                weather: "預報",
+                aiHelp: "AI 韓語小幫手"
+            },
+            ko: {
+                tripTitle: "서울 로맨틱 여행",
+                days: "일",
+                countdownText: "출발까지 남은 시간",
+                navHome: "홈",
+                navItinerary: "일정",
+                navChecklist: "준비물",
+                navMap: "지도",
+                navMoney: "정산",
+                seoulWeather: "서울 날씨",
+                checklistTitle: "체크리스트",
+                visaTitle: "비자 (K-ETA)",
+                visaDesc: "출발 72시간 전까지 신청하세요.",
+                applyKETA: "K-ETA 신청",
+                myLocation: "내 위치",
+                addExpense: "지출 추가",
+                history: "기록",
+                balance: "정산",
+                weather: "날씨",
+                aiHelp: "AI 한국어 도우미"
+            },
+            en: {
+                tripTitle: "Seoul Romantic Trip",
+                days: "Days",
+                countdownText: "Days until departure",
+                navHome: "Home",
+                navItinerary: "Itinerary",
+                navChecklist: "Checklist",
+                navMap: "Map",
+                navMoney: "Split Bill",
+                seoulWeather: "Seoul Weather",
+                checklistTitle: "Checklist",
+                visaTitle: "Visa (K-ETA)",
+                visaDesc: "Apply 72 hours before departure.",
+                applyKETA: "Apply K-ETA",
+                myLocation: "My Location",
+                addExpense: "Add Expense",
+                history: "History",
+                balance: "Balance",
+                weather: "Forecast",
+                aiHelp: "AI Phrase Helper"
+            },
+            ja: {
+                tripTitle: "ソウルロマンチック旅行",
+                days: "日",
+                countdownText: "出発まであと",
+                navHome: "ホーム",
+                navItinerary: "旅程",
+                navChecklist: "準備",
+                navMap: "地図",
+                navMoney: "割り勘",
+                seoulWeather: "ソウルの天気",
+                checklistTitle: "持ち物リスト",
+                visaTitle: "ビザ (K-ETA)",
+                visaDesc: "出発の72時間前までに申請してください。",
+                applyKETA: "K-ETAを申請",
+                myLocation: "現在地",
+                addExpense: "支出を追加",
+                history: "履歴",
+                balance: "精算",
+                weather: "予報",
+                aiHelp: "AI 韓国語ヘルパー"
+            }
+        };
+
+        // AI Phrases Database
+        const aiPhrases = {
+            general: [
+                { ko: "안녕하세요", pron: "Annyeonghaseyo", zh: "你好" },
+                { ko: "감사합니다", pron: "Kamsahamnida", zh: "謝謝" },
+                { ko: "화장실이 어디예요?", pron: "Hwajangsil-i eodi-yeyo?", zh: "廁所哪裡？" }
+            ],
+            food: [
+                { ko: "이거 주세요", pron: "Ige juseyo", zh: "請給我這個" },
+                { ko: "덜 맵게 해주세요", pron: "Deol maepge haejuseyo", zh: "請不要太辣" },
+                { ko: "물 좀 주세요", pron: "Mul jom juseyo", zh: "請給我水" },
+                { ko: "계산서 주세요", pron: "Gyesanseo juseyo", zh: "請給我帳單" }
+            ],
+            shopping: [
+                { ko: "얼마예요?", pron: "Eolmayeyo?", zh: "多少錢？" },
+                { ko: "깎아주세요", pron: "Kkakka juseyo", zh: "請算便宜一點" },
+                { ko: "입어봐도 돼요?", pron: "Ibeobwado dwaeyo?", zh: "可以試穿嗎？" }
+            ],
+            transport: [
+                { ko: "홍대입구역으로 가나요?", pron: "Hongdae-ipgu-yeok-euro ganayo?", zh: "這車去弘大入口站嗎？" },
+                { ko: "여기서 내려주세요", pron: "Yeogiseo naeryeojuseyo", zh: "請在這裡讓我下車" }
+            ],
+            photo: [
+                { ko: "사진 좀 찍어주시겠어요?", pron: "Sajin jom jjigeojusigesseoyo?", zh: "能幫我拍張照嗎？" }
+            ]
+        };
+
+        // --- Initialization ---
+        
+        let map;
+        let userMarker;
+
+        window.onload = function() {
+            // Firebase handles data loading asynchronously
+            updateTime();
+            setInterval(updateTime, 1000);
+            renderDayTabs();
+            initMap();
+            changeLanguage(); 
+        };
+
+        // --- Core Functions ---
+
+        function t(key) {
+            return i18n[currentLang][key] || key;
+        }
+
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toastMsg').innerText = msg;
+            toast.classList.remove('hidden');
+            toast.classList.add('toast-enter');
+            setTimeout(() => {
+                toast.classList.add('hidden');
+                toast.classList.remove('toast-enter');
+            }, 3000);
+        }
+
+        function changeLanguage() {
+            currentLang = document.getElementById('langSelect').value;
+            document.querySelectorAll('[data-translate]').forEach(el => {
+                const key = el.getAttribute('data-translate');
+                if (i18n[currentLang][key]) {
+                    el.innerText = i18n[currentLang][key];
+                }
+            });
+            renderDayTabs();
+            if(window.tripItinerary.length) renderItinerary();
+            if(window.tripExpenses.length) renderExpenses();
+        }
+
+        function updateTime() {
+            const now = new Date();
+            document.getElementById('currentTime').innerText = now.toLocaleTimeString(currentLang, {hour: '2-digit', minute:'2-digit'});
+            document.getElementById('currentDate').innerText = now.toLocaleDateString(currentLang);
+            
+            const diff = TRIP_START - now;
+            const days = Math.ceil(diff / (1000 * 60 * 60 * 24));
+            document.getElementById('daysLeft').innerText = days > 0 ? days : 0;
+        }
+
+        function switchTab(tab) {
+            ['home', 'itinerary', 'checklist', 'map', 'money'].forEach(v => {
+                document.getElementById('view-' + v).classList.add('hidden');
+            });
+            document.getElementById('view-' + tab).classList.remove('hidden');
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('text-pink-600');
+                if(btn.dataset.target === tab) btn.classList.add('text-pink-600');
+            });
+
+            if(tab === 'map') {
+                setTimeout(() => { map.invalidateSize(); }, 200);
+            }
+        }
+
+        // --- Checklist Logic ---
+
+        window.renderChecklist = function() {
+            const list = window.tripChecklist || [];
+            const container = document.getElementById('checklistContainer');
+            container.innerHTML = '';
+            
+            list.forEach((item, index) => {
+                const li = document.createElement('li');
+                li.className = 'flex items-center gap-2 p-2 bg-white border border-pink-100 rounded shadow-sm';
+                li.innerHTML = `
+                    <input type="checkbox" onchange="toggleCheck(${index})" ${item.done ? 'checked' : ''} class="w-5 h-5 accent-pink-500">
+                    <span class="flex-1 text-sm ${item.done ? 'line-through text-gray-400' : ''}">${item.txt}</span>
+                    <button onclick="deleteCheck(${index})" class="text-gray-300 hover:text-red-400"><i class="fa-solid fa-trash"></i></button>
+                `;
+                container.appendChild(li);
+            });
+        }
+
+        window.addCheckItem = function() {
+            const input = document.getElementById('newCheckItem');
+            if(!input.value) return;
+            window.tripChecklist.push({ txt: input.value, done: false });
+            window.saveChecklistToCloud();
+            input.value = '';
+            // render happens automatically via snapshot, but for instant feedback:
+            renderChecklist();
+        }
+
+        window.toggleCheck = function(idx) {
+            window.tripChecklist[idx].done = !window.tripChecklist[idx].done;
+            window.saveChecklistToCloud();
+            renderChecklist();
+        }
+
+        window.deleteCheck = function(idx) {
+            // Use custom modal instead of alert/confirm
+            showConfirm(() => {
+                window.tripChecklist.splice(idx, 1);
+                window.saveChecklistToCloud();
+                renderChecklist();
+            });
+        }
+
+        // --- Itinerary Logic ---
+
+        window.renderDayTabs = function() {
+            const container = document.getElementById('dayTabs');
+            container.innerHTML = '';
+            for(let i=1; i<=7; i++) {
+                const btn = document.createElement('button');
+                btn.className = `flex-shrink-0 px-4 py-2 rounded-full text-sm transition ${currentDay === i ? 'bg-pink-500 text-white shadow' : 'bg-white text-gray-500 border border-gray-200'}`;
+                btn.innerText = `Day ${i}`;
+                btn.onclick = () => { currentDay = i; renderDayTabs(); renderItinerary(); };
+                container.appendChild(btn);
+            }
+        }
+
+        window.renderItinerary = function() {
+            if (!window.tripItinerary || window.tripItinerary.length === 0) return;
+            const events = window.tripItinerary[currentDay - 1] || [];
+            const container = document.getElementById('dayContent');
+            container.innerHTML = '';
+
+            // Sort by time
+            events.sort((a, b) => a.time.localeCompare(b.time));
+
+            if(events.length === 0) {
+                container.innerHTML = `<div class="text-center text-gray-400 py-10">尚無行程，點擊 + 新增</div>`;
+                return;
+            }
+
+            events.forEach((ev, idx) => {
+                let lineClass = '';
+                if(ev.line) lineClass = `metro-line-${ev.line}`;
+                
+                const phraseData = getAiPhrase(ev.type);
+                const weatherIcons = ['fa-snowflake', 'fa-cloud', 'fa-sun', 'fa-wind'];
+                const wIcon = weatherIcons[(idx + currentDay) % 4];
+                const temp = Math.floor(Math.random() * 8) - 5; 
+
+                const card = document.createElement('div');
+                card.className = `bg-white rounded-xl shadow-sm border border-gray-100 p-4 relative overflow-hidden ${lineClass}`;
+                card.innerHTML = `
+                    <div class="flex justify-between items-start mb-2">
+                        <div class="flex items-center gap-2">
+                            <span class="font-mono font-bold text-lg text-pink-600">${ev.time}</span>
+                            <span class="text-xs bg-gray-100 px-2 py-1 rounded text-gray-500">${t('weather')}: <i class="fa-solid ${wIcon}"></i> ${temp}°C</span>
+                        </div>
+                        <div class="flex gap-2">
+                             <button onclick="editEvent(${idx})" class="text-gray-400 hover:text-blue-500"><i class="fa-solid fa-pen"></i></button>
+                             <button onclick="deleteEvent(${idx})" class="text-gray-400 hover:text-red-500"><i class="fa-solid fa-trash"></i></button>
+                        </div>
+                    </div>
+                    
+                    <h3 class="font-bold text-lg mb-1">${ev.title}</h3>
+                    
+                    ${ev.note ? `<p class="text-sm text-gray-600 mb-2"><i class="fa-solid fa-circle-info text-pink-300 text-xs"></i> ${ev.note}</p>` : ''}
+                    
+                    ${ev.line ? `<p class="text-xs text-blue-600 mb-2 font-bold"><i class="fa-solid fa-train-subway"></i> 轉乘: ${getLineName(ev.line)}</p>` : ''}
+                    
+                    <!-- AI Phrase Section -->
+                    <div class="mt-3 pt-2 border-t border-dashed border-gray-200">
+                        <div class="flex items-center justify-between text-xs text-pink-500 mb-1">
+                            <span class="font-bold"><i class="fa-solid fa-robot"></i> ${t('aiHelp')}</span>
+                            <button onclick="speak('${phraseData.ko}')"><i class="fa-solid fa-volume-high"></i></button>
+                        </div>
+                        <p class="text-sm font-bold text-gray-800">${phraseData.ko}</p>
+                        <p class="text-xs text-gray-400">${phraseData.pron}</p>
+                        <p class="text-xs text-gray-500">${phraseData.zh}</p>
+                    </div>
+
+                    <div class="absolute bottom-2 right-2 opacity-10">
+                         <i class="fa-solid ${getTypeIcon(ev.type)} text-4xl"></i>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        // Helper functions
+        function getLineName(code) {
+            const map = { 'AREX': 'AREX 機場快線', '1': 'Line 1', '2': 'Line 2', '3': 'Line 3', '4': 'Line 4', '5': 'Line 5' };
+            return map[code] || code;
+        }
+
+        function getTypeIcon(type) {
+            const icons = { general: 'fa-location-dot', food: 'fa-utensils', shopping: 'fa-bag-shopping', transport: 'fa-bus', photo: 'fa-camera' };
+            return icons[type] || 'fa-star';
+        }
+
+        function getAiPhrase(type) {
+            const cat = aiPhrases[type] || aiPhrases.general;
+            return cat[Math.floor(Math.random() * cat.length)];
+        }
+
+        window.speak = function(text) {
+            const utter = new SpeechSynthesisUtterance(text);
+            utter.lang = 'ko-KR';
+            window.speechSynthesis.speak(utter);
+        }
+
+        // CRUD Modal Logic
+        let editingIndex = -1;
+
+        window.openEventModal = function() {
+            editingIndex = -1;
+            document.getElementById('modalTitle').innerText = "新增行程";
+            document.getElementById('eventTime').value = '10:00';
+            document.getElementById('eventTitle').value = '';
+            document.getElementById('eventNote').value = '';
+            document.getElementById('eventModal').classList.remove('hidden');
+        }
+
+        window.editEvent = function(idx) {
+            editingIndex = idx;
+            const ev = window.tripItinerary[currentDay - 1][idx];
+            
+            document.getElementById('modalTitle').innerText = "編輯行程";
+            document.getElementById('eventTime').value = ev.time;
+            document.getElementById('eventTitle').value = ev.title;
+            document.getElementById('eventType').value = ev.type || 'general';
+            document.getElementById('eventLine').value = ev.line || '';
+            document.getElementById('eventNote').value = ev.note || '';
+            
+            document.getElementById('eventModal').classList.remove('hidden');
+        }
+
+        window.closeEventModal = function() {
+            document.getElementById('eventModal').classList.add('hidden');
+        }
+
+        window.saveEvent = function() {
+            const time = document.getElementById('eventTime').value;
+            const title = document.getElementById('eventTitle').value;
+            const type = document.getElementById('eventType').value;
+            const line = document.getElementById('eventLine').value;
+            const note = document.getElementById('eventNote').value;
+
+            if(!title) {
+                showToast('請輸入地點名稱');
+                return;
+            }
+
+            const newEvent = { time, title, type, line, note };
+
+            if(editingIndex === -1) {
+                window.tripItinerary[currentDay - 1].push(newEvent);
+            } else {
+                window.tripItinerary[currentDay - 1][editingIndex] = newEvent;
+            }
+
+            window.saveItineraryToCloud();
+            closeEventModal();
+            renderItinerary();
+            showToast('行程已儲存');
+        }
+
+        window.deleteEvent = function(idx) {
+            showConfirm(() => {
+                window.tripItinerary[currentDay - 1].splice(idx, 1);
+                window.saveItineraryToCloud();
+                renderItinerary();
+            });
+        }
+        
+        // Confirmation Modal Logic
+        let onConfirmAction = null;
+        function showConfirm(action) {
+            onConfirmAction = action;
+            document.getElementById('confirmModal').classList.remove('hidden');
+        }
+        window.closeConfirm = function() {
+            document.getElementById('confirmModal').classList.add('hidden');
+            onConfirmAction = null;
+        }
+        document.getElementById('confirmBtn').onclick = function() {
+            if(onConfirmAction) onConfirmAction();
+            closeConfirm();
+        };
+
+        // --- Map Logic ---
+
+        function initMap() {
+            const seoul = [37.5665, 126.9780];
+            map = L.map('map').setView(seoul, 13);
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; OpenStreetMap'
+            }).addTo(map);
+
+            const spots = [
+                {n: "景福宮", loc: [37.5796, 126.9770]},
+                {n: "N首爾塔", loc: [37.5511, 126.9882]},
+                {n: "弘大入口", loc: [37.5575, 126.9245]}
+            ];
+            spots.forEach(s => {
+                L.marker(s.loc).addTo(map).bindPopup(s.n);
+            });
+        }
+
+        window.locateMe = function() {
+            if (navigator.geolocation) {
+                showToast('正在獲取位置...');
+                navigator.geolocation.getCurrentPosition(position => {
+                    const lat = position.coords.latitude;
+                    const lng = position.coords.longitude;
+                    if(userMarker) map.removeLayer(userMarker);
+                    userMarker = L.marker([lat, lng], {icon: redIcon}).addTo(map).bindPopup("You are here").openPopup();
+                    map.setView([lat, lng], 15);
+                }, () => {
+                    showToast("無法獲取位置 (請確認權限)");
+                });
+            }
+        }
+        
+        const redIcon = new L.Icon({
+            iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
+            shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+            iconSize: [25, 41],
+            iconAnchor: [12, 41],
+            popupAnchor: [1, -34],
+            shadowSize: [41, 41]
+        });
+
+        // --- Expenses Logic ---
+
+        window.addExpense = function() {
+            const desc = document.getElementById('expenseDesc').value;
+            const amount = parseFloat(document.getElementById('expenseAmount').value);
+            const payer = document.getElementById('expensePayer').value;
+
+            if(!desc || !amount) {
+                showToast('請輸入項目與金額');
+                return;
+            }
+
+            window.tripExpenses.push({ desc, amount, payer, date: new Date().toLocaleDateString() });
+            window.saveExpensesToCloud();
+            
+            document.getElementById('expenseDesc').value = '';
+            document.getElementById('expenseAmount').value = '';
+            renderExpenses();
+            showToast('已新增支出');
+        }
+
+        window.renderExpenses = function() {
+            const list = window.tripExpenses || [];
+            const container = document.getElementById('expenseList');
+            container.innerHTML = '';
+            
+            let total = 0;
+            const paidBy = { Me: 0, FriendA: 0, FriendB: 0 };
+
+            list.forEach((ex, idx) => {
+                total += ex.amount;
+                if(paidBy[ex.payer] !== undefined) paidBy[ex.payer] += ex.amount;
+
+                const li = document.createElement('li');
+                li.className = 'flex justify-between p-3 text-sm';
+                li.innerHTML = `
+                    <div>
+                        <span class="font-bold text-gray-700">${ex.desc}</span>
+                        <div class="text-xs text-gray-400">${ex.payer} paid</div>
+                    </div>
+                    <div class="flex items-center gap-2">
+                         <span class="font-mono text-pink-600 font-bold">₩${ex.amount.toLocaleString()}</span>
+                         <button onclick="deleteExpense(${idx})" class="text-gray-300 text-xs"><i class="fa-solid fa-xmark"></i></button>
+                    </div>
+                `;
+                container.appendChild(li);
+            });
+
+            document.getElementById('totalSpent').innerText = `Total: ₩${total.toLocaleString()}`;
+
+            const perPerson = total / 3;
+            const balanceDiv = document.getElementById('balanceResult');
+            balanceDiv.innerHTML = `<div class="mb-2 pb-2 border-b border-white/20">每人應付: ₩${Math.round(perPerson).toLocaleString()}</div>`;
+            
+            Object.keys(paidBy).forEach(p => {
+                const diff = paidBy[p] - perPerson;
+                const roundedDiff = Math.round(diff);
+                let text = '';
+                if(roundedDiff > 0) text = `${p} 應收回 ₩${roundedDiff.toLocaleString()}`;
+                else if(roundedDiff < 0) text = `${p} 應支付 ₩${Math.abs(roundedDiff).toLocaleString()}`;
+                else text = `${p} 收支平衡`;
+                
+                balanceDiv.innerHTML += `<div>${text}</div>`;
+            });
+        }
+
+        window.deleteExpense = function(idx) {
+            showConfirm(() => {
+                window.tripExpenses.splice(idx, 1);
+                window.saveExpensesToCloud();
+                renderExpenses();
+            });
+        }
+    </script>
+</body>
+</html>
