@@ -13,17 +13,10 @@
   <meta name="theme-color" content="#fdf8f9">
   <meta name="mobile-web-app-capable" content="yes">
 
-  <!-- App Icon 設定 (SVG Data URI - 強化相容性) -->
-  <!-- 基礎 Favicon -->
+  <!-- App Icons -->
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='512' height='512' viewBox='0 0 512 512'%3E%3Cdefs%3E%3ClinearGradient id='grad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23fb7185;stop-opacity:1' /%3E%3Cstop offset='100%25' style='stop-color:%23e11d48;stop-opacity:1' /%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='512' height='512' rx='120' fill='url(%23grad)'/%3E%3Ctext x='50%25' y='42%25' dominant-baseline='middle' text-anchor='middle' font-family='sans-serif' font-weight='900' font-size='110' fill='white' style='text-shadow: 4px 4px 8px rgba(0,0,0,0.15)'%3ESEOUL%3C/text%3E%3Ctext x='50%25' y='65%25' dominant-baseline='middle' text-anchor='middle' font-family='sans-serif' font-weight='bold' font-size='90' fill='white' style='text-shadow: 3px 3px 6px rgba(0,0,0,0.15)'%3E2025%3C/text%3E%3Cpath d='M256 360 Q286 390 316 360 T376 360 Q406 390 376 420 T316 420 Q286 450 256 420 Q226 450 196 420 T136 420 Q106 390 136 360 T196 360 Q226 330 256 360' fill='none' stroke='white' stroke-width='8' stroke-linecap='round' opacity='0.3'/%3E%3C/svg%3E">
-  
-  <!-- Apple Touch Icon (Samsung/iOS 主畫面優先讀取) -->
   <link rel="apple-touch-icon" sizes="180x180" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='512' height='512' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' fill='%23fb7185'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='sans-serif' font-weight='bold' font-size='100' fill='white'%3ESEOUL%3C/text%3E%3C/svg%3E">
-  
-  <!-- Android Chrome 明確尺寸宣告 -->
-  <link rel="icon" type="image/svg+xml" sizes="192x192" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='512' height='512' viewBox='0 0 512 512'%3E%3Cdefs%3E%3ClinearGradient id='grad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23fb7185;stop-opacity:1' /%3E%3Cstop offset='100%25' style='stop-color:%23e11d48;stop-opacity:1' /%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='512' height='512' rx='120' fill='url(%23grad)'/%3E%3Ctext x='50%25' y='42%25' dominant-baseline='middle' text-anchor='middle' font-family='sans-serif' font-weight='900' font-size='110' fill='white' style='text-shadow: 4px 4px 8px rgba(0,0,0,0.15)'%3ESEOUL%3C/text%3E%3Ctext x='50%25' y='65%25' dominant-baseline='middle' text-anchor='middle' font-family='sans-serif' font-weight='bold' font-size='90' fill='white' style='text-shadow: 3px 3px 6px rgba(0,0,0,0.15)'%3E2025%3C/text%3E%3C/svg%3E">
-  
-  <link rel="manifest" href='data:application/manifest+json,{"name":"Seoul2025","short_name":"Seoul2025","start_url":".","display":"standalone","background_color":"#fdf8f9","theme_color":"#fdf8f9","icons":[{"src":"data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27512%27 height=%27512%27 viewBox=%270 0 512 512%27%3E%3Cdefs%3E%3ClinearGradient id=%27grad%27 x1=%270%25%27 y1=%270%25%27 x2=%27100%25%27 y2=%27100%25%27%3E%3Cstop offset=%270%25%27 style=%27stop-color:%23fb7185;stop-opacity:1%27 /%3E%3Cstop offset=%27100%25%27 style=%27stop-color:%23e11d48;stop-opacity:1%27 /%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width=%27512%27 height=%27512%27 rx=%27120%27 fill=%27url(%23grad)%27/%3E%3Ctext x=%2750%25%27 y=%2742%25%27 dominant-baseline=%27middle%27 text-anchor=%27middle%27 font-family=%27sans-serif%27 font-weight=%27900%27 font-size=%27110%27 fill=%27white%27 style=%27text-shadow: 4px 4px 8px rgba(0,0,0,0.15)%27%3ESEOUL%3C/text%3E%3Ctext x=%2750%25%27 y=%2765%25%27 dominant-baseline=%27middle%27 text-anchor=%27middle%27 font-family=%27sans-serif%27 font-weight=%27bold%27 font-size=%2790%27 fill=%27white%27 style=%27text-shadow: 3px 3px 6px rgba(0,0,0,0.15)%27%3E2025%3C/text%3E%3C/svg%3E","sizes":"192x192","type":"image/svg+xml","purpose":"any maskable"},{"src":"data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27512%27 height=%27512%27 viewBox=%270 0 512 512%27%3E%3Cdefs%3E%3ClinearGradient id=%27grad%27 x1=%270%25%27 y1=%270%25%27 x2=%27100%25%27 y2=%27100%25%27%3E%3Cstop offset=%270%25%27 style=%27stop-color:%23fb7185;stop-opacity:1%27 /%3E%3Cstop offset=%27100%25%27 style=%27stop-color:%23e11d48;stop-opacity:1%27 /%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width=%27512%27 height=%27512%27 rx=%27120%27 fill=%27url(%23grad)%27/%3E%3Ctext x=%2750%25%27 y=%2742%25%27 dominant-baseline=%27middle%27 text-anchor=%27middle%27 font-family=%27sans-serif%27 font-weight=%27900%27 font-size=%27110%27 fill=%27white%27 style=%27text-shadow: 4px 4px 8px rgba(0,0,0,0.15)%27%3ESEOUL%3C/text%3E%3Ctext x=%2750%25%27 y=%2765%25%27 dominant-baseline=%27middle%27 text-anchor=%27middle%27 font-family=%27sans-serif%27 font-weight=%27bold%27 font-size=%2790%27 fill=%27white%27 style=%27text-shadow: 3px 3px 6px rgba(0,0,0,0.15)%27%3E2025%3C/text%3E%3C/svg%3E","sizes":"512x512","type":"image/svg+xml","purpose":"any maskable"}]}'>
+  <link rel="icon" type="image/svg+xml" sizes="192x192" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='512' height='512' viewBox='0 0 512 512'%3E%3Cdefs%3E%3ClinearGradient id='grad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23fb7185;stop-opacity:1' /%3E%3Cstop offset='100%25' style='stop-color:%23e11d48;stop-opacity:1' /%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='512' height='512' rx='120' fill='url(%23grad)'/%3E%3Ctext x='50%25' y='42%25' dominant-baseline='middle' text-anchor='middle' font-family='sans-serif' font-weight='900' font-size='110' fill='white' style='text-shadow: 4px 4px 8px rgba(0,0,0,0.15)'%3ESEOUL%3C/text%3E%3Ctext x='50%25' y='65%25' dominant-baseline='middle' text-anchor='middle' font-family='sans-serif' font-weight='bold' font-size='90' fill='white' style='text-shadow: 3px 3px 6px rgba(0,0,0,0.15)'%3E2025%3C/text%3E%3Cpath d='M256 360 Q286 390 316 360 T376 360 Q406 390 376 420 T316 420 Q286 450 256 420 Q226 450 196 420 T136 420 Q106 390 136 360 T196 360 Q226 330 256 360' fill='none' stroke='white' stroke-width='8' stroke-linecap='round' opacity='0.3'/%3E%3C/svg%3E","sizes":"512x512","type":"image/svg+xml","purpose":"any maskable"}]}'>
 
   <!-- 載入 Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -40,14 +33,6 @@
       to { opacity: 1; transform: translateY(0); }
     }
     .animate-fade-in { animation: fade-in 0.3s ease-out forwards; }
-    
-    /* Mic pulse animation */
-    @keyframes pulse-mic {
-      0% { box-shadow: 0 0 0 0 rgba(251, 113, 133, 0.7); }
-      70% { box-shadow: 0 0 0 10px rgba(251, 113, 133, 0); }
-      100% { box-shadow: 0 0 0 0 rgba(251, 113, 133, 0); }
-    }
-    .animate-pulse-mic { animation: pulse-mic 1.5s infinite; }
   </style>
 </head>
 <body>
@@ -65,191 +50,174 @@
       ClipboardCheck, FileText, AlertCircle, Briefcase, Scan, CloudRain, Mic, Wand2, Plus, Save, Check, Trash2, Banknote, Search, XCircle, LayoutGrid, List, Image as ImageIcon, ArrowRight, CornerDownLeft
     } from 'https://esm.sh/lucide-react@0.263.1';
 
-    // --- 設定 ---
+    // --- 1. Constants & Configuration ---
     const LANGUAGES = { ZH: 'ZH', KR: 'KR', EN: 'EN', JP: 'JP' };
     const UI_LABELS = {
-      ZH: { title: '2025 首爾之旅', subtitle: '圭賢演唱會・冬日首爾', editTip: '點擊文字即可編輯', days: ['準備', 'Day 1', 'Day 2', 'Day 3', 'Day 4', 'Day 5', 'Day 6', 'Day 7'], transport: '交通', estTime: '時間', location: '地點', aiChat: 'AI 隨身導遊', genPhrases: '韓語幫手', phrasesTitle: '✨ 情境韓語小幫手', chatPlaceholder: '問問 AI...', close: '關閉', fallbackMsg: 'AI 連線異常', addEvent: '新增行程', addModalTitle: '新增行程', addModalTime: '時間 (24小時制)', addModalContent: '地點 / 活動內容', addModalSubmit: '儲存並排序', addModalCancel: '取消', addItem: '新增項目', splitBill: '分帳', total: '總支出', perPerson: '每人應付', rate: '匯率', addPhrase: '新增自訂短句', phraseMeaningPlaceholder: '中文意思', shoppingList: '採購清單', shoppingAdd: '新增商品', shoppingName: '商品名稱', shoppingCategory: '類別 (如:美妝)', shoppingImage: '圖片網址或上傳', shoppingUpload: '選擇圖片', shoppingViewList: '清單模式', shoppingViewGrid: '圖片模式', shoppingTab: '採購' },
-      KR: { title: '2025 서울 여행', subtitle: '규현 콘서트 • 겨울 서울', editTip: '클릭하여 편집', days: ['준비', '1일차', '2일차', '3일차', '4일차', '5일차', '6일차', '7일차'], transport: '교통', estTime: '시간', location: '장소', aiChat: 'AI 가이드', genPhrases: '한국어 도우미', phrasesTitle: '✨ 한국어', chatPlaceholder: '질문...', close: '닫기', fallbackMsg: 'AI 오류', addEvent: '일정 추가', addModalTitle: '추가', addModalTime: '시간', addModalContent: '내용', addModalSubmit: '저장', addModalCancel: '취소', addItem: '항목 추가', splitBill: '정산', total: '총 지출', perPerson: '1인당', rate: '환율', addPhrase: '문구 추가', phraseMeaningPlaceholder: '의미', shoppingList: '쇼핑 리스트', shoppingAdd: '상품 추가', shoppingName: '상품명', shoppingCategory: '카테고리', shoppingImage: '이미지', shoppingUpload: '업로드', shoppingViewList: '리스트', shoppingViewGrid: '그리드', shoppingTab: '쇼핑' },
-      EN: { title: 'Seoul Trip 2025', subtitle: 'Kyuhyun Concert • Winter Seoul', editTip: 'Click to edit', days: ['Prep', 'Day 1', 'Day 2', 'Day 3', 'Day 4', 'Day 5', 'Day 6', 'Day 7'], transport: 'Transport', estTime: 'Time', location: 'Loc', aiChat: 'AI Guide', genPhrases: 'Helper', phrasesTitle: '✨ Phrases', chatPlaceholder: 'Ask AI...', close: 'Close', fallbackMsg: 'AI Offline', addEvent: 'Add', addModalTitle: 'Add Event', addModalTime: 'Time', addModalContent: 'Content', addModalSubmit: 'Save', addModalCancel: 'Cancel', addItem: 'Add Item', splitBill: 'Split Bill', total: 'Total', perPerson: 'Per Person', rate: 'Rate', addPhrase: 'Add Phrase', phraseMeaningPlaceholder: 'Meaning', shoppingList: 'Shopping List', shoppingAdd: 'Add Item', shoppingName: 'Item Name', shoppingCategory: 'Category', shoppingImage: 'Image', shoppingUpload: 'Upload', shoppingViewList: 'List', shoppingViewGrid: 'Grid', shoppingTab: 'Shop' },
-      JP: { title: '2025 ソウル旅行', subtitle: 'キュヒョンコンサート・冬のソウル', editTip: 'クリックして編集', days: ['準備', '1日目', '2日目', '3日目', '4日目', '5日目', '6日目', '7日目'], transport: '交通', estTime: '時間', location: '場所', aiChat: 'AI ガイド', genPhrases: '韓国語ヘルプ', phrasesTitle: '✨ 韓国語', chatPlaceholder: '質問...', close: '閉じる', fallbackMsg: 'AIエラー', addEvent: '追加', addModalTitle: '追加', addModalTime: '時間', addModalContent: '内容', addModalSubmit: '保存', addModalCancel: 'キャンセル', addItem: '追加', splitBill: '割り勘', total: '合計', perPerson: '一人当たり', rate: 'レート', addPhrase: 'フレーズ追加', phraseMeaningPlaceholder: '意味', shoppingList: '買い物リスト', shoppingAdd: '商品追加', shoppingName: '商品名', shoppingCategory: 'カテゴリ', shoppingImage: '画像', shoppingUpload: 'アップロード', shoppingViewList: 'リスト', shoppingViewGrid: 'グリッド', shoppingTab: '買い物' }
+      ZH: { title: '2025 首爾之旅', subtitle: '圭賢演唱會・冬日首爾', editTip: '點擊文字即可編輯', days: ['準備', 'Day 1', 'Day 2', 'Day 3', 'Day 4', 'Day 5', 'Day 6', 'Day 7'], shoppingTab: '採購', transport: '交通', estTime: '時間', location: '地點', aiChat: 'AI 隨身導遊', genPhrases: '韓語幫手', phrasesTitle: '✨ 情境韓語小幫手', chatPlaceholder: '問問 AI...', close: '關閉', fallbackMsg: 'AI 連線異常', addEvent: '新增行程', addModalTitle: '新增行程', addModalTime: '時間 (24小時制)', addModalContent: '地點 / 活動內容', addModalSubmit: '儲存並排序', addModalCancel: '取消', addItem: '新增項目', splitBill: '分帳', total: '總支出', perPerson: '每人應付', rate: '匯率', addPhrase: '新增自訂短句', phraseMeaningPlaceholder: '中文意思', shoppingList: '採購清單', shoppingAdd: '新增商品', shoppingName: '商品名稱', shoppingCategory: '類別 (如:美妝)', shoppingImage: '圖片網址或上傳', shoppingUpload: '選擇圖片', shoppingViewList: '清單模式', shoppingViewGrid: '圖片模式', shoppingTab: '採購' },
+      KR: { title: '2025 서울 여행', subtitle: '규현 콘서트 • 겨울 서울', editTip: '클릭하여 편집', days: ['준비', '1일차', '2일차', '3일차', '4일차', '5일차', '6일차', '7일차'], shoppingTab: '쇼핑', transport: '교통', estTime: '시간', location: '장소', aiChat: 'AI 가이드', genPhrases: '한국어 도우미', phrasesTitle: '✨ 한국어', chatPlaceholder: '질문...', close: '닫기', fallbackMsg: 'AI 오류', addEvent: '일정 추가', addModalTitle: '추가', addModalTime: '시간', addModalContent: '내용', addModalSubmit: '저장', addModalCancel: '취소', addItem: '항목 추가', splitBill: '정산', total: '총 지출', perPerson: '1인당', rate: '환율', addPhrase: '문구 추가', phraseMeaningPlaceholder: '의미', shoppingList: '쇼핑 리스트', shoppingAdd: '상품 추가', shoppingName: '상품명', shoppingCategory: '카테고리', shoppingImage: '이미지', shoppingUpload: '업로드', shoppingViewList: '리스트', shoppingViewGrid: '그리드', shoppingTab: '쇼핑' },
+      EN: { title: 'Seoul Trip 2025', subtitle: 'Kyuhyun Concert • Winter Seoul', editTip: 'Click to edit', days: ['Prep', 'Day 1', 'Day 2', 'Day 3', 'Day 4', 'Day 5', 'Day 6', 'Day 7'], shoppingTab: 'Shop', transport: 'Transport', estTime: 'Time', location: 'Loc', aiChat: 'AI Guide', genPhrases: 'Helper', phrasesTitle: '✨ Phrases', chatPlaceholder: 'Ask AI...', close: 'Close', fallbackMsg: 'AI Offline', addEvent: 'Add', addModalTitle: 'Add Event', addModalTime: 'Time', addModalContent: 'Content', addModalSubmit: 'Save', addModalCancel: 'Cancel', addItem: 'Add Item', splitBill: 'Split Bill', total: 'Total', perPerson: 'Per Person', rate: 'Rate', addPhrase: 'Add Phrase', phraseMeaningPlaceholder: 'Meaning', shoppingList: 'Shopping List', shoppingAdd: 'Add Item', shoppingName: 'Item Name', shoppingCategory: 'Category', shoppingImage: 'Image', shoppingUpload: 'Upload', shoppingViewList: 'List', shoppingViewGrid: 'Grid', shoppingTab: 'Shop' },
+      JP: { title: '2025 ソウル旅行', subtitle: 'キュヒョンコンサート・冬のソウル', editTip: 'クリックして編集', days: ['準備', '1日目', '2日目', '3日目', '4日目', '5日目', '6日目', '7日目'], shoppingTab: '買い物', transport: '交通', estTime: '時間', location: '場所', aiChat: 'AI ガイド', genPhrases: '韓国語ヘルプ', phrasesTitle: '✨ 韓国語', chatPlaceholder: '質問...', close: '閉じる', fallbackMsg: 'AIエラー', addEvent: '追加', addModalTitle: '追加', addModalTime: '時間', addModalContent: '内容', addModalSubmit: '保存', addModalCancel: 'キャンセル', addItem: '追加', splitBill: '割り勘', total: '合計', perPerson: '一人当たり', rate: 'レート', addPhrase: 'フレーズ追加', phraseMeaningPlaceholder: '意味', shoppingList: '買い物リスト', shoppingAdd: '商品追加', shoppingName: '商品名', shoppingCategory: 'カテゴリ', shoppingImage: '画像', shoppingUpload: 'アップロード', shoppingViewList: 'リスト', shoppingViewGrid: 'グリッド', shoppingTab: '買い物' }
     };
 
     const FALLBACK_PHRASES_BY_TYPE = {
-      food: [
-        { k: '메뉴판 좀 주세요', p: 'Menyupan jom juseyo', m: { ZH: '請給我菜單', EN: 'Menu please', JP: 'メニューをください', KR: '메뉴판 좀 주세요' } },
-        { k: '이거 주세요', p: 'Ige juseyo', m: { ZH: '請給我這個', EN: 'This one please', JP: 'これをください', KR: '이거 주세요' } },
-        { k: '계산해 주세요', p: 'Gyesanhae juseyo', m: { ZH: '請結帳', EN: 'Check please', JP: 'お会計お願いします', KR: '계산해 주세요' } },
-        { k: '물 좀 주세요', p: 'Mul jom juseyo', m: { ZH: '請給我水', EN: 'Water please', JP: 'お水をください', KR: '물 좀 주세요' } },
-        { k: '덜 맵게 해주세요', p: 'Deol maepge haejuseyo', m: { ZH: '請做不辣一點', EN: 'Less spicy please', JP: '辛くしないでください', KR: '덜 맵게 해주세요' } },
-        { k: '화장실 어디예요?', p: 'Hwajangsil eodiyeyo?', m: { ZH: '洗手間在哪裡?', EN: 'Where is the toilet?', JP: 'トイレはどこですか？', KR: '화장실 어디예요?' } }
-      ],
-      shopping: [
-        { k: '이거 얼마예요?', p: 'Ige eolmayeyo?', m: { ZH: '這個多少錢?', EN: 'How much is this?', JP: 'これはいくらですか？', KR: '이거 얼마예요?' } },
-        { k: '입어봐도 돼요?', p: 'Ibeobwado dwaeyo?', m: { ZH: '可以試穿嗎?', EN: 'Can I try this on?', JP: '試着してもいいですか？', KR: '입어봐도 돼요?' } },
-        { k: '새것 있어요?', p: 'Saegeot isseoyo?', m: { ZH: '有新的嗎?', EN: 'Do you have a new one?', JP: '新しいのはありますか？', KR: '새것 있어요?' } },
-        { k: '깎아주세요', p: 'Kkakkajuseyo', m: { ZH: '請算便宜一點', EN: 'Can you give a discount?', JP: '安くしてくれませんか？', KR: '깎아주세요' } },
-        { k: '텍스 리펀 되나요?', p: 'Tekseu ripeon doenayo?', m: { ZH: '可以退稅嗎?', EN: 'Is tax refund available?', JP: '免税できますか？', KR: '텍스 리펀 되나요?' } },
-        { k: '봉투 주세요', p: 'Bongtu juseyo', m: { ZH: '請給我袋子', EN: 'Bag please', JP: '袋をください', KR: '봉투 주세요' } }
-      ],
-      transport: [
-        { k: '이 버스 명동 가나요?', p: 'I beoseu Myeongdong ganayo?', m: { ZH: '這班公車去明洞嗎?', EN: 'Does this bus go to Myeongdong?', JP: 'このバスは明洞に行きますか？', KR: '이 버스 명동 가나요?' } },
-        { k: '여기서 내려주세요', p: 'Yeogiseo naeryeojuseyo', m: { ZH: '請在這裡讓我下車', EN: 'Please drop me off here', JP: 'ここで降ろしてください', KR: '여기서 내려주세요' } },
-        { k: '얼마나 걸려요?', p: 'Eolmana geollyeoyo?', m: { ZH: '請問要多久?', EN: 'How long does it take?', JP: 'どのくらいかかりますか？', KR: '얼마나 걸려요?' } },
-        { k: '티머니 충전해 주세요', p: 'T-money chungjeonhae juseyo', m: { ZH: '請幫我充值 T-Money', EN: 'Please recharge T-money', JP: 'T-moneyをチャージしてください', KR: '티머니 충전해 주세요' } },
-        { k: '지하철역이 어디예요?', p: 'Jihacheolyeogi eodiyeyo?', m: { ZH: '地鐵站在哪裡?', EN: 'Where is the subway station?', JP: '地下鉄の駅はどこですか？', KR: '지하철역이 어디예요?' } },
-        { k: '택시 좀 불러주세요', p: 'Taeksi jom bulleojuseyo', m: { ZH: '請幫我叫計程車', EN: 'Please call a taxi for me', JP: 'タクシーを呼んでください', KR: '택시 좀 불러주세요' } }
-      ],
-      coffee: [
-        { k: '아이스 아메리카노 한 잔 주세요', p: 'Aiceu Americano hanjan juseyo', m: { ZH: '請給我一杯冰美式', EN: 'One Iced Americano please', JP: 'アイスアメリカーノをください', KR: '아이스 아메리카노 한 잔 주세요' } },
-        { k: '따뜻한 라떼 주세요', p: 'Ttatteutan latte juseyo', m: { ZH: '請給我一杯熱拿鐵', EN: 'One Hot Latte please', JP: 'ホットラテをください', KR: '따뜻한 라떼 주세요' } },
-        { k: '와이파이 비밀번호가 뭐예요?', p: 'WiFi bimilbeonhoga mwoyeyo?', m: { ZH: '請問 WiFi 密碼是什麼?', EN: 'What is the WiFi password?', JP: 'WiFiのパスワードは何ですか？', KR: '와이파이 비밀번호가 뭐예요?' } },
-        { k: '진동벨 주세요', p: 'Jindongbel juseyo', m: { ZH: '請給我震動鈴', EN: 'Give me a buzzer please', JP: '呼び出しベルをください', KR: '진동벨 주세요' } },
-        { k: '테이크아웃 할게요', p: 'Teikeuaut halgeyo', m: { ZH: '我要外帶', EN: 'To go please', JP: '持ち帰ります', KR: '테이크아웃 할게요' } },
-        { k: '화장실 비밀번호 알려주세요', p: 'Hwajangsil bimilbeonho allyeojuseyo', m: { ZH: '請告訴我廁所密碼', EN: 'What is the toilet password?', JP: 'トイレのパスワードを教えてください', KR: '화장실 비밀번호 알려주세요' } }
-      ],
-      default: [
-        { k: '안녕하세요', p: 'Annyeonghaseyo', m: { ZH: '你好', EN: 'Hello', JP: 'こんにちは', KR: '안녕하세요' } },
-        { k: '감사합니다', p: 'Gamsahamnida', m: { ZH: '謝謝', EN: 'Thank you', JP: 'ありがとうございます', KR: '감사합니다' } },
-        { k: '죄송합니다', p: 'Joesonghamnida', m: { ZH: '對不起', EN: 'I am sorry', JP: 'ごめんなさい', KR: '죄송합니다' } },
-        { k: '잠시만요', p: 'Jamsimanyo', m: { ZH: '借過 / 等一下', EN: 'Excuse me / Just a moment', JP: 'すみません / 少々お待ちください', KR: '잠시만요' } },
-        { k: '도와주세요', p: 'Dowajuseyo', m: { ZH: '請幫幫我', EN: 'Please help me', JP: '助けてください', KR: '도와주세요' } },
-        { k: '영어 할 수 있어요?', p: 'Yeong-eo hal su isseoyo?', m: { ZH: '你會說英文嗎?', EN: 'Do you speak English?', JP: '英語を話せますか？', KR: '영어 할 수 있어요?' } }
-      ]
+      food: [ { k: '메뉴판 좀 주세요', p: 'Menyupan jom juseyo', m: { ZH: '請給我菜單', EN: 'Menu please', JP: 'メニューをください', KR: '메뉴판 좀 주세요' } }, { k: '이거 주세요', p: 'Ige juseyo', m: { ZH: '請給我這個', EN: 'This one please', JP: 'これをください', KR: '이거 주세요' } }, { k: '계산해 주세요', p: 'Gyesanhae juseyo', m: { ZH: '請結帳', EN: 'Check please', JP: 'お会計お願いします', KR: '계산해 주세요' } } ],
+      shopping: [ { k: '이거 얼마예요?', p: 'Ige eolmayeyo?', m: { ZH: '這個多少錢?', EN: 'How much?', JP: 'いくらですか？', KR: '이거 얼마예요?' } }, { k: '깎아주세요', p: 'Kkakkajuseyo', m: { ZH: '請算便宜一點', EN: 'Discount please', JP: '安くしてください', KR: '깎아주세요' } } ],
+      transport: [ { k: '여기서 내려주세요', p: 'Yeogiseo naeryeojuseyo', m: { ZH: '請在這裡下車', EN: 'Drop me here', JP: 'ここで降ろしてください', KR: '여기서 내려주세요' } } ],
+      default: [ { k: '안녕하세요', p: 'Annyeonghaseyo', m: { ZH: '你好', EN: 'Hello', JP: 'こんにちは', KR: '안녕하세요' } }, { k: '감사합니다', p: 'Gamsahamnida', m: { ZH: '謝謝', EN: 'Thank you', JP: 'ありがとうございます', KR: '감사합니다' } } ]
     };
 
     const PHRASE_DB = {
       food: FALLBACK_PHRASES_BY_TYPE.food,
       shopping: FALLBACK_PHRASES_BY_TYPE.shopping,
       transport: FALLBACK_PHRASES_BY_TYPE.transport,
-      coffee: FALLBACK_PHRASES_BY_TYPE.coffee,
+      coffee: FALLBACK_PHRASES_BY_TYPE.coffee || [],
       default: FALLBACK_PHRASES_BY_TYPE.default
     };
 
-    const getFallbackPhrases = (type, lang) => {
-        const list = PHRASE_DB[type] || PHRASE_DB.default;
-        return list.map(item => ({
-            korean: item.k,
-            pronunciation: item.p,
-            meaning: item.m[lang] || item.m.EN || item.m.ZH 
-        }));
-    };
-
-    // --- 地鐵顏色 ---
     const SUBWAY_COLORS = {
-      '1': '#0052A4', '2': '#00A84D', '3': '#EF7C1C', '4': '#00A5DE',
-      '5': '#996CAC', '6': '#CD7C2F', '7': '#747F00', '8': '#E6186C', '9': '#BDB092',
+      '1': '#0052A4', '2': '#00A84D', '3': '#EF7C1C', '4': '#00A5DE', '5': '#996CAC', '6': '#CD7C2F', '7': '#747F00', '8': '#E6186C', '9': '#BDB092',
       'AREX': '#0090D2', 'A': '#0090D2', 'K': '#77C4A3', 'B': '#E7E727', 'S': '#A71E31'
     };
 
-    // --- API ---
-    // Use empty string as placeholder or load from localStorage if needed, though user said no need to input anymore
+    // --- 2. Helper Functions ---
     const getApiKeyFromStorage = () => ""; 
-
     const callGeminiAPI = async () => ({ success: false, error: "API Disabled" });
-
-    // --- Data Helper ---
     const toObj = (item) => (typeof item === 'string' ? { text: item, checked: false } : item);
+    const getFallbackPhrases = (type, lang) => {
+        const list = PHRASE_DB[type] || PHRASE_DB.default;
+        return list.map(item => ({ korean: item.k, pronunciation: item.p, meaning: item.m[lang] || item.m.EN || item.m.ZH }));
+    };
 
-    // --- Data ---
+    // --- 3. Data Loading Functions ---
     const getInitialItinerary = (lang) => {
-      const checklist = ['護照 (效期6個月以上) / Esim卡', '錢包整理 (現金/信用卡/機票)', '手機充電板 / 手錶充電線 / 轉接頭(4.8mm)', '耳機 / 行動電源 (需手提)', '梳洗刷牙用品 / 保養及卸妝用品', '護髮整髮梳子 / 眼鏡', '每日衣服 / 內衣褲 / 襪子', '睡衣褲 / 拖鞋 / 護膝', '熱水瓶 / 保暖衣物', '一般藥品 / 口罩'].map(toObj);
-      const sesItems = ['地點：T1 入境審查大廳 F 區', '時間：07:00 - 18:00', '流程：下機 -> 找 F 區登記中心 -> 拍照/指紋 -> 自動通關', '備案：若錯過，入境後至 3 樓出境大廳 G 區辦理'].map(toObj);
-      
-      const day0_ZH = {
-        day: 0, date: '出發前', theme: '行前準備 & SeS申請',
-        activities: [
-          { title: '必備行李清單', type: 'checklist', desc: '出發前請務必確認以下物品：', items: checklist },
-          { title: '仁川機場 SeS 自動通關申請', type: 'ses', desc: '台灣旅客可於 T1 入境審查 F 區直接辦理。', items: sesItems },
-          { title: '不可手提 / 必須託運', type: 'warning', desc: '液體 > 100ml, 刀剪工具。', items: ['大瓶化妝水/乳液', '修眉刀/指甲剪', '腳架/自拍棒 (管徑>1cm, 長>60cm)'].map(toObj) },
-          { title: '不可託運 / 必須手提', type: 'warning_red', desc: '電池類務必隨身攜帶！', items: ['行動電源', '鋰電池', '筆電/平板', '電子菸'].map(toObj) },
-          { title: '旅行文件', type: 'doc', desc: '建議備份：', items: ['Q-CODE', '訂房確認單', '演唱會門票', '保險單'].map(toObj) }
-        ]
-      };
-      
-      const day0_KR = { 
-        day: 0, date: '출발 전', theme: '준비 & SeS 신청', 
-        activities: [
-          { title: '필수 준비물', type: 'checklist', desc: '출발 전 확인하세요:', items: ['여권 (6개월 이상) / Esim', '지갑 정리 (현금/카드)', '충전기 / 어댑터', '이어폰 / 보조배터리', '세면도구 / 화장품', '빗 / 안경', '매일 입을 옷 / 속옷 / 양말', '잠옷 / 슬리퍼 / 무릎 보호대', '보온병 / 따뜻한 옷', '상비약 / 마스크'].map(toObj) },
-          { title: 'SeS 자동출입국심사 신청', type: 'ses', desc: '인천공항 T1 입국심사 F구역 등록센터', items: ['위치: T1 입국심사대 F구역', '시간: 07:00-18:00', '절차: 등록(사진/지문) 후 즉시 사용 가능', '비고: 놓친 경우 3층 출국장 G구역'].map(toObj) },
-          { title: '위탁 수하물 (기내 반입 금지)', type: 'warning', desc: '100ml 초과 액체류, 칼 등', items: ['대용량 화장품', '눈썹칼/손톱깎이', '삼각대/셀카봉'].map(toObj) },
-          { title: '기내 반입 (위탁 금지)', type: 'warning_red', desc: '배터리류는 반드시 기내로!', items: ['보조배터리', '리튬 배터리', '노트북/태블릿', '전자담배'].map(toObj) },
-          { title: '여행 서류', type: 'doc', desc: '문서 확인:', items: ['Q-CODE', '호텔 예약 확인서', '콘서트 티켓', '보험 증권'].map(toObj) }
-        ] 
-      };
-      
-      const day0_EN = { 
-        day: 0, date: 'Pre-trip', theme: 'Prep & SeS Registration', 
-        activities: [
-          { title: 'Essentials Checklist', type: 'checklist', desc: 'Check before you go:', items: ['Passport / Esim', 'Wallet (Cash/Cards)', 'Chargers / Adapter', 'Earphones / Power Bank', 'Toiletries / Skincare', 'Comb / Glasses', 'Clothes / Underwear / Socks', 'Pajamas / Slippers / Knee Pads', 'Thermos / Warm Clothes', 'Medicine / Masks'].map(toObj) },
-          { title: 'SeS Auto-Gate Registration', type: 'ses', desc: 'Apply at Incheon T1 Entry Inspection Area F.', items: ['Loc: T1 Area F', 'Time: 07:00-18:00', 'Process: Register (Photo/Fingerprint) -> Use Auto-Gate', 'Note: If closed, go to 3F Area G'].map(toObj) },
-          { title: 'Must Check-in', type: 'warning', desc: 'Liquids > 100ml, Sharp objects.', items: ['Large Liquids', 'Scissors/Clippers', 'Tripods'].map(toObj) },
-          { title: 'Must Carry-on', type: 'warning_red', desc: 'Batteries must be in carry-on!', items: ['Power Bank', 'Lithium Batteries', 'Laptop/Tablet', 'E-cigarettes'].map(toObj) },
-          { title: 'Documents', type: 'doc', desc: 'Have these ready:', items: ['Q-CODE', 'Hotel Booking', 'Concert Tickets', 'Insurance'].map(toObj) }
-        ] 
-      };
-      
-      const day0_JP = { 
-        day: 0, date: '出発前', theme: '準備 & SeS登録', 
-        activities: [
-          { title: '必需品リスト', type: 'checklist', desc: '出発前に確認:', items: ['パスポート / Esim', '財布 (現金/カード)', '充電器 / 変換プラグ', 'イヤホン / モバイルバッテリー', '洗面用具 / 化粧品', 'くし / 眼鏡', '着替え / 下着 / 靴下', 'パジャマ / スリッパ', '魔法瓶 / 防寒着', '常備薬 / マスク'].map(toObj) },
-          { title: 'SeS 自動化ゲート登録', type: 'ses', desc: '仁川T1 入国審査Fエリアで登録可能', items: ['場所：T1 入国審査Fエリア', '時間：07:00-18:00', '手順：登録(写真/指紋) -> 自動ゲート利用', '注意：閉鎖時は3F Gエリアへ'].map(toObj) },
-          { title: '預け入れ荷物', type: 'warning', desc: '100ml超の液体、刃物類', items: ['化粧水(大)', '眉用カミソリ/爪切り', '三脚/自撮り棒'].map(toObj) },
-          { title: '機内持ち込み必須', type: 'warning_red', desc: 'バッテリー類は必ず手荷物で！', items: ['モバイルバッテリー', 'リチウム電池', 'PC/タブレット', '電子タバコ'].map(toObj) },
-          { title: '書類確認', type: 'doc', desc: '準備書類:', items: ['Q-CODE', 'ホテル予約確認書', 'コンサートチケット', '保険証券'].map(toObj) }
-        ] 
+      const commonDay0 = {
+        ZH: { day: 0, date: '出發前', theme: '行前準備 & SeS申請', activities: [{ title: '必備行李清單', type: 'checklist', desc: '出發前確認:', items: ['護照/Esim', '錢包', '充電器', '轉接頭', '牙刷', '衣物', '保暖'].map(toObj) }, { title: 'SeS 自動通關申請', type: 'ses', desc: '仁川機場 T1 入境審查 F 區', items: ['地點：T1 入境審查 F 區', '時間：07:00 - 18:00', '流程：拍照/指紋 -> 自動通關'].map(toObj) }] },
+        KR: { day: 0, date: '출발 전', theme: '준비 & SeS', activities: [{ title: '준비물', type: 'checklist', desc: '확인:', items: ['여권', '지갑', '충전기', '어댑터', '세면도구', '옷', '보온'].map(toObj) }, { title: 'SeS 신청', type: 'ses', desc: '인천공항 T1 F구역', items: ['위치: T1 F구역', '시간: 07:00-18:00', '절차: 등록 -> 사용'].map(toObj) }] },
+        EN: { day: 0, date: 'Pre-trip', theme: 'Prep & SeS', activities: [{ title: 'Checklist', type: 'checklist', desc: 'Check:', items: ['Passport', 'Wallet', 'Charger', 'Adapter', 'Toiletries', 'Clothes', 'Warm'].map(toObj) }, { title: 'SeS Registration', type: 'ses', desc: 'Incheon T1 Area F', items: ['Loc: T1 Area F', 'Time: 07:00-18:00'].map(toObj) }] },
+        JP: { day: 0, date: '出発前', theme: '準備 & SeS', activities: [{ title: '持ち物', type: 'checklist', desc: '確認:', items: ['パスポート', '財布', '充電器', '変換プラグ', '洗面用具', '服', '防寒'].map(toObj) }, { title: 'SeS 登録', type: 'ses', desc: '仁川T1 Fエリア', items: ['場所：T1 Fエリア', '時間：07:00-18:00'].map(toObj) }] }
       };
 
       const days_ZH = [
-          { day: 1, date: '12/18 (四)', theme: '抵達首爾 & 飯店入住', activities: [{ time: '12:00', title: '從溫暖的家出發', type: 'car', desc: '預約肯驛機場接送至桃園機場。', location: 'Home', transport: '專車' }, { time: '15:15', title: '長榮 BR160 起飛', type: 'flight', desc: '桃園機場 (TPE) 第二航廈 -> 仁川機場 (ICN)', location: 'TPE Airport' }, { time: '18:45', title: '抵達仁川機場 & 入境', type: 'arrival', desc: '入境、領行李、買 T-Money。', location: 'ICN Airport' }, { time: '20:00', title: '前往 Wecostay Namsan', type: 'bus', desc: '仁川機場 5B 或 11B 站牌搭乘【6015 機場巴士】往明洞方向。於「忠武路站 (Chungmuro Station)」下車，步行約 5 分鐘抵達。', info: '費用: 17,000 KRW / 約 70-80 分鐘', customPhrases: [{ korean: 'G3 호텔에서 내려주세요', pronunciation: 'G3 Hotel-eseo naeryeojuseyo', meaning: '我們到 G3 Hotel 下車，謝謝' }], transport: '仁川機場 5B/11B 站牌搭乘【6015 機場巴士】(往明洞方向)，經過 3 站(約70分鐘)，於「忠武路站」下車，下車後往回走約 2 分鐘即達。' }, { time: '21:30', title: '飯店 Check-in & 晚餐', type: 'food', desc: '入住後吃炸雞或部隊鍋。', location: 'Chungmuro' }] },
-          { day: 2, date: '12/19 (五)', theme: '歷史漫步 & 傳統韻味', activities: [{ time: '10:00', title: '北村八景 & 北村韓屋村', type: 'sight', desc: '漫步於傳統韓屋群，尋找北村八景。', location: 'Bukchon', transport: '3號線 安國站 (2號出口)，出站後沿著北村路步行即達。' }, { time: '12:30', title: '北村百年土種蔘雞湯', type: 'food', desc: '北村附近的美味蔘雞湯。', location: 'Bukchon', transport: '徒步：從北村韓屋村步行前往。' }, { time: '14:30', title: '景福宮 & 光化門廣場', type: 'sight', desc: '參觀光化門與景福宮，欣賞守門將換崗儀式。', location: 'Gyeongbokgung', transport: '徒步：從北村往西步行約 15 分鐘即可抵達景福宮東側。' }] },
-          { day: 3, date: '12/20 (六)', theme: '城郭與文化', activities: [{ time: '10:00', title: '東大門城郭公園', type: 'sight', desc: '散步於首爾城郭，欣賞城市景色。', location: 'Dongdaemun', transport: '1號線 / 4號線 東大門站 (1號出口)，步行約 5 分鐘。' }, { time: '12:30', title: '仁寺洞附近餐廳', type: 'food', desc: '在仁寺洞享用傳統韓式料理。', location: 'Insadong', transport: '地鐵：從東大門搭乘1號線至鐘閣站，步行至仁寺洞。' }, { time: '14:30', title: '仁寺洞逛街', type: 'shopping', desc: '參觀人人廣場 (Ssamzigil)，購買傳統工藝品。', location: 'Insadong', transport: '徒步：就在餐廳附近。' }, { time: '17:00', title: '清溪川散步', type: 'walk', desc: '傍晚時分沿著清溪川散步。', location: 'Cheonggyecheon', transport: '徒步：從仁寺洞往南步行約 10 分鐘即達清溪川。' }, { time: '19:00', title: '明洞商圈', type: 'shopping', desc: '感受明洞的熱鬧夜景，享用街頭小吃或採購美妝。', location: 'Myeongdong', transport: '徒步：沿著清溪川步行至廣橋，轉往乙支路方向約 10 分鐘即達。' }] },
-          { day: 4, date: '12/21 (日)', theme: '圭賢演唱會 & 韓屋風情', activities: [{ time: '10:00', title: '南山谷韓屋村', type: 'sight', desc: '位於忠武路站旁，輕鬆散步體驗傳統庭園，不需門票。', location: 'Chungmuro', transport: '徒步：從 Wecostay 步行約 5 分鐘，由忠武路站 3 或 4 號出口旁入口進入。' }, { time: '13:00', title: '午餐 & 休息', type: 'food', desc: '在忠武路附近用餐，並回飯店稍作整理，準備前往演唱會。', location: 'Wecostay' }, { time: '14:30', title: '前往 Olympic Hall', type: 'train', desc: '前往奧林匹克公園。', location: 'Olympic Park', transport: '地鐵轉乘：4號線 忠武路站 -> (往當嶺方向，1站) -> 東大門歷史文化公園站，轉乘5號線 (往馬川/河南黔丹山方向，約13站) -> 奧林匹克公園站 (3號出口)。' }, { time: '17:00', title: '2025 KYUHYUN Concert', type: 'music', desc: '“The Classic” 演唱會 @ Olympic Hall。享受圭賢的歌聲！', location: 'Olympic Park' }, { time: '20:30', title: '返回市區 & 晚餐', type: 'food', desc: '演唱會結束後搭地鐵返回，吃頓熱騰騰的烤肉慶功。', location: 'Chungmuro', transport: '地鐵轉乘：原路返回至忠武路站，由 1 號出口步行至烤肉店。' }] },
-          { day: 5, date: '12/22 (一)', theme: '現代首爾 & 漢江夜景', activities: [{ time: '11:00', title: 'The Hyundai Seoul', type: 'shopping', desc: '參觀首爾最大的百貨公司。', location: 'Yeouido', transport: '地鐵轉乘：4號線 忠武路站 -> (往當嶺方向，1站) -> 東大門歷史文化公園站，轉乘5號線 (往傍花方向，9站) -> 汝矣尼魯站 (1號出口)，直通百貨。' }, { time: '15:00', title: '汝矣島漢江公園', type: 'walk', desc: '漢江邊散步，租借野餐墊 (若天氣允許) 或在漢江泡麵機煮拉麵。', location: 'Yeouido', transport: '徒步：從 The Hyundai 1 號門出來，過馬路即達汝矣島漢江公園。' }, { time: '17:00', title: '漢江遊覽船', type: 'ship', desc: 'Eland Cruise 欣賞漢江夜景。', location: 'Yeouido Dock', transport: '徒步：沿著漢江公園江邊往東走 (看到 E-land 標誌)，步行約 10-15 分鐘至 2 號碼頭。' }, { time: '19:30', title: '弘大晚餐', type: 'food', desc: '前往充滿年輕活力的弘大商圈享用晚餐。', location: 'Hongdae', transport: '地鐵轉乘：5號線 汝矣尼魯站 -> (往傍花方向，2站) -> 永登浦區廳站，轉乘2號線 (往合井/弘大方向，2站) -> 弘大入口站 (9號出口)。' }] },
-          { day: 6, date: '12/23 (二)', theme: '伴手禮採買 & 悠閒時光', activities: [{ time: '10:30', title: '廣藏市場', type: 'food', desc: '品嚐綠豆煎餅、生牛肉、麻藥飯捲。', location: 'Gwangjang Market', transport: '地鐵轉乘：4號線 忠武路站 -> (往當嶺方向，2站) -> 東大門站，轉乘1號線 (往首爾站方向，1站) -> 鐘路5街站 (8號出口即是市場入口)。' }, { time: '14:00', title: '樂天超市', type: 'shopping', desc: '首爾站店。採購零食、泡麵、海苔等伴手禮。', location: 'Seoul Station', transport: '地鐵直達：由鐘路5街站搭乘1號線 (往首爾站/仁川方向，3站) -> 首爾站 (1號出口出來上手扶梯即達)。' }, { time: '17:00', title: '飯店打包 & 休息', type: 'hotel', desc: '將戰利品放回飯店，整理行李。', location: 'Wecostay', transport: '地鐵直達：由首爾站搭乘4號線 (往當嶺方向，2站) -> 忠武路站。' }, { time: '19:00', title: '最後的晚餐', type: 'food', desc: '在乙支路 (Hipjiro) 體驗獨特的巷弄酒吧或烤腸店。', location: 'Euljiro', transport: '徒步：從忠武路站 8 號出口，步行約 5-8 分鐘至乙支路 3 街一帶巷弄。' }] },
+          { day: 1, date: '12/18 (四)', theme: '抵達首爾 & 飯店入住', activities: [{ time: '12:00', title: '從溫暖的家出發', type: 'car', desc: '預約肯驛機場接送至桃園機場。', location: 'Home', transport: '專車' }, { time: '15:15', title: '長榮 BR160 起飛', type: 'flight', desc: '桃園(TPE) -> 仁川(ICN)', location: 'TPE Airport' }, { time: '18:45', title: '抵達仁川機場 & 入境', type: 'arrival', desc: '入境、領行李、買 T-Money。', location: 'ICN Airport' }, { time: '20:00', title: '前往 Wecostay Namsan', type: 'bus', desc: '搭乘 6015 巴士至忠武路站。', info: '費用: 17,000 KRW', transport: '仁川機場 5B/11B 站牌搭乘【6015 機場巴士】(往明洞方向) -> (3站，約70分鐘) -> 於「忠武路站」下車，下車後往回走約 2 分鐘即達。' }, { time: '21:30', title: '飯店 Check-in & 晚餐', type: 'food', desc: '入住後吃炸雞或部隊鍋。', location: 'Chungmuro' }] },
+           { day: 2, date: '12/19 (五)', theme: '歷史漫步 & 傳統韻味', activities: [{ time: '10:00', title: '北村八景 & 北村韓屋村', type: 'sight', desc: '漫步於傳統韓屋群，尋找北村八景。', location: 'Bukchon', transport: '3號線 忠武路站 -> (往大化方向，3站) -> 安國站 (2號出口) -> 出站後沿著北村路步行即達。' }, { time: '12:30', title: '北村百年土種蔘雞湯', type: 'food', desc: '北村附近的美味蔘雞湯。', location: 'Bukchon', transport: '徒步：從北村韓屋村步行前往。' }, { time: '14:30', title: '景福宮 & 光化門廣場', type: 'sight', desc: '參觀光化門與景福宮，欣賞守門將換崗儀式。', location: 'Gyeongbokgung', transport: '徒步：從北村往西步行約 15 分鐘即可抵達景福宮東側。' }, { time: '17:00', title: 'LoL Park (GRAN SEOUL)', type: 'sight', desc: '參觀 LCK 聖地與周邊商店。營業時間 11:00-20:00。', location: 'LoL Park', transport: '徒步：從光化門廣場步行約 10 分鐘。' }] },
+          { day: 3, date: '12/20 (六)', theme: '城郭與文化', activities: [{ time: '10:00', title: '東大門城郭公園', type: 'sight', desc: '散步於首爾城郭，欣賞城市景色。', location: 'Dongdaemun', transport: '4號線 忠武路站 -> (往當嶺方向，1站) -> 東大門歷史文化公園站 (轉乘 1號線) -> (往逍遙山方向，1站) -> 東大門站 (1號出口)。' }, { time: '12:30', title: '仁寺洞附近餐廳', type: 'food', desc: '在仁寺洞享用傳統韓式料理。', location: 'Insadong', transport: '地鐵：從東大門搭乘1號線 (往仁川/新昌方向) -> 鐘閣站，步行至仁寺洞。' }, { time: '14:30', title: '仁寺洞逛街', type: 'shopping', desc: '參觀人人廣場 (Ssamzigil)，購買傳統工藝品。', location: 'Insadong', transport: '徒步：就在餐廳附近。' }, { time: '17:00', title: '清溪川散步', type: 'walk', desc: '傍晚時分沿著清溪川散步。', location: 'Cheonggyecheon', transport: '徒步：從仁寺洞往南步行約 10 分鐘即達清溪川。' }, { time: '19:00', title: '明洞商圈', type: 'shopping', desc: '感受明洞的熱鬧夜景，享用街頭小吃或採購美妝。', location: 'Myeongdong', transport: '徒步：沿著清溪川步行至廣橋，轉往乙支路方向約 10 分鐘即達。' }] },
+          { day: 4, date: '12/21 (日)', theme: '圭賢演唱會 & 韓屋風情', activities: [{ time: '10:00', title: '南山谷韓屋村', type: 'sight', desc: '位於忠武路站旁，輕鬆散步體驗傳統庭園，不需門票。', location: 'Chungmuro', transport: '徒步：從 Wecostay 步行約 5 分鐘。' }, { time: '13:00', title: '午餐 & 休息', type: 'food', desc: '在忠武路附近用餐，並回飯店稍作整理，準備前往演唱會。', location: 'Wecostay' }, { time: '14:30', title: '前往 Olympic Hall', type: 'train', desc: '前往奧林匹克公園。', location: 'Olympic Park', transport: '地鐵轉乘：4號線 忠武路站 -> (往當嶺方向，1站) -> 東大門歷史文化公園站 (轉乘 5號線) -> (往馬川/河南黔丹山方向，約13站) -> 奧林匹克公園站 (3號出口)。' }, { time: '17:00', title: '2025 KYUHYUN Concert', type: 'music', desc: '“The Classic” 演唱會 @ Olympic Hall。享受圭賢的歌聲！', location: 'Olympic Park' }, { time: '20:30', title: '返回市區 & 晚餐', type: 'food', desc: '演唱會結束後搭地鐵返回，吃頓熱騰騰的烤肉慶功。', location: 'Chungmuro', transport: '5號線 奧林匹克公園站 -> (往傍花/光化門方向，約13站) -> 東大門歷史文化公園站 (轉乘 4號線) -> (往烏耳島/舍堂方向，1站) -> 忠武路站 (1號出口)。' }] },
+          { day: 5, date: '12/22 (一)', theme: '現代首爾 & 漢江夜景', activities: [{ time: '11:00', title: 'The Hyundai Seoul', type: 'shopping', desc: '參觀首爾最大的百貨公司。', location: 'Yeouido', transport: '地鐵轉乘：4號線 忠武路站 -> (往當嶺方向，1站) -> 東大門歷史文化公園站 (轉乘 5號線) -> (往傍花方向，9站) -> 汝矣尼魯站 (1號出口)，直通百貨。' }, { time: '15:00', title: '汝矣島漢江公園', type: 'walk', desc: '漢江邊散步，租借野餐墊 (若天氣允許) 或在漢江泡麵機煮拉麵。', location: 'Yeouido', transport: '徒步：從 The Hyundai 1 號門出來，過馬路即達汝矣島漢江公園。' }, { time: '17:00', title: '漢江遊覽船', type: 'ship', desc: 'Eland Cruise 欣賞漢江夜景。', location: 'Yeouido Dock', transport: '徒步：沿著漢江公園江邊往東走 (看到 E-land 標誌)，步行約 10-15 分鐘至 2 號碼頭。' }, { time: '19:30', title: '弘大晚餐', type: 'food', desc: '前往充滿年輕活力的弘大商圈享用晚餐。', location: 'Hongdae', transport: '地鐵轉乘：5號線 汝矣尼魯站 -> (往傍花方向，2站) -> 永登浦區廳站 (轉乘 2號線) -> (往合井/弘大方向，2站) -> 弘大入口站 (9號出口)。' }] },
+          { day: 6, date: '12/23 (二)', theme: '伴手禮採買 & 悠閒時光', activities: [{ time: '10:30', title: '廣藏市場', type: 'food', desc: '品嚐綠豆煎餅、生牛肉、麻藥飯捲。', location: 'Gwangjang Market', transport: '地鐵轉乘：4號線 忠武路站 -> (往當嶺方向，2站) -> 東大門站 (轉乘 1號線) -> (往首爾站方向，1站) -> 鐘路5街站 (8號出口即是市場入口)。' }, { time: '14:00', title: '樂天超市', type: 'shopping', desc: '首爾站店。採購零食、泡麵、海苔等伴手禮。', location: 'Seoul Station', transport: '地鐵直達：由鐘路5街站搭乘1號線 (往首爾站/仁川方向，3站) -> 首爾站 (1號出口出來上手扶梯即達)。' }, { time: '17:00', title: '飯店打包 & 休息', type: 'hotel', desc: '將戰利品放回飯店，整理行李。', location: 'Wecostay', transport: '地鐵直達：由首爾站搭乘4號線 (往當嶺方向，2站) -> 忠武路站。' }, { time: '19:00', title: '最後的晚餐', type: 'food', desc: '在乙支路 (Hipjiro) 體驗獨特的巷弄酒吧或烤腸店。', location: 'Euljiro', transport: '徒步：從忠武路站 8 號出口，步行約 5-8 分鐘至乙支路 3 街一帶巷弄。' }] },
           { day: 7, date: '12/24 (三)', theme: '告別首爾 & 返家', activities: [{ time: '06:00', title: '退房 & 前往機場', type: 'bus', desc: '搭乘 6015 機場巴士前往仁川機場 (或搭計程車至首爾站搭 AREX 直達車)。', location: 'Airport Bus Stop', transport: '機場巴士：前往忠武路站 1 號出口前方公車站，搭乘【6015 機場巴士】(往仁川機場方向)，車程約 70-80 分鐘。' }, { time: '07:35', title: '辦理登機 & 退稅', type: 'plane', desc: '長榮航空櫃檯報到，辦理市區退稅單據的海關蓋章 (若需要)。', location: 'ICN Airport' }, { time: '11:40', title: 'BR169 起飛', type: 'flight', desc: '仁川 (ICN) -> 桃園 (TPE)', location: 'Departure Hall' }, { time: '13:30', title: '抵達台灣', type: 'home', desc: '平安抵達溫暖的家。', location: 'Taipei' }] }
       ];
 
       const days_KR = [
-        { day: 1, date: '12/18 (목)', theme: '서울 도착 & 호텔 체크인', activities: [{ time: '12:00', title: '집에서 출발', type: 'car', desc: '켄이 공항 픽업 서비스로 타오위안 공항 이동.', location: 'Home', transport: '전용 차량' }, { time: '15:15', title: 'BR160 이륙', type: 'flight', desc: '타오위안(TPE) 2터미널 -> 인천(ICN)', location: 'TPE Airport' }, { time: '18:45', title: '인천공항 도착 & 입국', type: 'arrival', desc: '입국 수속, 수하물 수령, 티머니 구매.', location: 'ICN Airport' }, { time: '20:00', title: 'Wecostay 이동', type: 'bus', desc: '6015번 공항버스 탑승 (충무로역 하차).', info: '비용: 17,000 KRW', customPhrases: [{ korean: 'G3 호텔에서 내려주세요', pronunciation: 'G3 Hotel-eseo naeryeojuseyo', meaning: 'G3 호텔에서 내려주세요' }], transport: '인천공항 5B/11B 승강장에서 【6015 공항버스】 탑승 (명동 방면), 3정거장(약 70분) 후 「충무로역」 하차, 도보 2분.' }, { time: '21:30', title: '체크인 & 저녁', type: 'food', desc: '체크인 후 치킨이나 부대찌개.', location: 'Chungmuro' }] },
-        { day: 2, date: '12/19 (금)', theme: '역사 산책 & 전통의 멋', activities: [{ time: '10:00', title: '북촌 한옥마을 & 8경', type: 'sight', desc: '한옥마을 산책 및 북촌 8경 감상.', location: 'Bukchon', transport: '3호선 안국역 2번 출구, 도보 이동.' }, { time: '12:30', title: '북촌 백년토종삼계탕', type: 'food', desc: '북촌 근처 맛있는 삼계탕.', location: 'Bukchon', transport: '도보: 북촌 한옥마을에서 도보 이동.' }, { time: '14:30', title: '경복궁 & 광화문', type: 'sight', desc: '경복궁 관람 및 수문장 교대식.', location: 'Gyeongbokgung', transport: '도보: 북촌에서 서쪽으로 약 15분 이동.' }] },
-        { day: 3, date: '12/20 (토)', theme: '성곽과 문화', activities: [{ time: '10:00', title: '동대문 성곽공원', type: 'sight', desc: '서울 성곽 산책 및 도시 전망.', location: 'Dongdaemun', transport: '1호선/4호선 동대문역 1번 출구.' }, { time: '12:30', title: '인사동 맛집', type: 'food', desc: '인사동에서 전통 한식.', location: 'Insadong', transport: '지하철: 동대문에서 1호선 종각역 이동 후 도보.' }, { time: '14:30', title: '인사동 쇼핑', type: 'shopping', desc: '쌈지길 및 공예품 쇼핑.', location: 'Insadong', transport: '도보: 식당 근처.' }, { time: '17:00', title: '청계천 산책', type: 'walk', desc: '저녁 무렵 청계천 산책.', location: 'Cheonggyecheon', transport: '도보: 인사동에서 남쪽으로 10분.' }, { time: '19:00', title: '명동 거리', type: 'shopping', desc: '명동 쇼핑 및 길거리 음식 즐기기.', location: 'Myeongdong', transport: '도보: 청계천에서 을지로 방향으로 약 10-15분.' }] },
-        { day: 4, date: '12/21 (일)', theme: '여유로운 오후 & 명동 맛집', activities: [{ time: '10:00', title: '남산골 한옥마을', type: 'sight', desc: '숙소 근처 산책.', location: 'Chungmuro', transport: '도보: 숙소에서 5분.' }, { time: '13:00', title: '점심 & 휴식', type: 'food', desc: '충무로 근처 식사 및 휴식.', location: 'Wecostay' }, { time: '15:00', title: '남산 오르미로 이동', type: 'sight', desc: '명동역으로 이동하여 남산 투명 엘리베이터 탑승.', location: 'Namsan Oreumi', transport: '4호선 충무로 -> 명동역 4번 출구 -> 직진 -> 회현사거리에서 좌회전.', visual: 'namsan_path', link: { text: 'Namsan Oreumi', url: 'https://www.bring-you.info/zh-tw/n-seoul-tower' } }, { time: '15:40', title: '남산 케이블카 & N서울타워', type: 'sight', desc: '케이블카 탑승하여 남산타워 이동. (운행시간: 10:00 - 23:00)', location: 'Namsan Tower', transport: '오르미 엘리베이터 -> 케이블카 매표소.' }, { time: '19:30', title: '명동 이동 & 저녁', type: 'food', desc: '타워 관람 후 명동으로 이동하여 쇼핑 및 식사.', location: 'Myeongdong', transport: '케이블카/버스 하산 후 도보 이동.' }] },
-        { day: 5, date: '12/22 (월)', theme: '현대 서울 & 한강 야경', activities: [{ time: '11:00', title: '더현대 서울', type: 'shopping', desc: '여의도 백화점 구경.', location: 'Yeouido', transport: '지하철: 4호선 충무로 -> 동대문역사문화공원(5호선 환승) -> 여의나루역(1번 출구).' }, { time: '15:00', title: '여의도 한강공원', type: 'walk', desc: '한강 산책 및 라면.', location: 'Yeouido', transport: '도보: 더현대 1번 게이트 건너편.' }, { time: '17:00', title: '한강 유람선', type: 'ship', desc: '이랜드 크루즈 야경.', location: 'Yeouido Dock', transport: '도보: 한강공원 따라 동쪽으로 이동.' }, { time: '19:30', title: '홍대 저녁', type: 'food', desc: '젊음의 거리 홍대.', location: 'Hongdae', transport: '지하철: 5호선 여의나루 -> 영등포구청(2호선 환승) -> 홍대입구역.' }] },
-        { day: 6, date: '12/23 (화)', theme: '기념품 & 여유', activities: [{ time: '10:30', title: '광장시장', type: 'food', desc: '빈대떡, 육회, 마약김밥.', location: 'Gwangjang Market', transport: '지하철: 4호선 충무로 -> 동대문(1호선 환승) -> 종로5가역(8번 출구).' }, { time: '14:00', title: '롯데마트', type: 'shopping', desc: '서울역점 쇼핑.', location: 'Seoul Station', transport: '지하철: 1호선 종로5가 -> 서울역.' }, { time: '17:00', title: '짐 정리 & 휴식', type: 'hotel', desc: '쇼핑 물품 정리.', location: 'Wecostay', transport: '지하철: 4호선 서울역 -> 충무로역.' }, { time: '19:00', title: '마지막 저녁', type: 'food', desc: '을지로 힙지로 골목.', location: 'Euljiro', transport: '도보: 충무로역 8번 출구.' }] },
-        { day: 7, date: '12/24 (수)', theme: '서울 안녕 & 귀국', activities: [{ time: '06:00', title: '체크아웃 & 공항 이동', type: 'bus', desc: '6015 공항버스 탑승.', location: 'Airport Bus Stop', transport: '공항버스: 충무로역 1번 출구 앞 정류장 (약 70-80분).' }, { time: '07:35', title: '체크인 & 텍스리펀', type: 'plane', desc: '에바항공 카운터.', location: 'ICN Airport' }, { time: '11:40', title: 'BR169 이륙', type: 'flight', desc: '인천(ICN) -> 타오위안(TPE)', location: 'Departure Hall' }, { time: '13:30', title: '대만 도착', type: 'home', desc: '즐거운 여행 종료.', location: 'Taipei' }] }
+        { day: 1, date: '12/18 (목)', theme: '서울 도착 & 호텔 체크인', activities: [{ time: '12:00', title: '집에서 출발', type: 'car', desc: '타오위안 공항 이동.', location: 'Home', transport: '전용 차량' }, { time: '15:15', title: 'BR160 이륙', type: 'flight', desc: '타오위안(TPE) -> 인천(ICN)', location: 'TPE Airport' }, { time: '18:45', title: '인천공항 도착', type: 'arrival', desc: '입국 수속, 티머니 구매.', location: 'ICN Airport' }, { time: '20:00', title: 'Wecostay 이동', type: 'bus', desc: '6015번 공항버스 (충무로역).', info: '17,000 KRW', transport: '인천공항 5B/11B 승강장 -> 【6015 공항버스】 (명동 방면) -> 3정거장(약 70분) -> 「충무로역」 하차 -> 도보 2분.' }, { time: '21:30', title: '체크인 & 저녁', type: 'food', desc: '체크인 후 치킨이나 부대찌개.', location: 'Chungmuro' }] },
+        { day: 2, date: '12/19 (금)', theme: '역사 산책 & 전통의 멋', activities: [{ time: '10:00', title: '북촌 한옥마을 & 8경', type: 'sight', desc: '한옥마을 산책.', location: 'Bukchon', transport: '3호선 안국역 2번 출구 -> 도보 이동.' }, { time: '12:30', title: '북촌 백년토종삼계탕', type: 'food', desc: '북촌 근처 맛있는 삼계탕.', location: 'Bukchon', transport: '도보: 북촌 한옥마을에서 도보 이동.' }, { time: '14:30', title: '경복궁 & 광화문', type: 'sight', desc: '경복궁 관람.', location: 'Gyeongbokgung', transport: '도보: 북촌에서 서쪽으로 약 15분 이동.' }, { time: '17:00', title: 'LoL Park (GRAN SEOUL)', type: 'sight', desc: 'LCK 아레나 및 라이엇 스토어 방문. 운영시간 11:00-20:00.', location: 'LoL Park', transport: '도보: 광화문광장에서 약 10분.' }] },
+        { day: 3, date: '12/20 (토)', theme: '성곽과 문화', activities: [{ time: '10:00', title: '동대문 성곽공원', type: 'sight', desc: '성곽 산책.', location: 'Dongdaemun', transport: '4호선 충무로역 -> (당고개 방면, 1정거장) -> 동대문역사문화공원역 (1호선 환승) -> (소요산 방면, 1정거장) -> 동대문역 (1번 출구).' }, { time: '12:30', title: '인사동 맛집', type: 'food', desc: '전통 한식.', location: 'Insadong', transport: '지하철: 1호선 동대문역 -> 종각역 이동 후 도보.' }, { time: '14:30', title: '인사동 쇼핑', type: 'shopping', desc: '쌈지길.', location: 'Insadong', transport: '도보: 식당 근처.' }, { time: '17:00', title: '청계천 산책', type: 'walk', desc: '저녁 산책.', location: 'Cheonggyecheon', transport: '도보: 인사동에서 남쪽으로 10분.' }, { time: '19:00', title: '명동 거리', type: 'shopping', desc: '명동 쇼핑 및 길거리 음식 즐기기.', location: 'Myeongdong', transport: '도보: 청계천에서 을지로 방향으로 약 10-15분.' }] },
+        { day: 4, date: '12/21 (일)', theme: '여유로운 오후 & 명동', activities: [{ time: '10:00', title: '남산골 한옥마을', type: 'sight', desc: '산책.', location: 'Chungmuro', transport: '도보 5분.' }, { time: '13:00', title: '점심 & 휴식', type: 'food', desc: '식사 후 휴식.', location: 'Wecostay' }, { time: '15:00', title: '남산 오르미', type: 'sight', desc: '명동역 -> 투명 엘리베이터.', location: 'Namsan Oreumi', transport: '4호선 충무로역 -> (오이도 방면, 1정거장) -> 명동역 (4번 출구) -> 직진 -> 회현사거리 좌회전.', visual: 'namsan_path', link: { text: 'Namsan Oreumi', url: 'https://www.bring-you.info/zh-tw/n-seoul-tower' } }, { time: '15:40', title: '남산 케이블카 & N서울타워', type: 'sight', desc: '케이블카 탑승 (10:00-23:00).', location: 'Namsan Tower', transport: '오르미 엘리베이터 -> 케이블카 매표소.' }, { time: '19:30', title: '명동 이동 & 저녁', type: 'food', desc: '타워 관람 후 명동 쇼핑/식사.', location: 'Myeongdong', transport: '케이블카/버스 하산 후 -> 도보 이동.' }] },
+        { day: 5, date: '12/22 (월)', theme: '현대 서울 & 한강', activities: [{ time: '11:00', title: 'The Hyundai Seoul', type: 'shopping', desc: '백화점.', location: 'Yeouido', transport: '4호선 충무로역 -> (당고개 방면, 1정거장) -> 동대문역사문화공원 (5호선 환승) -> (방화 방면, 9정거장) -> 여의나루역 (1번 출구).' }, { time: '15:00', title: '여의도 한강공원', type: 'walk', desc: '한강 라면.', location: 'Yeouido', transport: '도보: 더현대 1번 게이트 건너편.' }, { time: '17:00', title: '한강 유람선', type: 'ship', desc: '이랜드 크루즈.', location: 'Yeouido Dock', transport: '도보: 한강공원 따라 동쪽으로 이동.' }, { time: '19:30', title: '홍대 저녁', type: 'food', desc: '홍대 거리.', location: 'Hongdae', transport: '5호선 여의나루역 -> (방화 방면, 2정거장) -> 영등포구청역 (2호선 환승) -> (홍대입구 방면, 2정거장) -> 홍대입구역 (9번 출구).' }] },
+        { day: 6, date: '12/23 (화)', theme: 'お土産', activities: [{ time: '10:30', title: '広蔵市場', type: 'food', desc: '屋台。', location: 'Gwangjang Market', transport: '4호선 충무로역 -> (당고개 방면, 2정거장) -> 동대문(1호선 환승) -> (인천/서울역 방면, 1정거장) -> 종로5가역 (8번 출구).' }, { time: '14:00', title: 'ロッテマート', type: 'shopping', desc: 'ソウル駅。', location: 'Seoul Station', transport: '1호선 종로5가 -> (서울역/인천 방면, 3정거장) -> 서울역 (1번 출구).' }, { time: '17:00', title: 'パッキング', type: 'hotel', desc: '荷造り。', location: 'Wecostay', transport: '4호선 서울역 -> (당고개 방면, 2정거장) -> 忠武路駅。' }, { time: '19:00', title: '最後の夕食', type: 'food', desc: '乙支路。', location: 'Euljiro', transport: '徒歩：忠武路駅8番出口から。' }] },
+        { day: 7, date: '12/24 (水)', theme: '귀국 (타오위안)', activities: [{ time: '06:00', title: '공항 이동', type: 'bus', desc: '6015 공항버스.', location: 'Airport Bus Stop', transport: '공항버스: 충무로역 1번 출구 앞 정류장 (약 70-80분).' }, { time: '07:35', title: '체크인', type: 'plane', desc: '에바항공.', location: 'ICN Airport' }, { time: '11:40', title: 'BR169 이륙', type: 'flight', desc: '인천(ICN) -> 타오위안(TPE)', location: 'Departure Hall' }, { time: '13:30', title: '대만 도착', type: 'home', desc: '도착.', location: 'Taipei' }] }
       ];
 
       const days_EN = [
-          { day: 1, date: '12/18 (Thu)', theme: 'Arrival & Check-in', activities: [{ time: '12:00', title: 'Leave Home', type: 'car', desc: 'Kenyi Pickup to TPE Airport.', location: 'Home', transport: 'Private Car' }, { time: '15:15', title: 'Flight BR160', type: 'flight', desc: 'TPE Terminal 2 -> ICN', location: 'TPE Airport' }, { time: '18:45', title: 'Arrival', type: 'arrival', desc: 'Immigration, Baggage, T-Money.', location: 'ICN Airport' }, { time: '20:00', title: 'To Wecostay', type: 'bus', desc: 'Bus 6015 to Chungmuro.', info: 'Cost: 17,000 KRW', customPhrases: [{ korean: 'G3 호텔에서 내려주세요', pronunciation: 'G3 Hotel-eseo naeryeojuseyo', meaning: 'Please drop me at G3 Hotel' }], transport: 'Bus 6015 at Stop 5B/11B -> Chungmuro Stn (3 stops).' }, { time: '21:30', title: 'Check-in & Dinner', type: 'food', desc: 'Fried chicken or Army stew.', location: 'Chungmuro' }] },
-          { day: 2, date: '12/19 (Fri)', theme: 'History & Culture', activities: [{ time: '10:00', title: 'Bukchon Hanok Village', type: 'sight', desc: 'Hanok Village & 8 Views.', location: 'Bukchon', transport: 'Line 3 Anguk Station (Exit 2).' }, { time: '12:30', title: 'Bukchon Samgyetang', type: 'food', desc: 'Famous Ginseng Chicken Soup nearby.', location: 'Bukchon', transport: 'Walk from Hanok Village.' }, { time: '14:30', title: 'Gyeongbokgung', type: 'sight', desc: 'Palace & Guard Ceremony.', location: 'Gyeongbokgung', transport: 'Walk west from Bukchon (15 mins).' }, { time: '17:00', title: 'Free Time', type: 'walk', desc: 'Explore nearby.', location: 'Gwanghwamun', transport: 'Walk.' }] },
-          { day: 3, date: '12/20 (Sat)', theme: 'City Wall & Culture', activities: [{ time: '10:00', title: 'Dongdaemun Seonggwak Park', type: 'sight', desc: 'Seoul City Wall walk.', location: 'Dongdaemun', transport: 'Line 1/4 Dongdaemun Stn (Exit 1).' }, { time: '12:30', title: 'Insadong Lunch', type: 'food', desc: 'Traditional Korean Food.', location: 'Insadong', transport: 'Subway to Jonggak, then walk.' }, { time: '14:30', title: 'Insadong Shopping', type: 'shopping', desc: 'Ssamzigil & Crafts.', location: 'Insadong', transport: 'Walk nearby.' }, { time: '17:00', title: 'Cheonggyecheon', type: 'walk', desc: 'Stream walk.', location: 'Cheonggyecheon', transport: 'Walk south from Insadong.' }, { time: '19:00', title: 'Myeongdong', type: 'shopping', desc: 'Shopping and street food.', location: 'Myeongdong', transport: 'Walk: 10-15 mins from Cheonggyecheon.' }] },
-          { day: 4, date: '12/21 (Sun)', theme: 'Relaxed Afternoon & Myeongdong', activities: [{ time: '10:00', title: 'Namsangol Hanok', type: 'sight', desc: 'Walk near accommodation.', location: 'Chungmuro', transport: 'Walk: 5 mins from Wecostay.' }, { time: '13:00', title: 'Lunch & Rest', type: 'food', desc: 'Lunch nearby & rest.', location: 'Wecostay' }, { time: '15:00', title: 'To Namsan Oreumi', type: 'sight', desc: 'Subway to Myeongdong, walk to elevator.', location: 'Namsan Oreumi', transport: 'Line 4 Chungmuro -> Myeongdong Exit 4 -> Straight -> Left at intersection.', visual: 'namsan_path', link: { text: 'Namsan Oreumi', url: 'https://www.bring-you.info/zh-tw/n-seoul-tower' } }, { time: '15:40', title: 'Namsan Cable Car', type: 'sight', desc: 'Cable car to Seoul Tower. (Open: 10:00 - 23:00)', location: 'Namsan Tower', transport: 'Oreumi Elevator -> Cable Car Station.' }, { time: '19:30', title: 'Myeongdong Dinner', type: 'food', desc: 'Leave tower and go shopping/dining in Myeongdong.', location: 'Myeongdong', transport: 'Descend via cable car, walk to Myeongdong.' }] },
-          { day: 5, date: '12/22 (Mon)', theme: 'Modern Seoul & River', activities: [{ time: '11:00', title: 'The Hyundai Seoul', type: 'shopping', desc: 'Department Store.', location: 'Yeouido', transport: 'Line 4 Chungmuro -> Dongdaemun History (Transfer Line 5) -> Yeouinaru (Exit 1).' }, { time: '15:00', title: 'Hangang Park', type: 'walk', desc: 'Picnic by the river.', location: 'Yeouido', transport: 'Walk from Gate 1.' }, { time: '17:00', title: 'River Cruise', type: 'ship', desc: 'Eland Cruise night view.', location: 'Yeouido Dock', transport: 'Walk east along the river.' }, { time: '19:30', title: 'Hongdae Dinner', type: 'food', desc: 'Youth district.', location: 'Hongdae', transport: 'Line 5 -> Yeongdeungpo-gu Office (Transfer Line 2) -> Hongik Univ.' }] },
-          { day: 6, date: '12/23 (Tue)', theme: 'Souvenirs & Chill', activities: [{ time: '10:30', title: 'Gwangjang Mkt', type: 'food', desc: 'Street Food', transport: 'Line 4 -> Dongdaemun (Transfer Line 1) -> Jongno 5-ga (Exit 8).' }, { time: '14:00', title: 'Lotte Mart', type: 'shopping', desc: 'Shopping', transport: 'Line 1 to Seoul Station.' }, { time: '17:00', title: 'Packing', type: 'hotel', desc: 'Rest', location: 'Wecostay', transport: 'Line 4 to Chungmuro.' }, { time: '19:00', title: 'Final Dinner', type: 'food', desc: 'Euljiro Hipjiro vibes.', location: 'Euljiro', transport: 'Walk from Chungmuro Exit 8.' }] },
-          { day: 7, date: '12/24 (Wed)', theme: 'Departure', activities: [{ time: '06:00', title: 'To Airport', type: 'bus', desc: 'Bus 6015 to Incheon.', location: 'Airport Bus Stop', transport: 'Bus 6015 from Chungmuro Exit 1.' }, { time: '09:40', title: 'Check-in', type: 'plane', desc: 'Counter, Tax Refund.', location: 'ICN Airport' }, { time: '11:40', title: 'Flight BR169', type: 'flight', desc: 'ICN -> TPE', location: 'Departure Hall' }, { time: '13:30', title: 'Arrive', type: 'home', desc: 'Home Sweet Home.', location: 'Taipei' }] }
+          { day: 1, date: '12/18 (Thu)', theme: 'Arrival', activities: [{ time: '12:00', title: 'Leave Home', type: 'car', desc: 'To Airport.', location: 'Home' }, { time: '15:15', title: 'Flight BR160', type: 'flight', desc: 'TPE -> ICN', location: 'TPE Airport' }, { time: '18:45', title: 'Arrival', type: 'arrival', desc: 'Immigration.', location: 'ICN Airport' }, { time: '20:00', title: 'To Wecostay', type: 'bus', desc: 'Bus 6015 to Chungmuro.', info: '17,000 KRW', transport: 'Bus 6015 at Stop 5B/11B -> (3 stops, ~70min) -> Chungmuro Stn -> Walk 2min.' }, { time: '21:30', title: 'Check-in', type: 'food', desc: 'Dinner.', location: 'Chungmuro' }] },
+          { day: 2, date: '12/19 (Fri)', theme: 'History', activities: [{ time: '10:00', title: 'Bukchon Hanok Village', type: 'sight', desc: 'Hanok & 8 Views.', location: 'Bukchon', transport: 'Line 3 Anguk Stn Exit 2.' }, { time: '12:30', title: 'Bukchon Samgyetang', type: 'food', desc: 'Ginseng Chicken Soup.', location: 'Bukchon', transport: 'Walk from Hanok Village.' }, { time: '14:30', title: 'Gyeongbokgung', type: 'sight', desc: 'Palace.', location: 'Gyeongbokgung', transport: 'Walk.' }, { time: '17:00', title: 'LoL Park (GRAN SEOUL)', type: 'sight', desc: 'Visit LCK Arena & Riot Store. Open 11:00-20:00.', location: 'LoL Park', transport: 'Walk: 10 mins from Gwanghwamun Sq.' }] },
+          { day: 3, date: '12/20 (Sat)', theme: 'City Wall', activities: [{ time: '10:00', title: 'Dongdaemun Seonggwak Park', type: 'sight', desc: 'City Wall.', location: 'Dongdaemun', transport: 'Line 4 Chungmuro Stn -> (for Danggogae, 1 stop) -> Dongdaemun History (Transfer Line 1) -> (for Soyosan, 1 stop) -> Dongdaemun Stn (Exit 1).' }, { time: '12:30', title: 'Insadong Lunch', type: 'food', desc: 'Korean Food.', location: 'Insadong', transport: 'Line 1 to Jonggak, then walk.' }, { time: '14:30', title: 'Insadong Shopping', type: 'shopping', desc: 'Crafts.', location: 'Insadong', transport: 'Walk nearby.' }, { time: '17:00', title: 'Cheonggyecheon', type: 'walk', desc: 'Stream.', location: 'Cheonggyecheon', transport: 'Walk south from Insadong.' }, { time: '19:00', title: 'Myeongdong', type: 'shopping', desc: 'Shopping.', location: 'Myeongdong', transport: 'Walk: 10-15 mins from Cheonggyecheon.' }] },
+          { day: 4, date: '12/21 (Sun)', theme: 'Namsan & Myeongdong', activities: [{ time: '10:00', title: 'Namsangol Hanok', type: 'sight', desc: 'Walk.', location: 'Chungmuro' }, { time: '13:00', title: 'Lunch & Rest', type: 'food', desc: 'Rest.', location: 'Wecostay' }, { time: '15:00', title: 'To Namsan Oreumi', type: 'sight', desc: 'Subway to Elevator.', location: 'Namsan Oreumi', transport: 'Line 4 Chungmuro Stn -> (for Oido, 1 stop) -> Myeongdong Stn (Exit 4) -> Straight -> Left.', visual: 'namsan_path', link: { text: 'Namsan Oreumi', url: 'https://www.bring-you.info/zh-tw/n-seoul-tower' } }, { time: '15:40', title: 'Namsan Cable Car', type: 'sight', desc: 'Cable Car (10:00-23:00).', location: 'Namsan Tower' }, { time: '19:30', title: 'Myeongdong Dinner', type: 'food', desc: 'Shopping & Dinner.', location: 'Myeongdong', transport: 'Descend via cable car, walk to Myeongdong.' }] },
+          { day: 5, date: '12/22 (Mon)', theme: 'Modern Seoul', activities: [{ time: '11:00', title: 'The Hyundai Seoul', type: 'shopping', desc: 'Dept Store.', location: 'Yeouido', transport: 'Line 4 Chungmuro Stn -> (for Danggogae, 1 stop) -> Dongdaemun History (Transfer Line 5) -> (for Banghwa, 9 stops) -> Yeouinaru (Exit 1).' }, { time: '15:00', title: 'Hangang Park', type: 'walk', desc: 'Picnic.', location: 'Yeouido', transport: 'Walk from Gate 1.' }, { time: '17:00', title: 'River Cruise', type: 'ship', desc: 'Eland Cruise.', location: 'Yeouido Dock', transport: 'Walk east along the river.' }, { time: '19:30', title: 'Hongdae Dinner', type: 'food', desc: 'Youth District.', location: 'Hongdae', transport: 'Line 5 -> (for Banghwa, 2 stops) -> Yeongdeungpo-gu Office (Transfer Line 2) -> (for Hongik Univ, 2 stops) -> Hongik Univ (Exit 9).' }] },
+          { day: 6, date: '12/23 (Tue)', theme: 'Souvenirs', activities: [{ time: '10:30', title: 'Gwangjang Market', type: 'food', desc: 'Street Food.', location: 'Gwangjang Market', transport: 'Line 4 -> (for Danggogae, 2 stops) -> Dongdaemun (Transfer Line 1) -> (for Incheon, 1 stop) -> Jongno 5-ga (Exit 8).' }, { time: '14:00', title: 'Lotte Mart', type: 'shopping', desc: 'Seoul Stn.', location: 'Seoul Station' }, { time: '17:00', title: 'Packing', type: 'hotel', desc: 'Rest.', location: 'Wecostay', transport: 'Line 4 to Chungmuro (2 stops).' }, { time: '19:00', title: 'Final Dinner', type: 'food', desc: 'Euljiro.', location: 'Euljiro', transport: 'Walk from Chungmuro Exit 8.' }] },
+          { day: 7, date: '12/24 (Wed)', theme: 'Departure', activities: [{ time: '06:00', title: 'To Airport', type: 'bus', desc: 'Bus 6015.', location: 'Airport Bus Stop', transport: 'Bus 6015 from Chungmuro Exit 1.' }, { time: '07:35', title: 'Check-in', type: 'plane', desc: 'EVA Air.', location: 'ICN Airport' }, { time: '11:40', title: 'Flight BR169', type: 'flight', desc: 'ICN -> TPE', location: 'Departure Hall' }, { time: '13:30', title: 'Arrive', type: 'home', desc: 'Home.', location: 'Taipei' }] }
       ];
       
       const days_JP = [
-          { day: 1, date: '12/18 (木)', theme: 'ソウル到着 & チェックイン', activities: [{ time: '12:00', title: '自宅を出発', type: 'car', desc: '空港送迎で桃園空港へ。', location: 'Home', transport: '専用車' }, { time: '15:15', title: 'エバー航空 BR160', type: 'flight', desc: '桃園(TPE) -> 仁川(ICN)', location: 'TPE Airport' }, { time: '18:45', title: '仁川空港到着', type: 'arrival', desc: '入国審査、荷物受取、T-Money購入。', location: 'ICN Airport' }, { time: '20:00', title: 'Wecostayへ', type: 'bus', desc: '6015バスで忠武路へ。', info: '費用: 17,000 KRW', customPhrases: [{ korean: 'G3 호텔에서 내려주세요', pronunciation: 'G3 Hotel-eseo naeryeojuseyo', meaning: 'G3ホテルで降ろしてください' }], transport: '仁川空港 5B/11B乗り場 【6015バス】(明洞方面)、3駅(約70分)、「忠武路駅」下車。' }, { time: '21:30', title: 'チェックイン & 夕食', type: 'food', desc: 'チキンやプデチゲ。', location: 'Chungmuro' }] },
-          { day: 2, date: '12/19 (金)', theme: '歴史散策 & 伝統', activities: [{ time: '10:00', title: '北村韓屋村 & 八景', type: 'sight', desc: '韓屋村散策。', location: 'Bukchon', transport: '3号線 安国駅 (2番出口)。' }, { time: '12:30', title: '北村参鶏湯', type: 'food', desc: '近くで参鶏湯ランチ。', location: 'Bukchon', transport: '徒歩：韓屋村から。' }, { time: '14:30', title: '景福宮 & 光化門', type: 'sight', desc: '王宮と広場。', location: 'Gyeongbokgung', transport: '徒歩：北村から西へ15分。' }, { time: '17:00', title: '自由時間', type: 'walk', desc: '周辺散策。', location: 'Gwanghwamun', transport: '徒歩。' }] },
-          { day: 3, date: '12/20 (土)', theme: '城郭 & 文化', activities: [{ time: '10:00', title: '東大門城郭公園', type: 'sight', desc: 'ソウル城郭散歩。', location: 'Dongdaemun', transport: '1号線/4号線 東大門駅 (1番出口)。' }, { time: '12:30', title: '仁寺洞ランチ', type: 'food', desc: '伝統的な韓国料理。', location: 'Insadong', transport: '地下鉄：鍾路3街へ移動。' }, { time: '14:30', title: '仁寺洞ショッピング', type: 'shopping', desc: 'サムジキル、工芸品。', location: 'Insadong', transport: '徒歩。' }, { time: '17:00', title: '清渓川散歩', type: 'walk', desc: '夕方の川沿い散歩。', location: 'Cheonggyecheon', transport: '徒歩：仁寺洞から南へ。' }, { time: '19:00', title: '明洞', type: 'shopping', desc: 'ショッピングと屋台グルメ。', location: 'Myeongdong', transport: '徒歩：清渓川から乙支路方面へ約10-15分。' }] },
-          { day: 4, date: '12/21 (日)', theme: 'ゆったり午後 & 明洞グルメ', activities: [{ time: '10:00', title: '南山谷韓屋村', type: 'sight', desc: '宿の近くを散歩。', location: 'Chungmuro', transport: '徒歩：Wecostayから約5分。' }, { time: '13:00', title: 'ランチ & 休憩', type: 'food', desc: '近場で食事＆休憩。', location: 'Wecostay' }, { time: '15:00', title: '南山オルミへ', type: 'sight', desc: '明洞駅へ移動し、透明エレベーターへ。', location: 'Namsan Oreumi', transport: '4号線 忠武路 -> 明洞駅4番出口 -> 直進 -> 会賢交差点左折。', visual: 'namsan_path', link: { text: 'Namsan Oreumi', url: 'https://www.bring-you.info/zh-tw/n-seoul-tower' } }, { time: '15:40', title: '南山ケーブルカー', type: 'sight', desc: 'ケーブルカーでソウルタワーへ。(営業時間: 10:00 - 23:00)', location: 'Namsan Tower', transport: 'オルミエレベーター -> ケーブルカー乗り場。' }, { time: '19:30', title: '明洞へ移動 & 夕食', type: 'food', desc: 'タワーから明洞へ移動し、ショッピングと食事。', location: 'Myeongdong', transport: 'ケーブルカー下山後、徒歩。' }] },
-          { day: 5, date: '12/22 (月)', theme: '現代ソウル & 漢江夜景', activities: [{ time: '11:00', title: 'The Hyundai Seoul', type: 'shopping', desc: '汝矣島の巨大デパート。', location: 'Yeouido', transport: '地下鉄：4号線 忠武路 -> 東大門歴史(5号線乗換) -> ヨイナル(1番出口)。' }, { time: '15:00', title: '漢江公園', type: 'walk', desc: '散歩、漢江ラーメン。', location: 'Yeouido', transport: '徒歩：ザ・現代1番ゲート向かい。' }, { time: '17:00', title: '漢江遊覧船', type: 'ship', desc: 'イーランドクルーズ。', location: 'Yeouido Dock', transport: '徒歩：漢江沿いを東へ10-15分。' }, { time: '19:30', title: '弘大ディナー', type: 'food', desc: '若者の街。', location: 'Hongdae', transport: '地下鉄：5号線 -> 永登浦区庁(2号線乗換) -> 弘大入口(9番出口)。' }] },
-          { day: 6, date: '12/23 (火)', theme: 'お土産 & リラックス', activities: [{ time: '10:30', title: '広蔵市場', type: 'food', desc: 'ピンデトッ、ユッケ。', location: 'Gwangjang Market', transport: '地下鉄：4号線 忠武路 -> 東大門(1号線乗換) -> 鍾路5街(8番出口)。' }, { time: '14:00', title: 'ロッテマート', type: 'shopping', desc: 'ソウル駅店で買い物。', location: 'Seoul Station', transport: '地下鉄：1号線 ソウル駅。' }, { time: '17:00', title: 'パッキング', type: 'hotel', desc: '荷造り。', location: 'Wecostay', transport: '地下鉄：4号線で忠武路へ。' }, { time: '19:00', title: '最後の夕食', type: 'food', desc: '乙支路 (Hipjiro)。', location: 'Euljiro', transport: '徒歩：忠武路駅8番出口から。' }] },
-          { day: 7, date: '12/24 (水)', theme: '帰国 (仙台)', activities: [{ time: '06:00', title: '空港へ移動', type: 'bus', desc: '6015 空港バス。', location: 'Airport Bus Stop', transport: '空港バス：忠武路駅1番出口前 (約70分)。' }, { time: '07:35', title: 'チェックイン', type: 'plane', desc: '搭乗手続き & 免税手続き。', location: 'ICN Airport' }, { time: '09:35', title: '仙台行き出発', type: 'flight', desc: '仁川(ICN) -> 仙台(SDJ)', location: 'Departure Hall' }, { time: '11:45', title: '仙台到着', type: 'home', desc: 'お疲れ様でした。', location: 'Sendai Airport' }] }
+          { day: 1, date: '12/18 (木)', theme: 'ソウル到着', activities: [{ time: '12:00', title: '出発', type: 'car', desc: '空港へ。', location: 'Home' }, { time: '15:15', title: 'エバー航空 BR160', type: 'flight', desc: '桃園(TPE) -> 仁川(ICN)', location: 'TPE Airport' }, { time: '18:45', title: '到着', type: 'arrival', desc: '入国審査。', location: 'ICN Airport' }, { time: '20:00', title: 'Wecostayへ', type: 'bus', desc: '6015バス (忠武路)。', info: '17,000 KRW', transport: '仁川空港 5B/11B乗り場 【6015バス】(明洞方面) -> (3駅, 約70分) -> 「忠武路駅」下車 -> 徒歩2分。' }, { time: '21:30', title: '夕食', type: 'food', desc: 'チェックイン。', location: 'Chungmuro' }] },
+          { day: 2, date: '12/19 (金)', theme: '歴史', activities: [{ time: '10:00', title: '北村韓屋村 & 八景', type: 'sight', desc: '散策。', location: 'Bukchon', transport: '3号線 安国駅 2番出口。' }, { time: '12:30', title: '北村参鶏湯', type: 'food', desc: 'ランチ。', location: 'Bukchon', transport: '徒歩：韓屋村から。' }, { time: '14:30', title: '景福宮 & 光化門', type: 'sight', desc: '王宮。', location: 'Gyeongbokgung', transport: '徒歩：北村から西へ15分。' }, { time: '17:00', title: 'LoL Park (GRAN SEOUL)', type: 'sight', desc: 'LCKアリーナとライアットストア。営業時間 11:00-20:00。', location: 'LoL Park', transport: '徒歩：光化門広場から約10分。' }] },
+          { day: 3, date: '12/20 (土)', theme: '城郭 & 文化', activities: [{ time: '10:00', title: '東大門城郭公園', type: 'sight', desc: '散歩。', location: 'Dongdaemun', transport: '4号線 忠武路駅 -> (タンゴゲ方面、1駅) -> 東大門歴史文化公園駅 (1号線乗換) -> (逍遥山方面、1駅) -> 東大門駅 (1番出口)。' }, { time: '12:30', title: '仁寺洞ランチ', type: 'food', desc: '韓国料理。', location: 'Insadong', transport: '1号線 鍾路3街駅へ移動。' }, { time: '14:30', title: '仁寺洞ショッピング', type: 'shopping', desc: 'サムジキル。', location: 'Insadong', transport: '徒歩。' }, { time: '17:00', title: '清渓川散歩', type: 'walk', desc: '散歩。', location: 'Cheonggyecheon', transport: '徒歩：仁寺洞から南へ。' }, { time: '19:00', title: '明洞', type: 'shopping', desc: 'ショッピング。', location: 'Myeongdong', transport: '徒歩：清渓川から乙支路方面へ約10-15分。' }] },
+          { day: 4, date: '12/21 (日)', theme: '南山 & 明洞', activities: [{ time: '10:00', title: '南山谷韓屋村', type: 'sight', desc: '散策。', location: 'Chungmuro' }, { time: '13:00', title: 'ランチ & 休憩', type: 'food', desc: '休憩。', location: 'Wecostay' }, { time: '15:00', title: '南山オルミへ', type: 'sight', desc: '明洞駅 -> 透明エレベーター。', location: 'Namsan Oreumi', transport: '4号線 忠武路駅 -> (烏耳島方面、1駅) -> 明洞駅 (4番出口) -> 直進 -> 左折。', visual: 'namsan_path', link: { text: 'Namsan Oreumi', url: 'https://www.bring-you.info/zh-tw/n-seoul-tower' } }, { time: '15:40', title: '南山ケーブルカー', type: 'sight', desc: 'ケーブルカー (10:00-23:00)。', location: 'Namsan Tower' }, { time: '19:30', title: '明洞へ移動 & 夕食', type: 'food', desc: 'ショッピングと食事。', location: 'Myeongdong', transport: 'ケーブルカー下山後、徒歩。' }] },
+          { day: 5, date: '12/22 (月)', theme: '現代ソウル', activities: [{ time: '11:00', title: 'The Hyundai Seoul', type: 'shopping', desc: 'デパート。', location: 'Yeouido', transport: '4号線 忠武路駅 -> (タンゴゲ方面、1駅) -> 東大門歴史文化公園 (5号線乗換) -> (傍花方面、9駅) -> ヨイナル(1番出口)。' }, { time: '15:00', title: '漢江公園', type: 'walk', desc: '散歩。', location: 'Yeouido', transport: '徒歩：ザ・現代1番ゲート向かい。' }, { time: '17:00', title: '漢江遊覧船', type: 'ship', desc: 'クルーズ。', location: 'Yeouido Dock', transport: '徒歩：漢江沿いを東へ10-15分。' }, { time: '19:30', title: '弘大ディナー', type: 'food', desc: '若者の街。', location: 'Hongdae', transport: '5号線 -> (傍花方面、2駅) -> 永登浦区庁(2号線乗換) -> (弘大入口方面、2駅) -> 弘大入口(9番出口)。' }] },
+          { day: 6, date: '12/23 (火)', theme: 'お土産', activities: [{ time: '10:30', title: '広蔵市場', type: 'food', desc: '屋台。', location: 'Gwangjang Market', transport: '4号線 忠武路駅 -> (タンゴゲ方面、2駅) -> 東大門(1号線乗換) -> (ソウル駅/仁川方面、1駅) -> 鍾路5街(8番出口)。' }, { time: '14:00', title: 'ロッテマート', type: 'shopping', desc: 'ソウル駅。', location: 'Seoul Station', transport: '1号線 鍾路5街 -> (ソウル駅/仁川方面、3駅) -> ソウル駅(1番出口)。' }, { time: '17:00', title: 'パッキング', type: 'hotel', desc: '荷造り。', location: 'Wecostay', transport: '4号線 ソウル駅 -> (タンゴゲ方面、2駅) -> 忠武路駅。' }, { time: '19:00', title: '最後の夕食', type: 'food', desc: '乙支路。', location: 'Euljiro', transport: '徒歩：忠武路駅8番出口から。' }] },
+          { day: 7, date: '12/24 (水)', theme: '帰国 (仙台)', activities: [{ time: '06:00', title: '空港へ', type: 'bus', desc: '6015バス。', location: 'Airport Bus Stop', transport: '空港バス：忠武路駅1番出口前 (約70分)。' }, { time: '07:35', title: 'チェックイン', type: 'plane', desc: '手続き。', location: 'ICN Airport' }, { time: '09:35', title: '仙台行き出発', type: 'flight', desc: '仁川(ICN) -> 仙台(SDJ)', location: 'Departure Hall' }, { time: '11:45', title: '仙台到着', type: 'home', desc: 'お疲れ様でした。', location: 'Sendai Airport' }] }
       ];
 
       const data = {
-        ZH: [day0_ZH, ...days_ZH],
-        KR: [day0_KR, ...days_KR],
-        EN: [day0_EN, ...days_EN],
-        JP: [day0_JP, ...days_JP]
+        ZH: [commonDay0.ZH, ...days_ZH],
+        KR: [commonDay0.KR, ...days_KR],
+        EN: [commonDay0.EN, ...days_EN],
+        JP: [commonDay0.JP, ...days_JP]
       };
       return data[lang];
     };
 
-    // --- Components ---
-    // (Rest of the components remain unchanged from the previous correct version)
+    // --- 4. Load Data Function ---
+    const loadData = (language) => {
+        // Upgrade key to v2 to force refresh data structure
+        const key = `seoul_trip_2025_v6_${language}`;
+        try { 
+          const saved = localStorage.getItem(key); 
+          if (saved) {
+            return JSON.parse(saved); 
+          }
+        } catch (e) { console.error("Failed to load itinerary", e); }
+        return getInitialItinerary(language);
+    };
+
+    // --- 5. Component Definitions ---
+
+    // 5.1 Namsan Path Visualization Component
+    const NamsanPathVisual = () => (
+      <div className="mt-2 p-4 bg-white rounded-xl shadow-sm border border-slate-200">
+        <h4 className="text-xs font-bold text-slate-500 mb-2">路線指引：明洞站 ➔ 南山透明電梯</h4>
+        <svg viewBox="0 0 300 120" className="w-full h-auto">
+          {/* Roads */}
+          <path d="M40,100 L260,100" stroke="#e2e8f0" strokeWidth="20" strokeLinecap="round" />
+          <path d="M220,100 L220,30" stroke="#e2e8f0" strokeWidth="20" strokeLinecap="round" />
+          
+          {/* Path Line */}
+          <path d="M50,100 L220,100 L220,50" fill="none" stroke="#fb7185" strokeWidth="3" strokeDasharray="6,4" />
+          <path d="M215,55 L220,45 L225,55" fill="none" stroke="#fb7185" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
+
+          {/* Start Point: Myeongdong Stn Exit 4 */}
+          <circle cx="50" cy="100" r="6" fill="#3b82f6" />
+          <text x="50" y="115" fontSize="10" textAnchor="middle" fill="#475569" fontWeight="bold">明洞站 4號出口</text>
+          
+          {/* Landmark: McDonald's */}
+          <circle cx="90" cy="85" r="8" fill="#facc15" stroke="#b45309" strokeWidth="1" />
+          <text x="90" y="89" fontSize="10" textAnchor="middle" fill="#b45309" fontWeight="bold">M</text>
+
+          {/* Landmark: Intersection */}
+          <text x="235" y="105" fontSize="9" textAnchor="start" fill="#94a3b8">會賢十字路口</text>
+
+          {/* Turn Indicator */}
+          <path d="M200,90 Q220,90 220,70" fill="none" stroke="#fb7185" strokeWidth="2" markerEnd="url(#arrow)" />
+
+          {/* End Point: Oreumi */}
+          <rect x="205" y="20" width="30" height="30" rx="4" fill="#10b981" />
+          <text x="220" y="40" fontSize="16" textAnchor="middle" fill="white">🛗</text>
+          <text x="250" y="38" fontSize="10" textAnchor="start" fill="#10b981" fontWeight="bold">透明電梯</text>
+        </svg>
+      </div>
+    );
+    
+    // 5.2 RealTimeDateDisplay Component
+    const RealTimeDateDisplay = () => {
+      const [dateStr, setDateStr] = useState('');
+      useEffect(() => {
+        const updateDate = () => {
+          const now = new Date();
+          const seoulTime = new Date(now.toLocaleString("en-US", { timeZone: "Asia/Seoul" }));
+          const y = seoulTime.getFullYear();
+          const m = String(seoulTime.getMonth() + 1).padStart(2, '0');
+          const d = String(seoulTime.getDate()).padStart(2, '0');
+          const days = ['日', '一', '二', '三', '四', '五', '六'];
+          const dayName = days[seoulTime.getDay()];
+          setDateStr(`${y}/${m}/${d} (${dayName})`);
+        };
+        updateDate();
+        const timer = setInterval(updateDate, 60000);
+        return () => clearInterval(timer);
+      }, []);
+      return <span className="text-sm font-bold text-rose-900/90 mt-0.5 block">{dateStr}</span>;
+    };
+
+    // 5.3 ShoppingListContent Component
     const ShoppingListContent = ({ lang }) => {
       const [items, setItems] = useState([]);
       const [newItem, setNewItem] = useState({ name: '', category: '', image: '' });
@@ -361,6 +329,7 @@
       );
     };
 
+    // 5.4 Other Components
     const IconType = ({ type, className }) => {
       const icons = { 
         checklist: ClipboardCheck, warning: AlertTriangle, warning_red: AlertTriangle, doc: FileText, ses: Scan, 
@@ -370,31 +339,99 @@
       return <Icon className={`${className} ${type === 'arrival' ? 'rotate-90' : ''} ${type === 'warning_red' ? 'text-red-500' : ''} ${type === 'warning' ? 'text-amber-500' : ''} ${type === 'ses' ? 'text-blue-500' : ''}`} />;
     };
 
-    // Transport Formatter Component
     const TransportDisplay = ({ text }) => {
       if (!text) return null;
-      const parts = text.split(/([1-9]號線|Line\s*[1-9]|AREX|[1-9]호선|[1-9]号線)/g);
-      return (
-        <span className="inline-flex flex-wrap items-center gap-1 align-middle ml-1">
-          {parts.map((part, idx) => {
-            let color = null;
-            if (part.match(/1號線|Line\s*1|1호선|1号線/)) color = SUBWAY_COLORS['1'];
-            else if (part.match(/2號線|Line\s*2|2호선|2号線/)) color = SUBWAY_COLORS['2'];
-            else if (part.match(/3號線|Line\s*3|3호선|3号線/)) color = SUBWAY_COLORS['3'];
-            else if (part.match(/4號線|Line\s*4|4호선|4号線/)) color = SUBWAY_COLORS['4'];
-            else if (part.match(/5號線|Line\s*5|5호선|5号線/)) color = SUBWAY_COLORS['5'];
-            else if (part.match(/6號線|Line\s*6|6호선|6号線/)) color = SUBWAY_COLORS['6'];
-            else if (part.match(/7號線|Line\s*7|7호선|7号線/)) color = SUBWAY_COLORS['7'];
-            else if (part.match(/8號線|Line\s*8|8호선|8号線/)) color = SUBWAY_COLORS['8'];
-            else if (part.match(/9號線|Line\s*9|9호선|9号線/)) color = SUBWAY_COLORS['9'];
-            else if (part.match(/AREX/i)) color = SUBWAY_COLORS['AREX'];
+      const rawSteps = text.split(/\s*->\s*/).filter(s => s.trim());
+      const isSubwayRoute = text.includes('->');
 
-            if (color) {
-              return <span key={idx} className="px-1.5 py-0.5 rounded text-white font-bold text-[10px] inline-block" style={{ backgroundColor: color }}>{part}</span>;
+      if (!isSubwayRoute) {
+         return (
+             <div className="text-xs text-stone-500 mt-1 flex flex-wrap gap-1">
+                 {text.split(/([0-9]+號線|Line\s*[0-9]+|AREX|[0-9]+호선|[0-9]+号線)/g).map((part, i) => {
+                    const match = part.match(/([0-9]+)(?:號線|Line|호선|号線)|(AREX)/i);
+                    if(match) {
+                        const k = match[2] ? 'AREX' : match[1];
+                        return <span key={i} className="px-1.5 py-0.5 rounded text-white text-[10px] font-bold" style={{backgroundColor: SUBWAY_COLORS[k] || '#999'}}>{part}</span>;
+                    }
+                    return <span key={i}>{part}</span>;
+                 })}
+             </div>
+         );
+      }
+
+      return (
+        <div className="mt-3 ml-2">
+          {rawSteps.map((step, idx) => {
+            const lineMatch = step.match(/(\d+)(?:號線|号線|호선)|Line\s*(\d+)|(AREX)/i);
+            let lineColor = '#e5e7eb';
+            let isLineStep = false;
+            let lineLabel = '';
+
+            if (lineMatch) {
+               const lineCode = lineMatch[3] ? 'AREX' : (lineMatch[1] || lineMatch[2]);
+               if(SUBWAY_COLORS[lineCode]) {
+                   lineColor = SUBWAY_COLORS[lineCode];
+                   isLineStep = true;
+                   lineLabel = lineMatch[3] ? 'A' : (lineMatch[1] || lineMatch[2]);
+               }
+            } else if (idx > 0) {
+               for(let i=idx-1; i>=0; i--) {
+                   const prevMatch = rawSteps[i].match(/(\d+)(?:號線|号線|호선)|Line\s*(\d+)|(AREX)/i);
+                   if(prevMatch) {
+                       const k = prevMatch[3] ? 'AREX' : (prevMatch[1] || prevMatch[2]);
+                       if(SUBWAY_COLORS[k]) {
+                           lineColor = SUBWAY_COLORS[k];
+                           break; 
+                       }
+                   }
+               }
             }
-            return part.trim() ? <span key={idx} className="text-xs text-stone-500">{part}</span> : null;
+            
+            // Special handling for start/end points if no line detected
+            if (!isLineStep) {
+               if (idx === 0) {
+                  lineColor = '#3b82f6'; // Blue for Start
+                  lineLabel = '起';
+               } else if (idx === rawSteps.length - 1) {
+                  lineColor = '#ef4444'; // Red for End
+                  lineLabel = '終';
+               }
+            }
+
+            const isLast = idx === rawSteps.length - 1;
+            let mainText = step;
+            let subText = "";
+            const parenMatch = step.match(/^(.*?)\s*(\(.*\))$/);
+            if(parenMatch) {
+                mainText = parenMatch[1];
+                subText = parenMatch[2];
+            }
+
+            return (
+              <div key={idx} className="relative flex items-start pb-6 last:pb-0 group">
+                {!isLast && (
+                  <div className="absolute left-[9px] top-4 h-full w-0.5" style={{ backgroundColor: lineColor, opacity: 0.3 }}></div>
+                )}
+                <div 
+                    className="relative z-10 w-5 h-5 rounded-full border-2 border-white shadow-sm shrink-0 mt-0.5 flex items-center justify-center text-[10px] font-bold text-white transition-transform hover:scale-110"
+                    style={{ backgroundColor: lineColor }}
+                >
+                  {lineLabel || <div className="w-1.5 h-1.5 bg-white rounded-full"></div>}
+                </div>
+                <div className="ml-3">
+                    <div className={`text-sm ${lineLabel && lineLabel !== '起' && lineLabel !== '終' ? 'font-bold text-stone-800' : 'text-stone-600'}`}>
+                        {mainText}
+                    </div>
+                    {subText && (
+                        <div className="text-[11px] text-stone-500 font-medium mt-0.5">
+                            {subText}
+                        </div>
+                    )}
+                </div>
+              </div>
+            );
           })}
-        </span>
+        </div>
       );
     };
 
@@ -446,26 +483,6 @@
            </div>
         </div>
       );
-    };
-
-    const RealTimeDateDisplay = () => {
-      const [dateStr, setDateStr] = useState('');
-      useEffect(() => {
-        const updateDate = () => {
-          const now = new Date();
-          const seoulTime = new Date(now.toLocaleString("en-US", { timeZone: "Asia/Seoul" }));
-          const y = seoulTime.getFullYear();
-          const m = String(seoulTime.getMonth() + 1).padStart(2, '0');
-          const d = String(seoulTime.getDate()).padStart(2, '0');
-          const days = ['日', '一', '二', '三', '四', '五', '六'];
-          const dayName = days[seoulTime.getDay()];
-          setDateStr(`${y}/${m}/${d} (${dayName})`);
-        };
-        updateDate();
-        const timer = setInterval(updateDate, 60000);
-        return () => clearInterval(timer);
-      }, []);
-      return <span className="text-sm font-bold text-rose-900/90 mt-0.5 block">{dateStr}</span>;
     };
 
     const EditableText = ({ text, className, multiline = false, onSave }) => {
@@ -767,50 +784,6 @@
       );
     };
 
-    const loadData = (language) => {
-        // Upgrade key to v2 to force refresh data structure
-        const key = `seoul_trip_2025_v2_${language}`;
-        try { 
-          const saved = localStorage.getItem(key); 
-          if (saved) {
-            return JSON.parse(saved); 
-          }
-        } catch (e) { console.error("Failed to load itinerary", e); }
-        return getInitialItinerary(language);
-    };
-
-    // Namsan Path Visualization Component
-    const NamsanPathVisual = () => (
-      <div className="mt-2 p-4 bg-white rounded-xl shadow-sm border border-slate-200">
-        <h4 className="text-xs font-bold text-slate-500 mb-2">路線指引：明洞站 ➔ 南山透明電梯</h4>
-        <svg viewBox="0 0 300 120" className="w-full h-auto">
-          {/* Roads */}
-          <path d="M40,100 L260,100" stroke="#e2e8f0" strokeWidth="20" strokeLinecap="round" />
-          <path d="M220,100 L220,30" stroke="#e2e8f0" strokeWidth="20" strokeLinecap="round" />
-          
-          {/* Path Line */}
-          <path d="M50,100 L220,100 L220,50" fill="none" stroke="#fb7185" strokeWidth="3" strokeDasharray="6,4" />
-          <path d="M215,55 L220,45 L225,55" fill="none" stroke="#fb7185" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
-
-          {/* Start Point: Myeongdong Stn Exit 4 */}
-          <circle cx="50" cy="100" r="6" fill="#3b82f6" />
-          <text x="50" y="115" fontSize="10" textAnchor="middle" fill="#475569" fontWeight="bold">明洞站 4號出口</text>
-          
-          {/* Landmark: Intersection */}
-          <text x="150" y="95" fontSize="9" textAnchor="middle" fill="#94a3b8">直走 (Pacific Hotel)</text>
-          <text x="235" y="105" fontSize="9" textAnchor="start" fill="#94a3b8">會賢十字路口</text>
-
-          {/* Turn Indicator */}
-          <path d="M200,90 Q220,90 220,70" fill="none" stroke="#fb7185" strokeWidth="2" markerEnd="url(#arrow)" />
-
-          {/* End Point: Oreumi */}
-          <rect x="205" y="20" width="30" height="30" rx="4" fill="#10b981" />
-          <text x="220" y="40" fontSize="16" textAnchor="middle" fill="white">🛗</text>
-          <text x="250" y="38" fontSize="10" textAnchor="start" fill="#10b981" fontWeight="bold">透明電梯</text>
-        </svg>
-      </div>
-    );
-
     function App() {
       const [lang, setLang] = useState('ZH');
       const [activeDay, setActiveDay] = useState(0);
@@ -830,7 +803,7 @@
       // Auto-save effect
       useEffect(() => { 
         if(itinerary && itinerary.length > 0) {
-            const key = `seoul_trip_2025_v2_${lang}`; 
+            const key = `seoul_trip_2025_v6_${lang}`; 
             localStorage.setItem(key, JSON.stringify(itinerary)); 
         }
       }, [itinerary, lang]);
@@ -1090,20 +1063,9 @@
                             <Sparkles size={10} />{UI_LABELS[lang].genPhrases}
                           </button>
                           {(item.location || item.transport || item.duration) && (
-                            <div className="mt-2 flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-stone-500">
-                              {item.location && (
-                                <a 
-                                  href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(item.location)}`} 
-                                  target="_blank" 
-                                  rel="noopener noreferrer"
-                                  className="flex items-center gap-1 text-rose-400 hover:text-rose-600 transition-colors group/map shrink-0"
-                                  onClick={(e) => e.stopPropagation()}
-                                >
-                                  <MapPin size={11} className="group-hover/map:scale-110 transition-transform" />
-                                  <span className="border-b border-transparent group-hover/map:border-rose-400">{item.location}</span>
-                                </a>
-                              )}
-                              {item.transport && <TransportDisplay text={item.transport} />}
+                            <div className="mt-2 text-stone-500">
+                              {/* New Transport Display logic handles both icons and the vertical timeline */}
+                              <TransportDisplay text={item.transport} />
                             </div>
                           )}
                         </div>
